@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Poker — ORANGE CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ads Toggle Button -->
+    <button class="ads-toggle" id="ads-toggle">🚫 Hide Ads</button>
+    
+    <!-- Advertisement System -->
+    <div class="ad-container left ad-1" onclick="window.open('kraft-singles-ad.html', '_blank')">
+      <img src="images/ad1.svg" class="ad-svg" alt="Ad 1">
+    </div>
+    <div class="ad-container left ad-2" onclick="window.open('doctors-hate-this.html', '_blank')">
+      <img src="images/ad2.svg" class="ad-svg" alt="Ad 2">
+    </div>
+    <div class="ad-container right ad-3" onclick="window.open('popup-hell.html', '_blank')">
+      <img src="images/ad3.svg" class="ad-svg" alt="Ad 3">
+    </div>
+    <div class="ad-container right ad-4" onclick="window.open('you-wont-believe.html', '_blank')">
+      <img src="images/ad4.svg" class="ad-svg" alt="Ad 4">
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+  <h1 class="brand">ORANGE CASINO</h1>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="slot.html">Slots</a>
+          <a href="blackjack.html">Blackjack</a>
+          <a href="poker.html">Poker</a>
+          <a href="scratch-offs.html">Scratch-Offs</a>
+          <a href="achievements.html">Achievements</a>
+        </nav>
+  <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>♠️ Texas Hold'em Poker</h2>
+        <p class="page-subtitle">Play Texas Hold'em with multiple betting rounds against the dealer!</p>
+      </div>
+      
+      <div class="game-stage">
+        <div class="game-panel poker-table">
+          <div class="table-config">
+            <label>Players at table: 
+              <select id="num-players">
+                <option value="3">3 (You + 2 AI)</option>
+                <option value="4">4 (You + 3 AI)</option>
+                <option value="5" selected>5 (You + 4 AI)</option>
+                <option value="6">6 (You + 5 AI)</option>
+                <option value="7">7 (You + 6 AI)</option>
+                <option value="8">8 (You + 7 AI)</option>
+              </select>
+            </label>
+          </div>
+          
+          <div class="community-section">
+            <h3>🃏 Community Cards</h3>
+            <div id="community-cards" class="card-row community-cards"></div>
+            <div class="pot-display">
+              <h4>💰 Pot: $<span id="pot-amount">0</span></h4>
+            </div>
+          </div>
+          
+          <div id="poker-players" class="poker-players-grid">
+            <!-- Players will be dynamically generated -->
+          </div>
+          
+          <div class="poker-actions">
+            <button class="btn deal-btn" id="deal-btn">🆕 Deal New Hand</button>
+            <button class="btn fold-btn" id="fold-btn" disabled>❌ Fold</button>
+            <button class="btn call-btn" id="call-btn" disabled>📞 Call</button>
+            <button class="btn check-btn" id="check-btn" disabled>✓ Check</button>
+            <button class="btn bet-btn" id="bet-btn" disabled>💰 Bet</button>
+            <button class="btn raise-btn" id="raise-btn" disabled>⬆️ Raise</button>
+          </div>
+          
+          <div class="game-status-section">
+            <div class="game-status" id="game-status">Click "Deal New Hand" to start</div>
+            <div class="game-log">
+              <h4>📋 Game Log</h4>
+              <div class="log" id="poker-log"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="game-controls">
+          <div class="control-panel bet-panel">
+            <h4>💰 Betting Controls</h4>
+            <div class="bet-section">
+              <label class="bet-label">Ante Amount:</label>
+              <input id="poker-bet" class="bet-input" type="number" value="15" min="1">
+            </div>
+            <div class="quick-bet-buttons">
+              <button class="quick-bet-btn" data-amount="10">$10</button>
+              <button class="quick-bet-btn" data-amount="25">$25</button>
+              <button class="quick-bet-btn" data-amount="50">$50</button>
+            </div>
+            <div class="bet-section">
+              <label class="bet-label">Raise to:</label>
+              <input id="raise-amount" class="bet-input" type="number" value="20" min="1">
+            </div>
+            <div class="quick-raise-buttons">
+              <button class="quick-raise-btn" data-amount="20">$20</button>
+              <button class="quick-raise-btn" data-amount="50">$50</button>
+              <button class="quick-raise-btn" data-amount="100">$100</button>
+              <button class="quick-raise-btn pot-btn" data-amount="pot">Pot</button>
+            </div>
+          </div>
+          
+          <div class="control-panel rankings-panel">
+            <h4>🏆 Hand Rankings</h4>
+            <div class="rankings-list">
+              <div class="ranking-item">👑 Royal Flush (highest)</div>
+              <div class="ranking-item">🔥 Straight Flush</div>
+              <div class="ranking-item">4️⃣ Four of a Kind</div>
+              <div class="ranking-item">🏠 Full House</div>
+              <div class="ranking-item">♦️ Flush</div>
+              <div class="ranking-item">📏 Straight</div>
+              <div class="ranking-item">3️⃣ Three of a Kind</div>
+              <div class="ranking-item">2️⃣ Two Pair</div>
+              <div class="ranking-item">1️⃣ One Pair</div>
+              <div class="ranking-item">🎯 High Card (lowest)</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Made with ❤️ — demo only. No real money.</div>
+    </footer>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script src="scripts/poker-multiplayer.js"></script>
+    
+    <script>
+      // Ghost Code System for Poker
+      let pokerCheatSequence = [];
+      const pokerCodes = {
+        'royal': { reward: 4900, message: '👑 ROYAL activated! +$4,900!', used: false },
+        'flush': { reward: 4400, message: '♦️ FLUSH activated! +$4,400!', used: false },
+        'straight': { reward: 3900, message: '📈 STRAIGHT activated! +$3,900!', used: false },
+        'pair': { reward: 3400, message: '🃏 PAIR activated! +$3,400!', used: false },
+        'bluff': { reward: 2900, message: '😎 BLUFF activated! +$2,900!', used: false }
+      };
+
+      // Load used codes from localStorage
+      function loadPokerUsedCodes() {
+        const saved = localStorage.getItem('poker_codes_used');
+        if (saved) {
+          const usedCodes = JSON.parse(saved);
+          Object.keys(usedCodes).forEach(code => {
+            if (pokerCodes[code]) {
+              pokerCodes[code].used = usedCodes[code];
+            }
+          });
+        }
+      }
+
+      // Save used codes to localStorage
+      function savePokerUsedCodes() {
+        const usedCodes = {};
+        Object.keys(pokerCodes).forEach(code => {
+          usedCodes[code] = pokerCodes[code].used;
+        });
+        localStorage.setItem('poker_codes_used', JSON.stringify(usedCodes));
+      }
+
+      document.addEventListener('keydown', function(e) {
+        pokerCheatSequence.push(e.key.toLowerCase());
+        
+        // Check against all codes
+        Object.keys(pokerCodes).forEach(code => {
+          if (pokerCheatSequence.length >= code.length) {
+            const recentKeys = pokerCheatSequence.slice(-code.length).join('');
+            
+            if (recentKeys === code && !pokerCodes[code].used) {
+              // Code matched and not used yet
+              const currentBalance = window.vc.readBalance();
+              window.vc.writeBalance(currentBalance + pokerCodes[code].reward);
+              
+              // Show confetti and big message
+              if (window.vc.confetti) window.vc.confetti();
+              if (window.vc.showBigMessage) window.vc.showBigMessage(pokerCodes[code].message, 3000);
+              if (window.vc.setBuddyText) window.vc.setBuddyText(pokerCodes[code].message);
+              
+              // Mark ghost code achievement
+              if (window.vc.markGhostCodeMain) window.vc.markGhostCodeMain();
+              
+              // Mark as used
+              pokerCodes[code].used = true;
+              savePokerUsedCodes();
+              
+              // Reset sequence
+              pokerCheatSequence = [];
+            }
+          }
+        });
+        
+        // Keep sequence reasonable length
+        if (pokerCheatSequence.length > 20) {
+          pokerCheatSequence = pokerCheatSequence.slice(-20);
+        }
+      });
+
+      // Load used codes on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        loadPokerUsedCodes();
+        // Mark poker as visited for achievement
+        if (window.vc && window.vc.markPokerVisited) {
+          window.vc.markPokerVisited();
+        }
+      });
+    </script>
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">−</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">You're on fire!</div>
+      </div>
+    </div>
+    <div class="big-overlay" id="big-overlay"><div class="message" id="big-message"></div></div>
+    <div id="confetti-root"></div>
+  </body>
+</html>

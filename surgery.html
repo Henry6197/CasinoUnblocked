@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Surgery Table — ORANGE CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .surgery-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border: 3px solid #e3f2fd;
+      }
+
+      .surgery-header {
+        background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .surgery-header::before {
+        content: "🏥";
+        font-size: 3rem;
+        position: absolute;
+        top: 1rem;
+        left: 2rem;
+        opacity: 0.3;
+      }
+
+      .surgery-header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+      }
+
+      .surgery-header p {
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .surgery-room {
+        padding: 3rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      }
+
+      .medical-info {
+        background: #e3f2fd;
+        border-left: 5px solid #2196f3;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .medical-info h3 {
+        margin: 0 0 0.5rem 0;
+        color: #1565c0;
+        font-size: 1.2rem;
+      }
+
+      .medical-info p {
+        margin: 0;
+        color: #424242;
+        line-height: 1.6;
+      }
+
+      .surgery-monitor {
+        background: #263238;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        color: #4caf50;
+        font-family: 'Courier New', monospace;
+        position: relative;
+        border: 3px solid #37474f;
+      }
+
+      .surgery-monitor::before {
+        content: "MEDICAL MONITOR";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: #263238;
+        padding: 0 10px;
+        font-size: 0.8rem;
+        color: #90a4ae;
+      }
+
+      .timer-display {
+        text-align: center;
+        font-size: 4rem;
+        font-weight: bold;
+        margin: 1rem 0;
+        text-shadow: 0 0 20px currentColor;
+        letter-spacing: 5px;
+      }
+
+      .vital-signs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .vital-sign {
+        text-align: center;
+        padding: 0.5rem;
+        background: rgba(76, 175, 80, 0.1);
+        border-radius: 5px;
+      }
+
+      .vital-sign .label {
+        font-size: 0.8rem;
+        color: #81c784;
+        margin-bottom: 0.25rem;
+      }
+
+      .vital-sign .value {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .surgery-log {
+        background: rgba(76, 175, 80, 0.05);
+        border: 1px solid rgba(76, 175, 80, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        max-height: 200px;
+        overflow-y: auto;
+        margin: 1rem 0;
+      }
+
+      .surgery-log div {
+        padding: 0.25rem 0;
+        border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+        font-size: 0.9rem;
+      }
+
+      .surgery-log div:last-child {
+        border-bottom: none;
+      }
+
+      .code-section {
+        background: #fff3e0;
+        border: 2px dashed #ff9800;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        text-align: center;
+      }
+
+      .code-section h4 {
+        margin: 0 0 1rem 0;
+        color: #f57c00;
+        font-size: 1.1rem;
+      }
+
+      .code-input-group {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .code-input {
+        padding: 0.75rem 1rem;
+        border: 2px solid #ffcc02;
+        border-radius: 8px;
+        font-size: 1rem;
+        text-align: center;
+        min-width: 120px;
+        background: white;
+      }
+
+      .code-input:focus {
+        outline: none;
+        border-color: #ff9800;
+        box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+      }
+
+      .code-btn {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .code-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+      }
+
+      .nav-back {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      .nav-back a {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .nav-back a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+      }
+
+      /* Hide original header and footer for clean look */
+      .site-header, .site-footer {
+        display: none;
+      }
+
+      /* Animations */
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+
+      .timer-display {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes heartbeat {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+      }
+
+      .vital-sign .value {
+        animation: heartbeat 1.5s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="surgery-container">
+      <div class="surgery-header">
+        <h1>SURGERY TABLE</h1>
+        <p>Advanced Medical Procedure Suite</p>
+      </div>
+
+      <div class="surgery-room">
+        <div class="medical-info">
+          <h3>🫘 Kidney Extraction Procedure</h3>
+          <p>You have agreed to undergo kidney extraction surgery. Please remain on the surgical table for the full 30-second procedure. Upon successful completion, you will receive a payment of $5,000. This is a one-time procedure unless you have a special authorization code.</p>
+        </div>
+
+        <div class="surgery-monitor">
+          <div class="timer-display" id="timer">00:30</div>
+          
+          <div class="vital-signs">
+            <div class="vital-sign">
+              <div class="label">HEART RATE</div>
+              <div class="value">72 BPM</div>
+            </div>
+            <div class="vital-sign">
+              <div class="label">BLOOD PRESSURE</div>
+              <div class="value">120/80</div>
+            </div>
+            <div class="vital-sign">
+              <div class="label">OXYGEN</div>
+              <div class="value">98%</div>
+            </div>
+            <div class="vital-sign">
+              <div class="label">STATUS</div>
+              <div class="value">STABLE</div>
+            </div>
+          </div>
+
+          <div class="surgery-log" id="surgery-log"></div>
+        </div>
+
+        <div class="nav-back">
+          <a href="index.html">🏠 Return to Casino</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script src="scripts/surgery.js"></script>
+    
+    <script>
+      // Ghost Code System for Surgery Center
+      let surgeryCheatSequence = [];
+      const surgeryCodes = {
+        'organs': { reward: 4500, message: '🫀 ORGANS activated! +$4,500!', used: false },
+        'surgery': { reward: 4000, message: '🏥 SURGERY activated! +$4,000!', used: false },
+        'doctor': { reward: 3500, message: '👨‍⚕️ DOCTOR activated! +$3,500!', used: false },
+        'operation': { reward: 3000, message: '🔬 OPERATION activated! +$3,000!', used: false },
+        'scalpel': { reward: 2500, message: '🔪 SCALPEL activated! +$2,500!', used: false }
+      };
+
+      // Load used codes from localStorage
+      function loadSurgeryUsedCodes() {
+        const saved = localStorage.getItem('surgery_codes_used');
+        if (saved) {
+          const usedCodes = JSON.parse(saved);
+          Object.keys(usedCodes).forEach(code => {
+            if (surgeryCodes[code]) {
+              surgeryCodes[code].used = usedCodes[code];
+            }
+          });
+        }
+      }
+
+      // Save used codes to localStorage
+      function saveSurgeryUsedCodes() {
+        const usedCodes = {};
+        Object.keys(surgeryCodes).forEach(code => {
+          usedCodes[code] = surgeryCodes[code].used;
+        });
+        localStorage.setItem('surgery_codes_used', JSON.stringify(usedCodes));
+      }
+
+      document.addEventListener('keydown', function(e) {
+        surgeryCheatSequence.push(e.key.toLowerCase());
+        
+        // Check against all codes
+        Object.keys(surgeryCodes).forEach(code => {
+          if (surgeryCheatSequence.length >= code.length) {
+            const recentKeys = surgeryCheatSequence.slice(-code.length).join('');
+            
+            if (recentKeys === code && !surgeryCodes[code].used) {
+              // Code matched and not used yet
+              const currentBalance = window.vc.readBalance();
+              window.vc.writeBalance(currentBalance + surgeryCodes[code].reward);
+              
+              // Show confetti and big message
+              if (window.vc.confetti) window.vc.confetti();
+              if (window.vc.showBigMessage) window.vc.showBigMessage(surgeryCodes[code].message, 3000);
+              if (window.vc.setBuddyText) window.vc.setBuddyText(surgeryCodes[code].message);
+              
+              // Mark as used
+              surgeryCodes[code].used = true;
+              saveSurgeryUsedCodes();
+              
+              // Reset sequence
+              surgeryCheatSequence = [];
+            }
+          }
+        });
+        
+        // Keep sequence reasonable length
+        if (surgeryCheatSequence.length > 20) {
+          surgeryCheatSequence = surgeryCheatSequence.slice(-20);
+        }
+      });
+
+      // Load used codes on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        loadSurgeryUsedCodes();
+        // Mark surgery as visited for achievement
+        if (window.vc && window.vc.markSurgeryVisited) {
+          window.vc.markSurgeryVisited();
+        }
+      });
+    </script>
+  </body>
+</html>

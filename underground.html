@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏴‍☠️ The Underground Casino</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="new-styles.css">
+</head>
+<body>
+       
+    <style>
+        /* Dark Underground Theme Override */
+        :root {
+            --bg: #0f0a08;
+            --card: #1a130f;
+            --accent: #ff6b35;
+            --accent-2: #b7410e;
+            --muted: #8b7d6b;
+            --glass: rgba(255, 107, 53, 0.1);
+            --danger: #dc143c;
+            --radius: 14px;
+            --container-width: 1200px;
+            --gap: 18px;
+            --text: #c4b5a0;
+        }
+        
+        .underground-theme {
+            background: linear-gradient(180deg, #0f0a08 0%, #1a130f 50%, #2b1e17 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        .underground-theme .site-header {
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), rgba(139, 38, 53, 0.05));
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        }
+        
+        .underground-theme .brand {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+        
+        .underground-theme .main-nav a {
+            color: var(--muted);
+        }
+        
+        .underground-theme .main-nav a:hover {
+            color: var(--text);
+            background: var(--glass);
+        }
+        
+        .underground-theme .balance {
+            color: var(--muted);
+        }
+        
+        .underground-theme .welcome-banner {
+            background: linear-gradient(135deg, var(--danger), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 24px 0;
+            border-radius: var(--radius);
+            margin-bottom: 32px;
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.4);
+        }
+        
+        .underground-theme .card {
+            background: linear-gradient(180deg, rgba(26, 19, 15, 0.95), rgba(43, 30, 23, 0.9));
+            color: var(--text);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .underground-theme .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.3);
+            border-color: var(--accent);
+        }
+        
+        .underground-theme .btn {
+            background: var(--accent);
+            color: #0f0a08;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .underground-theme .btn:hover {
+            background: var(--accent-2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .underground-theme .site-footer {
+            background: linear-gradient(180deg, #0f0a08 0%, #1a130f 100%);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            color: var(--muted);
+        }
+        
+        /* Underground specific sections */
+        .underground-services-section {
+            margin: 32px 0;
+        }
+        
+        .underground-stats-section {
+            margin: 32px 0;
+            padding: 24px;
+            background: linear-gradient(145deg, rgba(43, 30, 23, 0.6), rgba(26, 19, 15, 0.8));
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--gap);
+            margin-top: 18px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 18px;
+            background: rgba(15, 10, 8, 0.7);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+        
+        .back-to-surface {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .back-to-surface:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+        }
+        
+        /* Section titles */
+        .section-title {
+            font-size: 1.5em;
+            margin: 0 0 18px;
+            color: var(--accent);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 12px;
+            display: block;
+            text-align: center;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.3));
+        }
+        
+        .financial-grid {
+            display: flex;
+            gap: var(--gap);
+            margin-top: 18px;
+        }
+        
+        .financial-panel {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(26, 19, 15, 0.95), rgba(43, 30, 23, 0.9));
+            padding: 18px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .financial-panel h4 {
+            margin: 0 0 12px;
+            color: var(--accent);
+            font-size: 1.2em;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .button-group .btn {
+            flex: 1;
+        }
+        
+        .loan-btn {
+            background: var(--accent);
+        }
+        
+        .payback-btn {
+            background: var(--danger);
+        }
+        
+        .surgery-btn {
+            background: var(--accent-2);
+            width: 100%;
+            margin-top: 12px;
+        }
+        
+        .surgery-warning {
+            color: var(--danger);
+            font-size: 0.9em;
+            font-style: italic;
+            margin: 8px 0;
+        }
+        
+        .loan-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 0.9em;
+        }
+        
+        .loan-info div {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            color: var(--text);
+        }
+        
+        .loan-info span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        @media (max-width: 880px) {
+            .financial-grid {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+        
+        /* Underground Code Section */
+        .underground-code-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 19, 15, 0.8));
+            border: 2px solid rgba(255, 107, 53, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+        }
+
+        .underground-code-title {
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+
+        .underground-code-input-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        #undergroundCodeInput {
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--accent);
+            border: 2px solid rgba(255, 107, 53, 0.6);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            flex: 1;
+            max-width: 250px;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        #undergroundCodeInput:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.6);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        #undergroundCodeInput::placeholder {
+            color: rgba(255, 107, 53, 0.7);
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .underground-code-button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .underground-code-button:hover {
+            background: linear-gradient(135deg, #ff8c66, var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+        }
+
+        .underground-code-button:active {
+            transform: translateY(-1px);
+        }
+
+        .underground-code-message {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .underground-code-input-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            #undergroundCodeInput, .underground-code-button {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body class="underground-theme">
+    <!-- Light Mode Toggle Button -->
+    <a href="index.html" class="back-to-surface">
+        ☀️ Light Mode
+    </a>
+    
+    <header class="site-header">
+        <div class="container">
+            <h1 class="brand">🏴‍☠️ UNDERGROUND CASINO</h1>
+            <nav class="main-nav">
+                <a href="index.html">Surface</a>
+                <a href="underground-roulette.html">Russian Roulette</a>
+                <a href="underground-baccarat.html">Blood Pact Baccarat</a>
+                <a href="underground-dogfights.html">Dog Fights</a>
+                <a href="underground-shop.html">Black Market</a>
+                <a href="achievements.html">Achievements</a>
+            </nav>
+            <div class="balance" id="balance">
+                Underground Wallet: $<span id="underground-balance">500</span>
+                <span class="debt">Debt: $<span id="underground-debt">0</span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="welcome-banner">
+                <h2>🏴‍☠️ Welcome to the Underground 🏴‍☠️</h2>
+                <p class="welcome-subtitle">⚠️ Where the stakes are higher and the rules don't apply. Enter at your own risk. ⚠️</p>
+            </div>
+
+            <!-- Underground Games Section -->
+            <div class="games-section">
+                <h3 class="section-title">🎲 Underground Games</h3>
+                <div class="game-cards">
+                    <div class="card game-card">
+                        <div class="card-icon">🔫</div>
+                        <h3>Russian Roulette</h3>
+                        <p>One bullet, six chambers. The ultimate game of chance and nerve.</p>
+                        <div class="card-footer">
+                            <button class="btn" onclick="playRussianRoulette()">🎯 Pull the Trigger</button>
+                        </div>
+                    </div>
+                    <div class="card game-card">
+                        <div class="card-icon">🎴</div>
+                        <h3>Blood Pact Baccarat</h3>
+                        <p>High-stakes baccarat where debts are paid in more than money.</p>
+                        <div class="card-footer">
+                            <button class="btn" onclick="playBaccarat()">💀 Make the Pact</button>
+                        </div>
+                    </div>
+                    <div class="card game-card">
+                        <div class="card-icon">🐕</div>
+                        <h3>Underground Dog Fights</h3>
+                        <p>Bet on the fiercest fighters in the underground circuit.</p>
+                        <div class="card-footer">
+                            <button class="btn" onclick="dogFights()">🥊 Place Your Bets</button>
+                        </div>
+                    </div>
+                    <div class="card game-card">
+                        <div class="card-icon">�🏪</div>
+                        <h3>Black Market Shop</h3>
+                        <p>Buy illegal items, weapons, and underground services.</p>
+                        <div class="card-footer">
+                            <button class="btn" onclick="openShop()">🛒 Browse Goods</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Underground Financial Services Section -->
+            <div class="underground-services-section">
+                <h3 class="section-title">💰 Underground Services</h3>
+                <div class="financial-grid">
+                    <div class="financial-panel loan-panel">
+                        <h4>💳 Underground Loans</h4>
+                        <p>Need cash fast? No questions asked, no credit checks.</p>
+                        <div class="surgery-warning">⚠️ 80% INTEREST - 3 LOAN LIMIT</div>
+                        <div class="loan-info">
+                            <div>Current Debt: $<span id="current-debt">0</span></div>
+                            <div>Active Loans: <span id="loans-used">0</span>/3</div>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn loan-btn" onclick="takeUndergroundLoan()">💸 Borrow $1,000</button>
+                            <button class="btn payback-btn" onclick="paybackUndergroundLoan()">💰 Pay Back</button>
+                        </div>
+                    </div>
+                    <div class="financial-panel emergency-panel">
+                        <h4>🏦 Money Laundering</h4>
+                        <p>Clean ALL your dirty money (10x rate). Keeps $500 minimum.</p>
+                        <div class="surgery-warning">⚠️ BLOCKED IF YOU HAVE DEBT</div>
+                        <button class="btn surgery-btn" onclick="launderMoney()">🧽 Launder All Cash</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Underground Stats Section -->
+            <div class="underground-stats-section">
+                <h3 class="section-title">📊 Underground Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">47</div>
+                        <div>Players Eliminated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$8.7M</div>
+                        <div>Dirty Money Cleaned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">23</div>
+                        <div>Russian Roulette Survivors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div>Underground Influence</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Section -->
+            <div class="help-section">
+                <h3 class="section-title">⚠️ Remember</h3>
+                <div class="help-panel" style="text-align: center; padding: 24px; background: linear-gradient(145deg, rgba(220, 20, 60, 0.2), rgba(139, 38, 53, 0.1)); border: 1px solid var(--danger); border-radius: var(--radius);">
+                    <p style="font-style: italic; font-size: 1.1em; color: var(--danger);">
+                        "What happens underground, stays underground..."
+                    </p>
+                    <p style="margin-top: 12px; color: var(--muted);">
+                        In the shadows we deal, in the darkness we play, in the underground we stay.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Underground Code Section -->
+        <div class="underground-code-section">
+            <h3 class="underground-code-title">🌑 Got a Black Market Code? 🌑</h3>
+            <div class="underground-code-input-group">
+                <input type="text" id="undergroundCodeInput" placeholder="Enter dark code..." maxlength="20" onkeypress="handleUndergroundKeyPress(event)">
+                <button onclick="checkUndergroundCode()" class="underground-code-button">ACTIVATE</button>
+            </div>
+            <div id="underground-code-message" class="underground-code-message"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">🏴‍☠️ Underground Casino — Where legends are made. No rules apply.</div>
+    </footer>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script>
+        // Underground Casino System - Completely Independent
+        let undergroundBalance = Number(localStorage.getItem('underground_balance') || 500);
+        let undergroundDebt = Number(localStorage.getItem('underground_debt') || 0);
+        let reputation = localStorage.getItem('underground_reputation') || 'Unknown';
+        
+        // Game Functions - Navigate to actual underground games
+        function playRussianRoulette() {
+            window.location.href = 'underground-roulette.html';
+        }
+        
+        function playBaccarat() {
+            window.location.href = 'underground-baccarat.html';
+        }
+        
+        function dogFights() {
+            window.location.href = 'underground-dogfights.html';
+        }
+        
+        function openShop() {
+            window.location.href = 'underground-shop.html';
+        }
+        
+        function launderMoney() {
+            if (undergroundDebt > 0) {
+                showUndergroundMessage('🏦 LAUNDERING BLOCKED', 'Cannot launder money while you have outstanding debt. Pay your debts first.');
+                return;
+            }
+            
+            if (undergroundBalance <= 500) {
+                showUndergroundMessage('🏦 INSUFFICIENT FUNDS', 'You need more than $500 to launder money. Must keep minimum $500 balance.');
+                return;
+            }
+            
+            // Calculate how much to launder (all except $500)
+            const amountToLaunder = undergroundBalance - 500;
+            const cleanMoney = amountToLaunder * 10; // 1:10 ratio
+            
+            // Update balances
+            undergroundBalance = 500; // Keep exactly $500
+            
+            // Add clean money to main balance (surface money)
+            let surfaceBalance = Number(localStorage.getItem('vc_balance') || 1000);
+            surfaceBalance += cleanMoney;
+            localStorage.setItem('vc_balance', String(surfaceBalance));
+            
+            // Save underground data
+            saveUndergroundData();
+            updateDisplay();
+            
+            showUndergroundMessage('🧽 MONEY LAUNDERED', `Successfully laundered $${amountToLaunder.toLocaleString()} underground → $${cleanMoney.toLocaleString()} clean surface money. Kept $500 underground.`);
+            
+            // Mark money laundering achievement
+            if (window.vc && window.vc.markMoneyLaundered) {
+                window.vc.markMoneyLaundered();
+            }
+        }
+        
+        // Underground Loan System
+        function takeUndergroundLoan() {
+            let activeLoanCount = Number(localStorage.getItem('underground_active_loans') || 0);
+            
+            if (activeLoanCount >= 3) {
+                showUndergroundMessage('💳 LOAN DENIED', 'Maximum active loan limit reached. You have 3 active loans. Pay some back to get more credit.');
+                return;
+            }
+            
+            // Can take loans regardless of existing debt
+            
+            undergroundBalance += 1000;
+            undergroundDebt += 1800; // 80% interest (1000 * 1.8)
+            activeLoanCount += 1;
+            
+            localStorage.setItem('underground_active_loans', String(activeLoanCount));
+            saveUndergroundData();
+            updateDisplay();
+            
+            const remaining = 3 - activeLoanCount;
+            showUndergroundMessage('💸 LOAN APPROVED', `You received $1,000. You now owe $1,800 (80% interest). Active loans: ${activeLoanCount}/3`);
+        }
+        
+        // Underground loan payback system
+        function paybackUndergroundLoan() {
+            if (undergroundDebt <= 0) {
+                showUndergroundMessage('💳 NO DEBT', 'You have no outstanding underground debt.');
+                return;
+            }
+            
+            if (undergroundBalance < undergroundDebt) {
+                showUndergroundMessage('💸 INSUFFICIENT FUNDS', `You need $${undergroundDebt.toLocaleString()} to pay back your debt, but only have $${undergroundBalance.toLocaleString()}.`);
+                return;
+            }
+            
+            undergroundBalance -= undergroundDebt;
+            const paidAmount = undergroundDebt;
+            undergroundDebt = 0;
+            
+            // Reset active loan count when all debt is paid
+            localStorage.setItem('underground_active_loans', '0');
+            
+            saveUndergroundData();
+            updateDisplay();
+            
+            showUndergroundMessage('💰 DEBT CLEARED', `Successfully paid back $${paidAmount.toLocaleString()}. Your debt is cleared and you can take new loans!`);
+        }
+        
+        // Underground messaging system
+        function showUndergroundMessage(title, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, #1a130f, #2b1e17);
+                border: 2px solid #ff6b35;
+                border-radius: 15px;
+                padding: 30px;
+                z-index: 10000;
+                text-align: center;
+                box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+                max-width: 400px;
+                color: #c4b5a0;
+            `;
+            
+            messageDiv.innerHTML = `
+                <h3 style="color: #ff6b35; margin-bottom: 15px; text-shadow: 0 0 10px #ff6b35;">${title}</h3>
+                <p style="color: #c4b5a0; margin-bottom: 20px;">${message}</p>
+                <button onclick="this.parentElement.remove()" style="
+                    background: linear-gradient(45deg, #dc143c, #ff6b35);
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-weight: bold;
+                ">Close</button>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // Save underground data
+        function saveUndergroundData() {
+            localStorage.setItem('underground_balance', String(undergroundBalance));
+            localStorage.setItem('underground_debt', String(undergroundDebt));
+            localStorage.setItem('underground_reputation', reputation);
+        }
+        
+        // Update display
+        function updateDisplay() {
+            const balanceEl = document.getElementById('underground-balance');
+            const debtEl = document.getElementById('underground-debt');
+            const currentDebtEl = document.getElementById('current-debt');
+            const loansUsedEl = document.getElementById('loans-used');
+            
+            if (balanceEl) balanceEl.textContent = undergroundBalance.toLocaleString();
+            if (debtEl) debtEl.textContent = undergroundDebt.toLocaleString();
+            if (currentDebtEl) currentDebtEl.textContent = undergroundDebt.toLocaleString();
+            
+            const activeLoanCount = Number(localStorage.getItem('underground_active_loans') || 0);
+            if (loansUsedEl) loansUsedEl.textContent = activeLoanCount;
+        }
+        
+        // Normal Input Code System for Underground
+        const undergroundCodes = {
+            'darkcash': { reward: 3000, message: '💰 DARKCASH activated! +$3,000 underground coins!', used: false },
+            'shadow': { reward: 2500, message: '🌑 SHADOW activated! +$2,500 underground coins!', used: false },
+            'blood': { reward: 2000, message: '🩸 BLOOD activated! +$2,000 underground coins!', used: false },
+            'night': { reward: 1500, message: '🌙 NIGHT activated! +$1,500 underground coins!', used: false },
+            'demon': { reward: 1000, message: '👹 DEMON activated! +$1,000 underground coins!', used: false }
+        };
+
+        // Load used codes from localStorage  
+        function loadUndergroundUsedCodes() {
+            const saved = localStorage.getItem('underground_codes_used');
+            if (saved) {
+                const usedCodes = JSON.parse(saved);
+                Object.keys(usedCodes).forEach(code => {
+                    if (undergroundCodes[code]) {
+                        undergroundCodes[code].used = usedCodes[code];
+                    }
+                });
+            }
+        }
+
+        // Save used codes to localStorage
+        function saveUndergroundUsedCodes() {
+            const usedCodes = {};
+            Object.keys(undergroundCodes).forEach(code => {
+                usedCodes[code] = undergroundCodes[code].used;
+            });
+            localStorage.setItem('underground_codes_used', JSON.stringify(usedCodes));
+        }
+        
+        // Check underground code function
+        function checkUndergroundCode() {
+            const codeInput = document.getElementById('undergroundCodeInput');
+            const code = codeInput.value.toLowerCase().trim();
+            
+            if (undergroundCodes[code] && !undergroundCodes[code].used) {
+                // Valid code that hasn't been used
+                undergroundBalance += undergroundCodes[code].reward;
+                
+                saveUndergroundData();
+                updateDisplay();
+                
+                showUndergroundMessage('🔮 CODE ACTIVATED', undergroundCodes[code].message);
+                
+                // Also update the dedicated message div
+                const messageDiv = document.getElementById('underground-code-message');
+                if (messageDiv) {
+                    messageDiv.textContent = undergroundCodes[code].message;
+                    messageDiv.style.color = '#4CAF50';
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                    }, 5000);
+                }
+                
+                // Mark achievement
+                if (window.vc && window.vc.markGhostCodeUnderground) {
+                    window.vc.markGhostCodeUnderground();
+                }
+                
+                // Mark as used
+                undergroundCodes[code].used = true;
+                saveUndergroundUsedCodes();
+                
+                // Clear input
+                codeInput.value = '';
+            } else if (undergroundCodes[code] && undergroundCodes[code].used) {
+                // Code exists but already used
+                showUndergroundMessage('❌ CODE USED', 'This code has already been redeemed!');
+                const messageDiv = document.getElementById('underground-code-message');
+                if (messageDiv) {
+                    messageDiv.textContent = '❌ Code already used!';
+                    messageDiv.style.color = '#f44336';
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                    }, 3000);
+                }
+                codeInput.value = '';
+            } else {
+                // Invalid code
+                showUndergroundMessage('❌ INVALID CODE', 'Unknown code. Try harder, street rat.');
+                const messageDiv = document.getElementById('underground-code-message');
+                if (messageDiv) {
+                    messageDiv.textContent = '❌ Invalid code!';
+                    messageDiv.style.color = '#f44336';
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                    }, 3000);
+                }
+                codeInput.value = '';
+            }
+        }
+
+        // Allow Enter key to submit
+        function handleUndergroundKeyPress(event) {
+            if (event.key === 'Enter') {
+                checkUndergroundCode();
+            }
+        }
+        
+        // Initialize underground casino
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDisplay();
+            loadUndergroundUsedCodes();
+            
+            // Mark underground as visited for achievement
+            if (window.vc && window.vc.markUndergroundVisited) {
+                window.vc.markUndergroundVisited();
+            }
+            
+            // Welcome message
+            setTimeout(() => {
+                showUndergroundMessage('🏴‍☠️ WELCOME TO THE UNDERGROUND', 'You have entered a world where normal rules don\'t apply. Your journey into the shadows begins now...');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

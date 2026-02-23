@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slots — ORANGE CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ads Toggle Button -->
+    <button class="ads-toggle" id="ads-toggle">🚫 Hide Ads</button>
+    
+    <!-- Advertisement System -->
+    <div class="ad-container left ad-1" onclick="window.open('kraft-singles-ad.html', '_blank')">
+      <img src="images/ad1.svg" class="ad-svg" alt="Ad 1">
+    </div>
+    <div class="ad-container left ad-2" onclick="window.open('doctors-hate-this.html', '_blank')">
+      <img src="images/ad2.svg" class="ad-svg" alt="Ad 2">
+    </div>
+    <div class="ad-container right ad-3" onclick="window.open('popup-hell.html', '_blank')">
+      <img src="images/ad3.svg" class="ad-svg" alt="Ad 3">
+    </div>
+    <div class="ad-container right ad-4" onclick="window.open('you-wont-believe.html', '_blank')">
+      <img src="images/ad4.svg" class="ad-svg" alt="Ad 4">
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+  <h1 class="brand">ORANGE CASINO</h1>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="slot.html">Slots</a>
+          <a href="blackjack.html">Blackjack</a>
+          <a href="poker.html">Poker</a>
+          <a href="scratch-offs.html">Scratch-Offs</a>
+          <a href="achievements.html">Achievements</a>
+        </nav>
+  <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>🎰 Slot Machine</h2>
+        <p class="page-subtitle">Spin the reels and watch the orange magic happen!</p>
+      </div>
+      
+      <div class="game-stage">
+        <div class="game-panel slot-machine-panel">
+          <div class="machine-header">
+            <h3>🎯 Orange Slot Machine</h3>
+            <div class="machine-status">Ready to spin!</div>
+          </div>
+          
+          <div class="jackpot-display">
+            <h4>💎 JACKPOT 💎</h4>
+            <div class="jackpot-amount">$<span id="jackpot-amount">5000</span></div>
+            <div class="jackpot-info">Win with any 5 in a row!</div>
+          </div>
+          
+          <div class="reels-container">
+            <div class="reels" id="reels">
+              <!-- 5 columns x 3 rows -->
+              <div class="reel" data-index="0">🍒</div>
+              <div class="reel" data-index="1">🍋</div>
+              <div class="reel" data-index="2">⭐</div>
+              <div class="reel" data-index="3">🍇</div>
+              <div class="reel" data-index="4">🔔</div>
+              <div class="reel" data-index="5">🍋</div>
+              <div class="reel" data-index="6">🍒</div>
+              <div class="reel" data-index="7">🍋</div>
+              <div class="reel" data-index="8">⭐</div>
+              <div class="reel" data-index="9">🍇</div>
+              <div class="reel" data-index="10">🔔</div>
+              <div class="reel" data-index="11">🍉</div>
+              <div class="reel" data-index="12">🍒</div>
+              <div class="reel" data-index="13">🍋</div>
+              <div class="reel" data-index="14">⭐</div>
+            </div>
+          </div>
+          
+          <div class="machine-controls">
+            <button class="btn spin-btn" id="spin">🎰 SPIN</button>
+            <button class="btn max-btn" id="max">💎 MAX BET</button>
+          </div>
+          
+          <div class="results-log">
+            <h4>📋 Recent Spins</h4>
+            <div class="log" id="slot-log"></div>
+          </div>
+        </div>
+
+        <aside class="game-controls">
+          <div class="control-panel bet-panel">
+            <h4>💰 Betting Controls</h4>
+            <div class="bet-section">
+              <label class="bet-label">Bet Amount:</label>
+              <input id="bet" class="bet-input" type="number" value="10" min="1">
+            </div>
+          </div>
+          
+          <div class="control-panel payout-panel">
+            <h4>🏆 Payout Table</h4>
+            <div class="payout-list">
+              <div class="payout-item">🎯 3 in a row = 2x bet</div>
+              <div class="payout-item">🎯 4 in a row = 4x bet</div>
+              <div class="payout-item">🎯 Full row = 8x bet</div>
+              <div class="payout-item">🎯 Full column = 5x bet</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Made with ❤️ — demo only. No real money.</div>
+    </footer>
+
+  <script src="scripts/todd-dialogue.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/achievements.js"></script>
+  <script src="scripts/slot.clean.js"></script>
+  
+  <script>
+      // Ghost Code System for Slot Machine
+      let slotCheatSequence = [];
+      const slotCodes = {
+        'spinwin': { reward: 4800, message: '🎰 SPINWIN activated! +$4,800!', used: false },
+        'sevens': { reward: 4200, message: '🎰 SEVENS activated! +$4,200!', used: false },
+        'cherries': { reward: 3800, message: '🍒 CHERRIES activated! +$3,800!', used: false },
+        'slots': { reward: 3400, message: '🎲 SLOTS activated! +$3,400!', used: false },
+        'reels': { reward: 3000, message: '🎡 REELS activated! +$3,000!', used: false }
+      };    // Load used codes from localStorage
+    function loadSlotUsedCodes() {
+      const saved = localStorage.getItem('slot_codes_used');
+      if (saved) {
+        const usedCodes = JSON.parse(saved);
+        Object.keys(usedCodes).forEach(code => {
+          if (slotCodes[code]) {
+            slotCodes[code].used = usedCodes[code];
+          }
+        });
+      }
+    }
+
+    // Save used codes to localStorage
+    function saveSlotUsedCodes() {
+      const usedCodes = {};
+      Object.keys(slotCodes).forEach(code => {
+        usedCodes[code] = slotCodes[code].used;
+      });
+      localStorage.setItem('slot_codes_used', JSON.stringify(usedCodes));
+    }
+
+    document.addEventListener('keydown', function(e) {
+      slotCheatSequence.push(e.key.toLowerCase());
+      
+      // Check against all codes
+      Object.keys(slotCodes).forEach(code => {
+        if (slotCheatSequence.length >= code.length) {
+          const recentKeys = slotCheatSequence.slice(-code.length).join('');
+          
+          if (recentKeys === code && !slotCodes[code].used) {
+            // Code matched and not used yet
+            const currentBalance = window.vc.readBalance();
+            window.vc.writeBalance(currentBalance + slotCodes[code].reward);
+            
+              // Show confetti and big message
+              if (window.vc.confetti) window.vc.confetti();
+              if (window.vc.showBigMessage) window.vc.showBigMessage(slotCodes[code].message, 3000);
+              if (window.vc.setBuddyText) window.vc.setBuddyText(slotCodes[code].message);
+              
+              // Mark ghost code achievement
+              if (window.vc.markGhostCodeMain) window.vc.markGhostCodeMain();
+              
+              // Mark as used
+              slotCodes[code].used = true;
+              saveSlotUsedCodes();            // Reset sequence
+            slotCheatSequence = [];
+          }
+        }
+      });
+      
+      // Keep sequence reasonable length
+      if (slotCheatSequence.length > 20) {
+        slotCheatSequence = slotCheatSequence.slice(-20);
+      }
+    });
+
+      // Load used codes on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        loadSlotUsedCodes();
+        // Mark slots as visited for achievement
+        if (window.vc && window.vc.markSlotsVisited) {
+          window.vc.markSlotsVisited();
+        }
+      });
+  </script>
+    <!-- buddy + overlays -->
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">−</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">Let's win big!</div>
+      </div>
+    </div>
+    <div class="big-overlay" id="big-overlay"><div class="message" id="big-message"></div></div>
+    <div id="confetti-root"></div>
+  </body>
+</html>

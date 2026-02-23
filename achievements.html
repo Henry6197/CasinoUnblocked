@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Achievements — ORANGE CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ads Toggle Button -->
+    <button class="ads-toggle" id="ads-toggle">🚫 Hide Ads</button>
+    
+    <!-- Advertisement System -->
+    <div class="ad-container left ad-1" onclick="window.open('kraft-singles-ad.html', '_blank')">
+      <img src="images/ad1.svg" class="ad-svg" alt="Ad 1">
+    </div>
+    <div class="ad-container left ad-2" onclick="window.open('doctors-hate-this.html', '_blank')">
+      <img src="images/ad2.svg" class="ad-svg" alt="Ad 2">
+    </div>
+    <div class="ad-container right ad-3" onclick="window.open('popup-hell.html', '_blank')">
+      <img src="images/ad3.svg" class="ad-svg" alt="Ad 3">
+    </div>
+    <div class="ad-container right ad-4" onclick="window.open('you-wont-believe.html', '_blank')">
+      <img src="images/ad4.svg" class="ad-svg" alt="Ad 4">
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+  <h1 class="brand">ORANGE CASINO</h1>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="slot.html">Slots</a>
+          <a href="blackjack.html">Blackjack</a>
+          <a href="poker.html">Poker</a>
+          <a href="scratch-offs.html">Scratch-Offs</a>
+          <a href="achievements.html">Achievements</a>
+        </nav>
+  <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>🏆 Achievements</h2>
+        <p class="page-subtitle">Track your progress and unlock rewards as you play!</p>
+      </div>
+
+      <div class="achievements-section">
+        <div class="achievements-info">
+          <p class="achievements-desc">Complete various challenges to earn achievements and rewards. Your progress is automatically saved!</p>
+          <div class="achievement-progress">
+            <h3 id="achievement-counter">Loading achievements...</h3>
+          </div>
+        </div>
+        
+        <div class="achievements-grid">
+          <div id="achievements" class="achievements-list"></div>
+        </div>
+        
+        <div class="achievements-controls">
+          <button class="btn reset-btn" id="reset-achievements">🔄 Reset All Achievements</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Made with ❤️ — demo only. No real money.</div>
+    </footer>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">−</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">You're on fire!</div>
+      </div>
+    </div>
+    
+    <!-- Custom Modal Popup -->
+    <div id="custom-modal" class="custom-modal" style="display: none;">
+      <div class="custom-modal-overlay"></div>
+      <div class="custom-modal-content">
+        <div class="custom-modal-header">
+          <h3 id="modal-title">Dialog</h3>
+        </div>
+        <div class="custom-modal-body">
+          <p id="modal-message">Message</p>
+        </div>
+        <div class="custom-modal-footer">
+          <button class="btn modal-btn modal-cancel" id="modal-cancel">Cancel</button>
+          <button class="btn modal-btn modal-confirm" id="modal-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

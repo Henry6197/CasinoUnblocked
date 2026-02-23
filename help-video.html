@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help Video - ORANGE CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffd700 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .video-title {
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .video-subtitle {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .video-frame {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/9;
+            margin-bottom: 25px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .chapter-navigation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .chapter-btn {
+            background: linear-gradient(145deg, #ff6b35, #ff8c42);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .chapter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.6);
+            background: linear-gradient(145deg, #ff8c42, #ffa500);
+        }
+
+        .chapter-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .chapter-time {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .video-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-info h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .video-info p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .youtube-link {
+            display: inline-block;
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+        }
+
+        .youtube-link:hover {
+            background: linear-gradient(145deg, #ff6666, #ff0000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .video-container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .video-title {
+                font-size: 2em;
+            }
+            
+            .chapter-navigation {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .chapter-btn {
+                padding: 12px 16px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-container {
+                padding: 15px;
+            }
+            
+            .video-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="brand">ORANGE CASINO</h1>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="slot.html">Slots</a>
+                <a href="blackjack.html">Blackjack</a>
+                <a href="poker.html">Poker</a>
+                <a href="scratch-offs.html">Scratch-Offs</a>
+                <a href="achievements.html">Achievements</a>
+            </nav>
+            <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="video-container">
+            <div class="video-header">
+                <h1 class="video-title">🎰 Orange Casino Tutorial 🎰</h1>
+                <p class="video-subtitle">Essential guide to all casino games - 6 chapters, 30 seconds each</p>
+            </div>
+            
+            <div class="video-frame">
+                <iframe 
+                    id="casino-video"
+                    src="https://www.youtube.com/embed/lZucjmu-F2M?enablejsapi=1&rel=0" 
+                    title="Orange Casino Tutorial" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="chapter-navigation">
+                <button class="chapter-btn" onclick="seekToTime(0)">
+                    🎰 Introduction
+                    <div class="chapter-time">0:00 - 0:30</div>
+                </button>
+                <button class="chapter-btn" onclick="seekToTime(30)">
+                    🎯 Slot Machines
+                    <div class="chapter-time">0:30 - 1:00</div>
+                </button>
+                <button class="chapter-btn" onclick="seekToTime(60)">
+                    🃏 Blackjack
+                    <div class="chapter-time">1:00 - 1:30</div>
+                </button>
+                <button class="chapter-btn" onclick="seekToTime(90)">
+                    ♠️ Poker
+                    <div class="chapter-time">1:30 - 2:00</div>
+                </button>
+                <button class="chapter-btn" onclick="seekToTime(120)">
+                    🎫 Scratch-Offs
+                    <div class="chapter-time">2:00 - 2:30</div>
+                </button>
+                <button class="chapter-btn" onclick="seekToTime(150)">
+                    🏆 Achievements
+                    <div class="chapter-time">2:30 - 3:00</div>
+                </button>
+            </div>
+
+            <div class="video-info">
+                <h3>📹 About This Tutorial</h3>
+                <p>This streamlined video guide covers the core features of Orange Casino in 6 focused chapters.</p>
+                <p><strong>Video Length:</strong> 3 minutes (30 seconds per chapter)</p>
+                <p><strong>Format:</strong> Live demonstration of actual gameplay</p>
+                <p><strong>Chapters:</strong> Intro → Slots → Blackjack → Poker → Scratch-Offs → Achievements</p>
+                <p><strong>Perfect For:</strong> Quick overview of all main casino games</p>
+                
+                <a href="https://youtu.be/lZucjmu-F2M" target="_blank" class="youtube-link">
+                    📺 Watch on YouTube
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">Made with ❤️ — demo only. No real money.</div>
+    </footer>
+
+    <script>
+        function seekToTime(seconds) {
+            const iframe = document.getElementById('casino-video');
+            
+            // Method 1: Try using postMessage to YouTube iframe
+            try {
+                iframe.contentWindow.postMessage(
+                    '{"event":"command","func":"seekTo","args":[' + seconds + ', true]}',
+                    'https://www.youtube.com'
+                );
+            } catch (e) {
+                console.log('Direct iframe communication failed, using URL method');
+            }
+            
+            // Method 2: Reload iframe with timestamp
+            const baseUrl = 'https://www.youtube.com/embed/lZucjmu-F2M?enablejsapi=1&rel=0';
+            iframe.src = baseUrl + '&start=' + seconds;
+        }
+
+        // Add keyboard shortcuts for chapter navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.altKey) {
+                const chapterTimes = [0, 30, 60, 90, 120, 150]; // 6 chapters
+                const keyNumber = parseInt(event.key);
+                
+                if (keyNumber >= 0 && keyNumber <= 5 && chapterTimes[keyNumber] !== undefined) {
+                    event.preventDefault();
+                    seekToTime(chapterTimes[keyNumber]);
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 Chapter shortcuts:');
+            console.log('  Alt + 0: Introduction');
+            console.log('  Alt + 1: Slot Machines');
+            console.log('  Alt + 2: Blackjack');
+            console.log('  Alt + 3: Poker');
+            console.log('  Alt + 4: Scratch-Offs');
+            console.log('  Alt + 5: Achievements');
+        });
+    </script>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    
+    <script>
+      // Mark help video watched achievement
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.vc && window.vc.markHelpWatched) {
+          window.vc.markHelpWatched();
+        }
+      });
+    </script>
+</body>
+</html>
