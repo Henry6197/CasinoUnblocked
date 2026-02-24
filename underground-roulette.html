@@ -3,613 +3,952 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔫 Russian Roulette - Underground Casino</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="new-styles.css">
+    <title>???</title>
     <style>
-        /* Dark Underground Theme Override */
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --bg: #0f0a08;
-            --card: #1a130f;
-            --accent: #ff6b35;
-            --accent-2: #b7410e;
-            --muted: #8b7d6b;
-            --glass: rgba(255, 107, 53, 0.1);
-            --danger: #dc143c;
-            --radius: 14px;
-            --container-width: 1200px;
-            --gap: 18px;
-            --text: #c4b5a0;
+            --rust: #8b4513;
+            --rust-light: #a0522d;
+            --rust-dark: #5c2e0e;
+            --blood: #6b0000;
+            --blood-bright: #8b0000;
+            --concrete: #3a3632;
+            --concrete-light: #4a4540;
+            --grime: #2a2520;
+            --grime-dark: #1a1510;
+            --text-dim: #6b6055;
+            --text: #8b8070;
+            --text-bright: #b0a090;
+            --bulb: rgba(200, 160, 80, 0.08);
         }
-        
-        .underground-theme {
-            background: linear-gradient(180deg, #0f0a08 0%, #1a130f 50%, #2b1e17 100%);
-            background-attachment: fixed;
+
+        body {
+            background: var(--grime-dark);
+            color: var(--text);
+            font-family: 'Special Elite', 'Courier New', monospace;
             min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
         }
-        
-        .underground-theme .site-header {
-            background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), rgba(139, 38, 53, 0.05));
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
-        }
-        
-        .underground-theme .brand {
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
-        }
-        
-        .underground-theme .main-nav a {
-            color: var(--muted);
-        }
-        
-        .underground-theme .main-nav a:hover {
-            color: var(--text);
-            background: var(--glass);
-        }
-        
-        .underground-theme .balance {
-            color: var(--muted);
-        }
-        
-        .underground-theme .welcome-banner {
-            background: linear-gradient(135deg, var(--danger), var(--accent));
-            color: white;
-            text-align: center;
-            padding: 24px 0;
-            border-radius: var(--radius);
-            margin-bottom: 32px;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.4);
-        }
-        
-        .underground-theme .game-panel {
-            background: linear-gradient(180deg, rgba(26, 19, 15, 0.95), rgba(43, 30, 23, 0.9));
-            color: var(--text);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .underground-theme .btn {
-            background: var(--accent);
-            color: #0f0a08;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .underground-theme .btn:hover {
-            background: var(--accent-2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-        }
-        
-        .underground-theme .site-footer {
-            background: linear-gradient(180deg, #0f0a08 0%, #1a130f 100%);
-            border-top: 1px solid rgba(255, 107, 53, 0.2);
-            color: var(--muted);
-        }
-        
-        .back-to-underground {
+
+        /* Basement atmosphere */
+        body::before {
+            content: '';
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 50% 20%, var(--bulb) 0%, transparent 60%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0px,
+                    transparent 3px,
+                    rgba(0,0,0,0.03) 3px,
+                    rgba(0,0,0,0.03) 4px
+                ),
+                url('images/360_F_210328878_cIlSkzQwKOB1ZmKWEWev05eAB9m053XY.jpg');
+            background-size: cover, auto, cover;
+            background-position: center, center, center;
+            background-attachment: fixed;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
         }
-        
-        .back-to-underground:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+
+        /* Flickering light effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -10%; left: 30%; right: 30%;
+            height: 40%;
+            background: radial-gradient(ellipse, rgba(200, 160, 80, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: flicker 4s infinite;
         }
-        
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            5% { opacity: 0.3; }
+            6% { opacity: 1; }
+            40% { opacity: 0.95; }
+            42% { opacity: 0.4; }
+            43% { opacity: 1; }
+            78% { opacity: 1; }
+            80% { opacity: 0.2; }
+            81% { opacity: 0.9; }
+            82% { opacity: 0.5; }
+            83% { opacity: 1; }
+        }
+
+        .basement {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Top chain / hanging light */
+        .hanging-light {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1.4em;
+            color: var(--text-dim);
+            letter-spacing: 8px;
+            animation: sway 6s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .room-title {
+            text-align: center;
+            font-size: 1.6em;
+            color: var(--rust-light);
+            text-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+            margin-bottom: 4px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .room-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        /* Scratched note on the wall */
+        .wall-note {
+            background: linear-gradient(145deg, rgba(60, 50, 40, 0.8), rgba(40, 35, 28, 0.9));
+            border: 1px solid rgba(139, 69, 19, 0.25);
+            border-radius: 2px;
+            padding: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+        }
+
+        .wall-note::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px,
+                transparent 20px,
+                rgba(139,69,19,0.03) 20px,
+                rgba(139,69,19,0.03) 21px
+            );
+            pointer-events: none;
+        }
+
+        .wall-note h3 {
+            color: var(--blood-bright);
+            font-size: 1em;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .wall-note p {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            line-height: 1.7;
+        }
+
+        .wall-note .scratched {
+            color: var(--rust);
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        /* Lives display - tally marks on wall */
+        .lives-wall {
+            text-align: center;
+            margin: 24px 0;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(42, 37, 32, 0.6), rgba(26, 21, 16, 0.8));
+            border-top: 1px solid rgba(139, 69, 19, 0.15);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.15);
+        }
+
+        .lives-label {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .lives-marks {
+            font-size: 2.2em;
+            letter-spacing: 12px;
+            text-shadow: 0 0 8px rgba(107, 0, 0, 0.4);
+        }
+
+        .lives-marks .alive { color: var(--blood-bright); }
+        .lives-marks .dead { color: var(--concrete); text-decoration: line-through; }
+
+        /* The revolver */
+        .revolver-area {
+            text-align: center;
+            margin: 32px 0;
+            position: relative;
+        }
+
         .revolver {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #2a2a2a 30%, #1a1a1a 70%, #0a0a0a 100%);
             border-radius: 50%;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4em;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
-            transition: transform 0.5s ease;
+            font-size: 4.5em;
+            border: 3px solid var(--rust-dark);
+            box-shadow:
+                0 0 40px rgba(0,0,0,0.6),
+                inset 0 0 20px rgba(0,0,0,0.5),
+                0 0 2px var(--rust);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.3, 1);
             cursor: pointer;
+            position: relative;
         }
-        
+
         .revolver:hover {
-            transform: rotate(60deg) scale(1.05);
+            box-shadow:
+                0 0 50px rgba(0,0,0,0.7),
+                inset 0 0 20px rgba(0,0,0,0.5),
+                0 0 5px var(--rust-light);
         }
-        
+
+        .revolver.spinning {
+            transform: rotate(1080deg);
+        }
+
+        /* Chambers */
+        .chambers {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
         .chamber {
-            width: 40px;
-            height: 40px;
-            background: #333;
+            width: 32px;
+            height: 32px;
+            background: var(--grime);
             border-radius: 50%;
-            margin: 5px;
-            border: 2px solid var(--muted);
-            display: inline-block;
-            transition: all 0.3s ease;
+            border: 2px solid var(--concrete);
+            transition: all 0.4s ease;
         }
-        
+
         .chamber.loaded {
-            background: var(--danger);
-            box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+            background: var(--blood);
+            border-color: var(--blood-bright);
+            box-shadow: 0 0 12px rgba(107, 0, 0, 0.6);
         }
-        
+
         .chamber.fired {
-            background: #666;
-            border-color: #999;
+            background: var(--concrete-light);
+            border-color: var(--text-dim);
         }
-        
-        .chambers-display {
-            text-align: center;
-            margin: 20px 0;
+
+        .chamber.current {
+            border-color: var(--rust-light);
+            box-shadow: 0 0 8px rgba(160, 82, 45, 0.4);
         }
-        
-        .danger-warning {
-            background: linear-gradient(145deg, rgba(220, 20, 60, 0.2), rgba(139, 38, 53, 0.1));
-            border: 2px solid var(--danger);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            color: var(--danger);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .game-controls {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .pull-trigger-btn {
-            font-size: 1.5em;
-            padding: 20px 40px;
-            background: linear-gradient(45deg, var(--danger), var(--accent));
-            color: white;
-            border: none;
-            border-radius: var(--radius);
+
+        /* Trigger button */
+        .trigger-btn {
+            display: inline-block;
+            font-family: 'Special Elite', monospace;
+            font-size: 1.3em;
+            padding: 18px 48px;
+            background: linear-gradient(180deg, var(--rust-dark), #3a1a0a);
+            color: var(--text-bright);
+            border: 2px solid var(--rust);
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow:
+                0 4px 16px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(160,82,45,0.2);
+            margin-top: 16px;
         }
-        
-        .pull-trigger-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.5);
+
+        .trigger-btn:hover:not(:disabled) {
+            background: linear-gradient(180deg, var(--rust), var(--rust-dark));
+            border-color: var(--rust-light);
+            box-shadow:
+                0 6px 24px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(160,82,45,0.3),
+                0 0 15px rgba(139, 69, 19, 0.2);
+            transform: translateY(-1px);
         }
-        
-        .pull-trigger-btn:disabled {
-            background: #666;
+
+        .trigger-btn:active:not(:disabled) {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .trigger-btn:disabled {
+            background: var(--grime);
+            border-color: var(--concrete);
+            color: var(--concrete-light);
             cursor: not-allowed;
-            opacity: 0.5;
+            box-shadow: none;
         }
-        
+
+        .secondary-btn {
+            display: inline-block;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.85em;
+            padding: 10px 24px;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--concrete);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 8px 4px 0;
+        }
+
+        .secondary-btn:hover {
+            border-color: var(--rust);
+            color: var(--text);
+        }
+
+        /* Game log - scratches on the wall */
+        .game-log-area {
+            margin: 32px 0;
+        }
+
+        .log-title {
+            color: var(--text-dim);
+            font-size: 0.75em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
         .game-log {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--muted);
-            border-radius: var(--radius);
-            padding: 15px;
-            height: 200px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(139, 69, 19, 0.12);
+            border-radius: 2px;
+            padding: 16px;
+            height: 180px;
             overflow-y: auto;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
+            font-size: 0.82em;
+            line-height: 1.6;
         }
-        
+
+        .game-log::-webkit-scrollbar { width: 4px; }
+        .game-log::-webkit-scrollbar-track { background: var(--grime-dark); }
+        .game-log::-webkit-scrollbar-thumb { background: var(--rust-dark); }
+
         .log-entry {
-            margin: 5px 0;
-            padding: 5px;
-            border-left: 3px solid var(--accent);
-            padding-left: 10px;
+            margin: 4px 0;
+            padding: 4px 0 4px 12px;
+            border-left: 2px solid var(--concrete);
+            color: var(--text-dim);
         }
-        
+
         .log-entry.danger {
-            border-left-color: var(--danger);
-            color: var(--danger);
+            border-left-color: var(--blood-bright);
+            color: var(--blood-bright);
         }
-        
+
         .log-entry.success {
-            border-left-color: #4caf50;
-            color: #4caf50;
+            border-left-color: #556b2f;
+            color: #7a8b5a;
         }
-        
-        .stats-display {
+
+        .log-entry.info {
+            border-left-color: var(--rust);
+            color: var(--rust-light);
+        }
+
+        /* Stats - scratched tallies */
+        .stats {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 24px 0;
         }
-        
-        .stat-item {
+
+        .stat {
             text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius);
-            border: 1px solid var(--muted);
+            padding: 16px 8px;
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            border-radius: 2px;
         }
-        
+
         .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--accent);
             display: block;
+            font-size: 1.8em;
+            color: var(--rust-light);
+            text-shadow: 0 0 6px rgba(139, 69, 19, 0.2);
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.7em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup {
+            background: linear-gradient(145deg, var(--grime), var(--grime-dark));
+            border: 2px solid var(--rust-dark);
+            border-radius: 4px;
+            padding: 36px;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 2px var(--rust);
+        }
+
+        .popup h3 {
+            color: var(--rust-light);
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+        }
+
+        .popup p {
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+
+        .popup button {
+            font-family: 'Special Elite', monospace;
+            background: linear-gradient(180deg, var(--rust-dark), #3a1a0a);
+            color: var(--text-bright);
+            border: 1px solid var(--rust);
+            padding: 10px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .popup button:hover {
+            background: linear-gradient(180deg, var(--rust), var(--rust-dark));
+        }
+
+        /* Screen shake on BANG */
+        @keyframes shake {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-8px, 4px); }
+            20% { transform: translate(6px, -6px); }
+            30% { transform: translate(-4px, 2px); }
+            40% { transform: translate(4px, -4px); }
+            50% { transform: translate(-2px, 4px); }
+            60% { transform: translate(6px, 2px); }
+            70% { transform: translate(-4px, -2px); }
+            80% { transform: translate(2px, 4px); }
+            90% { transform: translate(-2px, -4px); }
+        }
+
+        body.shaking { animation: shake 0.5s ease; }
+
+        /* Blood splatter on death */
+        .blood-splatter {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(107,0,0,0.6) 0%, transparent 70%);
+            z-index: 9999;
+            pointer-events: none;
+            animation: bloodFade 2s ease-out forwards;
+        }
+
+        @keyframes bloodFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Dripping pipe decoration */
+        .pipe {
+            position: fixed;
+            top: 0;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--rust-dark), var(--concrete));
+            z-index: 0;
+        }
+
+        .pipe.left { left: 15%; }
+        .pipe.right { right: 15%; }
+
+        .pipe::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: -2px;
+            width: 7px;
+            height: 7px;
+            background: var(--rust);
+            border-radius: 50%;
+            animation: drip 3s ease-in infinite;
+            opacity: 0;
+        }
+
+        .pipe.right::after { animation-delay: 1.5s; }
+
+        @keyframes drip {
+            0% { opacity: 0; transform: translateY(0); }
+            10% { opacity: 0.7; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(40px); }
+        }
+
+        /* Round counter */
+        .round-display {
+            text-align: center;
+            margin: 16px 0 8px;
+            color: var(--text-dim);
+            font-size: 0.85em;
+            letter-spacing: 2px;
+        }
+
+        .round-display span {
+            color: var(--rust-light);
+            font-size: 1.1em;
+        }
+
+        /* Dead state */
+        body.dead {
+            filter: grayscale(0.6) brightness(0.7);
+        }
+
+        body.dead .trigger-btn,
+        body.dead .secondary-btn {
+            display: none;
+        }
+
+        .death-message {
+            text-align: center;
+            padding: 32px;
+            color: var(--blood-bright);
+            font-size: 1.1em;
+            line-height: 1.8;
+            display: none;
+        }
+
+        body.dead .death-message {
+            display: block;
+        }
+
+        .restart-btn {
+            display: none;
+            font-family: 'Special Elite', monospace;
+            font-size: 1em;
+            padding: 14px 36px;
+            background: linear-gradient(180deg, var(--blood), #3a0000);
+            color: var(--text-bright);
+            border: 2px solid var(--blood-bright);
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 16px;
+            transition: all 0.3s;
+        }
+
+        body.dead .restart-btn { display: inline-block; }
+
+        .restart-btn:hover {
+            background: linear-gradient(180deg, var(--blood-bright), var(--blood));
+            box-shadow: 0 0 20px rgba(107, 0, 0, 0.4);
         }
     </style>
 </head>
-<body class="underground-theme">
-    <a href="underground.html" class="back-to-underground">
-        🏴‍☠️ Back to Underground
-    </a>
-    
-    <header class="site-header">
-        <div class="container">
-            <h1 class="brand">🔫 RUSSIAN ROULETTE</h1>
-            <nav class="main-nav">
-                <a href="underground.html">Underground</a>
-                <a href="underground-roulette.html">Russian Roulette</a>
-                <a href="underground-baccarat.html">Blood Pact Baccarat</a>
-                <a href="underground-dogfights.html">Dog Fights</a>
-                <a href="underground-shop.html">Black Market</a>
-                <a href="achievements.html">Achievements</a>
-            </nav>
-            <div class="balance" id="balance">
-                Underground Wallet: $<span id="underground-balance">500</span>
-                <span class="debt">Lives: <span id="lives">3</span></span>
+<body>
+    <div class="pipe left"></div>
+    <div class="pipe right"></div>
+
+    <div class="basement">
+        <div class="hanging-light">⛓️ 💡 ⛓️</div>
+        <h1 class="room-title">Russian Roulette</h1>
+        <p class="room-subtitle">The door is locked. The only way out is through.</p>
+
+        <div class="wall-note">
+            <h3>⚠ SCRATCHED INTO THE WALL</h3>
+            <p>
+                One bullet. Six chambers. Pull the trigger.<br>
+                Every round you survive pays <strong style="color:#7a8b5a;">$100</strong> off your debt.<br>
+                Survive 5 clicks = <strong style="color:#7a8b5a;">$500 paid off</strong>. Then you walk out.<br>
+                <span class="scratched">Nobody has made it past round 4</span><br>
+                Each pull spins the cylinder again.<br>
+                You have 3 chances. Use them wisely.<br><br>
+                <strong style="color:var(--blood-bright);">⚠ IF YOU DIE — YOU LOSE EVERYTHING.</strong><br>
+                <span style="color:var(--text-dim); font-size:0.9em;">All progress. All achievements. All money. Gone.</span>
+            </p>
+        </div>
+
+        <div class="wall-note" style="border-color: rgba(107,0,0,0.4);">
+            <h3 style="color: var(--rust-light);">💰 DEBT REMAINING</h3>
+            <p style="font-size: 1.5em; color: var(--blood-bright); text-align: center; margin: 8px 0;">
+                $<span id="debt-display">0</span>
+            </p>
+            <p style="text-align: center; font-size: 0.8em;">Paid this session: $<span id="paid-display">0</span></p>
+        </div>
+
+        <div class="lives-wall">
+            <div class="lives-label">Chances Remaining</div>
+            <div class="lives-marks" id="lives-marks">
+                ❤️ ❤️ ❤️
             </div>
         </div>
-    </header>
 
-    <main class="container">
-        <section class="hero">
-            <div class="welcome-banner">
-                <h2>🔫 Russian Roulette 🔫</h2>
-                <p class="welcome-subtitle">⚠️ One bullet, six chambers. Do you feel lucky? ⚠️</p>
+        <div class="round-display">
+            Round: <span id="round-num">0</span> / 5
+        </div>
+
+        <div class="revolver-area">
+            <div class="revolver" id="revolver" onclick="spinRevolver()">🔫</div>
+            <div class="chambers" id="chambers">
+                <div class="chamber" data-chamber="0"></div>
+                <div class="chamber" data-chamber="1"></div>
+                <div class="chamber" data-chamber="2"></div>
+                <div class="chamber" data-chamber="3"></div>
+                <div class="chamber" data-chamber="4"></div>
+                <div class="chamber" data-chamber="5"></div>
             </div>
-            
-            <div class="game-stage">
-                <div class="game-panel">
-                    <h3>🎯 The Game</h3>
-                    
-                    <div class="danger-warning">
-                        <h4>⚠️ EXTREME DANGER ⚠️</h4>
-                        <p>This is a game of life and death. One chamber contains a bullet. Pull the trigger and hope for the best.</p>
-                        <p><strong>Bet: $100 per round | Win: $500</strong></p>
-                    </div>
-                    
-                    <div class="revolver" id="revolver" onclick="spinRevolver()">
-                        🔫
-                    </div>
-                    
-                    <div class="chambers-display">
-                        <h4>Chambers:</h4>
-                        <div id="chambers">
-                            <div class="chamber" data-chamber="0"></div>
-                            <div class="chamber" data-chamber="1"></div>
-                            <div class="chamber" data-chamber="2"></div>
-                            <div class="chamber" data-chamber="3"></div>
-                            <div class="chamber" data-chamber="4"></div>
-                            <div class="chamber" data-chamber="5"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="game-controls">
-                        <button class="pull-trigger-btn" id="triggerBtn" onclick="pullTrigger()">
-                            🎯 Pull the Trigger ($100)
-                        </button>
-                        <br><br>
-                        <button class="btn" onclick="newGame()">🔄 New Game</button>
-                        <button class="btn" onclick="spinRevolver()">🔄 Spin Cylinder</button>
-                    </div>
-                    
-                    <div class="stats-display">
-                        <div class="stat-item">
-                            <span class="stat-value" id="gamesPlayed">0</span>
-                            <div>Games Played</div>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="gamesWon">0</span>
-                            <div>Games Won</div>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="totalWinnings">$0</span>
-                            <div>Total Winnings</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="game-controls">
-                    <h4>Game Log</h4>
-                    <div class="game-log" id="gameLog">
-                        <div class="log-entry">Welcome to Russian Roulette. Good luck...</div>
-                    </div>
-                </div>
+
+            <div>
+                <button class="trigger-btn" id="triggerBtn" onclick="pullTrigger()">
+                    Pull the Trigger
+                </button>
             </div>
-        </section>
-    </main>
+            <div>
+                <button class="secondary-btn" onclick="newGame()">New Game</button>
+                <button class="secondary-btn" onclick="spinRevolver()">Spin Cylinder</button>
+            </div>
+        </div>
 
-    <footer class="site-footer">
-        <div class="container">🔫 Russian Roulette — May fortune favor the bold.</div>
-    </footer>
+        <div class="death-message" id="death-message">
+            💀 YOU DIDN'T MAKE IT 💀<br>
+            <span style="font-size:0.8em; color: var(--text-dim);">The basement claims another.</span><br>
+            <button class="restart-btn" onclick="fullReset()">Try Again</button>
+        </div>
 
-    <script src="scripts/todd-dialogue.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/achievements.js"></script>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-value" id="gamesPlayed">0</span>
+                <div class="stat-label">Attempts</div>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="gamesWon">0</span>
+                <div class="stat-label">Survived</div>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="streakDisplay">0</span>
+                <div class="stat-label">Best Streak</div>
+            </div>
+        </div>
+
+        <div class="game-log-area">
+            <div class="log-title">scratches on the wall</div>
+            <div class="game-log" id="gameLog">
+                <div class="log-entry info">You wake up in a dim room. There's a revolver on the table.</div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Game state
-        let undergroundBalance = Number(localStorage.getItem('underground_balance') || 500);
-        let lives = Number(localStorage.getItem('roulette_lives') || 3);
-        let gamesPlayed = Number(localStorage.getItem('roulette_games_played') || 0);
-        let gamesWon = Number(localStorage.getItem('roulette_games_won') || 0);
-        let totalWinnings = Number(localStorage.getItem('roulette_total_winnings') || 0);
-        
+        // === GAME STATE ===
+        let lives = Number(localStorage.getItem('rr_lives') || 3);
+        let gamesPlayed = Number(localStorage.getItem('rr_played') || 0);
+        let gamesWon = Number(localStorage.getItem('rr_won') || 0);
+        let bestStreak = Number(localStorage.getItem('rr_streak') || 0);
+        let paidThisSession = 0;
+
         let bulletChamber = -1;
         let currentChamber = 0;
+        let roundNum = 0;
         let gameActive = false;
-        
-        // Initialize game
-        function initGame() {
-            updateDisplay();
-            newGame();
-            logMessage('Welcome to Russian Roulette. Click "New Game" to start.');
+        let currentStreak = 0;
+
+        function getDebt() {
+            return Number(localStorage.getItem('vc_debt') || 0);
         }
-        
-        // Start new game
-        function newGame() {
-            if (undergroundBalance < 100) {
-                showMessage('💸 INSUFFICIENT FUNDS', 'You need at least $100 to play Russian Roulette.');
-                return;
+
+        function setDebt(v) {
+            localStorage.setItem('vc_debt', String(Math.max(0, v)));
+        }
+
+        function save() {
+            localStorage.setItem('rr_lives', String(lives));
+            localStorage.setItem('rr_played', String(gamesPlayed));
+            localStorage.setItem('rr_won', String(gamesWon));
+            localStorage.setItem('rr_streak', String(bestStreak));
+        }
+
+        function updateDisplay() {
+            // Lives as hearts
+            const marksEl = document.getElementById('lives-marks');
+            let marks = '';
+            for (let i = 0; i < 3; i++) {
+                if (i < lives) marks += '<span class="alive">❤️</span> ';
+                else marks += '<span class="dead">🖤</span> ';
             }
-            
+            marksEl.innerHTML = marks;
+
+            document.getElementById('round-num').textContent = roundNum;
+            document.getElementById('gamesPlayed').textContent = gamesPlayed;
+            document.getElementById('gamesWon').textContent = gamesWon;
+            document.getElementById('streakDisplay').textContent = bestStreak;
+
+            // Debt display
+            document.getElementById('debt-display').textContent = getDebt().toLocaleString();
+            document.getElementById('paid-display').textContent = paidThisSession.toLocaleString();
+
             if (lives <= 0) {
-                showMessage('💀 GAME OVER', 'You have no lives left. Your underground career is over.');
+                document.body.classList.add('dead');
+            } else {
+                document.body.classList.remove('dead');
+            }
+        }
+
+        function logMessage(msg, type = '') {
+            const log = document.getElementById('gameLog');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry' + (type ? ' ' + type : '');
+            entry.textContent = msg;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function showPopup(title, message, btnText, btnAction) {
+            const overlay = document.createElement('div');
+            overlay.className = 'popup-overlay';
+            overlay.innerHTML = `
+                <div class="popup">
+                    <h3>${title}</h3>
+                    <p>${message}</p>
+                    <button id="popup-btn">${btnText || 'Continue'}</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            overlay.querySelector('#popup-btn').addEventListener('click', () => {
+                overlay.remove();
+                if (btnAction) btnAction();
+            });
+        }
+
+        // Check if player has debt — if not, kick them out
+        function checkDebtGate() {
+            if (getDebt() <= 0) {
+                showPopup(
+                    '🚫 NO DEBT',
+                    'You have no debt. You don\'t belong here. The basement only opens for those who owe.',
+                    'Leave',
+                    () => { window.location.href = 'index.html'; }
+                );
+                return false;
+            }
+            return true;
+        }
+
+        function newGame() {
+            if (!checkDebtGate()) return;
+
+            if (lives <= 0) {
+                // Death — nuke everything
+                triggerFullReset();
                 return;
             }
-            
+
             bulletChamber = Math.floor(Math.random() * 6);
             currentChamber = 0;
+            roundNum = 0;
             gameActive = true;
-            
-            // Reset chambers display
-            const chambers = document.querySelectorAll('.chamber');
-            chambers.forEach(chamber => {
-                chamber.classList.remove('loaded', 'fired');
+            currentStreak = 0;
+
+            document.querySelectorAll('.chamber').forEach(c => {
+                c.classList.remove('loaded', 'fired', 'current');
             });
-            
+
             document.getElementById('triggerBtn').disabled = false;
-            logMessage('New game started. Bullet loaded in chamber ' + (bulletChamber + 1) + '. Spin the cylinder!');
+            logMessage('A new round begins. The cylinder clicks into place...', 'info');
             spinRevolver();
+            updateDisplay();
         }
-        
-        // Spin the revolver cylinder
+
         function spinRevolver() {
             if (!gameActive) return;
-            
-            const revolver = document.getElementById('revolver');
-            revolver.style.transform = `rotate(${Math.random() * 720 + 360}deg)`;
-            
+
+            const rev = document.getElementById('revolver');
+            rev.classList.add('spinning');
+            setTimeout(() => rev.classList.remove('spinning'), 800);
+
             currentChamber = Math.floor(Math.random() * 6);
-            logMessage('Cylinder spun. Current chamber: ' + (currentChamber + 1));
+
+            document.querySelectorAll('.chamber').forEach((c, i) => {
+                c.classList.remove('current');
+                if (i === currentChamber && !c.classList.contains('fired')) {
+                    c.classList.add('current');
+                }
+            });
+
+            logMessage('The cylinder spins...', 'info');
         }
-        
-        // Pull the trigger
+
         function pullTrigger() {
             if (!gameActive) return;
-            
-            if (undergroundBalance < 100) {
-                showMessage('💸 INSUFFICIENT FUNDS', 'You need $100 to play.');
-                return;
-            }
-            
-            undergroundBalance -= 100;
-            gamesPlayed++;
-            
-            // Mark roulette play achievement (they survived at least one round)
-            if (window.vc && window.vc.markRoulettePlay) {
-                window.vc.markRoulettePlay();
-            }
-            
+
             const chambers = document.querySelectorAll('.chamber');
             chambers[currentChamber].classList.add('fired');
-            
+            chambers[currentChamber].classList.remove('current');
+
+            roundNum++;
+            gamesPlayed++;
+
             if (currentChamber === bulletChamber) {
-                // BANG! - Player loses
+                // === BANG ===
                 chambers[bulletChamber].classList.add('loaded');
                 lives--;
                 gameActive = false;
                 document.getElementById('triggerBtn').disabled = true;
-                
-                logMessage('💀 BANG! You pulled the trigger on the loaded chamber!', 'danger');
-                logMessage('You lost a life. Lives remaining: ' + lives, 'danger');
-                
-                showMessage('💀 BANG!', `You hit the bullet! You lost $100 and a life. Lives remaining: ${lives}`);
-                
+                currentStreak = 0;
+
+                // Effects
+                document.body.classList.add('shaking');
+                setTimeout(() => document.body.classList.remove('shaking'), 500);
+
+                const splatter = document.createElement('div');
+                splatter.className = 'blood-splatter';
+                document.body.appendChild(splatter);
+                setTimeout(() => splatter.remove(), 2000);
+
+                logMessage('BANG. The chamber was loaded.', 'danger');
+                logMessage('You lost a chance. ' + lives + ' remaining.', 'danger');
+
+                save();
+                updateDisplay();
+
                 if (lives <= 0) {
-                    showMessage('💀 GAME OVER', 'You have no lives left. Your underground story ends here.');
+                    // DEATH — full reset after dramatic pause
+                    setTimeout(() => {
+                        triggerFullReset();
+                    }, 2000);
+                } else {
+                    showPopup('💀 BANG', 'The bullet found you. ' + lives + ' chance' + (lives !== 1 ? 's' : '') + ' left.', 'Continue');
                 }
             } else {
-                // Click - Safe chamber
-                const winAmount = 500;
-                undergroundBalance += winAmount;
-                totalWinnings += winAmount;
-                gamesWon++;
-                
-                logMessage('✅ Click! Safe chamber. You win $500!', 'success');
-                logMessage('Continue playing or start a new game.', 'success');
-                
-                showMessage('🍀 SAFE!', `Lucky! You won $500! Current balance: $${undergroundBalance.toLocaleString()}`);
-                
-                // Move to next chamber
-                currentChamber = (currentChamber + 1) % 6;
+                // === CLICK — survived — pay $100 off debt ===
+                currentStreak++;
+                if (currentStreak > bestStreak) bestStreak = currentStreak;
+
+                const debt = getDebt();
+                const payment = Math.min(100, debt);
+                if (payment > 0) {
+                    setDebt(debt - payment);
+                    paidThisSession += payment;
+                    logMessage('...click. Empty. $' + payment + ' paid off your debt.', 'success');
+                } else {
+                    logMessage('...click. Empty chamber. Debt already clear.', 'success');
+                }
+
+                if (roundNum >= 5) {
+                    gameActive = false;
+                    gamesWon++;
+                    document.getElementById('triggerBtn').disabled = true;
+
+                    const newDebt = getDebt();
+                    logMessage('You survived all 5 rounds. The door unlocks.', 'success');
+                    if (newDebt <= 0) {
+                        showPopup('🚪 DEBT CLEARED', 'Five empty chambers. Your debt is paid. The lock clicks open — you\'re free.', 'Leave', () => { window.location.href = 'index.html'; });
+                    } else {
+                        showPopup('🚪 YOU SURVIVED', 'Five empty chambers. $' + (roundNum * 100) + ' paid. Remaining debt: $' + newDebt.toLocaleString() + '. The door opens... for now.', 'Continue');
+                    }
+                } else {
+                    setTimeout(() => spinRevolver(), 600);
+                }
+
+                save();
+                updateDisplay();
             }
-            
-            saveGameData();
+        }
+
+        // === DEATH: FULL RESET ===
+        function triggerFullReset() {
+            showPopup(
+                '💀 YOU DIED',
+                'The basement claims you. Everything you\'ve earned... gone. Achievements. Money. All of it. Wiped clean.',
+                'Accept Fate',
+                () => {
+                    // Nuke everything
+                    localStorage.clear();
+                    window.location.href = 'index.html';
+                }
+            );
+        }
+
+        function fullReset() {
+            lives = 3;
+            gamesPlayed = 0;
+            gamesWon = 0;
+            bestStreak = 0;
+            paidThisSession = 0;
+            save();
+            document.body.classList.remove('dead');
+            document.getElementById('gameLog').innerHTML = '<div class="log-entry info">You wake up again. The revolver is still on the table.</div>';
+            if (checkDebtGate()) {
+                updateDisplay();
+                newGame();
+            }
+        }
+
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!checkDebtGate()) return;
             updateDisplay();
-        }
-        
-        // Log message to game log
-        function logMessage(message, type = '') {
-            const log = document.getElementById('gameLog');
-            const entry = document.createElement('div');
-            entry.className = `log-entry ${type}`;
-            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-            log.appendChild(entry);
-            log.scrollTop = log.scrollHeight;
-        }
-        
-        // Show message popup
-        function showMessage(title, message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(45deg, #1a130f, #2b1e17);
-                border: 2px solid #ff6b35;
-                border-radius: 15px;
-                padding: 30px;
-                z-index: 10000;
-                text-align: center;
-                box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
-                max-width: 400px;
-                color: #c4b5a0;
-            `;
-            
-            messageDiv.innerHTML = `
-                <h3 style="color: #ff6b35; margin-bottom: 15px; text-shadow: 0 0 10px #ff6b35;">${title}</h3>
-                <p style="color: #c4b5a0; margin-bottom: 20px;">${message}</p>
-                <button onclick="this.parentElement.remove()" style="
-                    background: linear-gradient(45deg, #dc143c, #ff6b35);
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    font-weight: bold;
-                ">Close</button>
-            `;
-            
-            document.body.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                if (messageDiv.parentElement) {
-                    messageDiv.remove();
-                }
-            }, 5000);
-        }
-        
-        // Save game data
-        function saveGameData() {
-            localStorage.setItem('underground_balance', String(undergroundBalance));
-            localStorage.setItem('roulette_lives', String(lives));
-            localStorage.setItem('roulette_games_played', String(gamesPlayed));
-            localStorage.setItem('roulette_games_won', String(gamesWon));
-            localStorage.setItem('roulette_total_winnings', String(totalWinnings));
-        }
-        
-        // Update display
-        function updateDisplay() {
-            document.getElementById('underground-balance').textContent = undergroundBalance.toLocaleString();
-            document.getElementById('lives').textContent = lives;
-            document.getElementById('gamesPlayed').textContent = gamesPlayed;
-            document.getElementById('gamesWon').textContent = gamesWon;
-            document.getElementById('totalWinnings').textContent = '$' + totalWinnings.toLocaleString();
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', initGame);
-
-        // Ghost Code System for Russian Roulette
-        let rouletteCheatSequence = [];
-        const rouletteCodes = {
-            'bullet': { reward: 4800, message: '🔫 BULLET activated! +$4,800 underground coins!', used: false },
-            'chamber': { reward: 4200, message: '🔄 CHAMBER activated! +$4,200 underground coins!', used: false },
-            'trigger': { reward: 3600, message: '🎯 TRIGGER activated! +$3,600 underground coins!', used: false },
-            'russian': { reward: 3000, message: '🇷🇺 RUSSIAN activated! +$3,000 underground coins!', used: false },
-            'death': { reward: 2400, message: '💀 DEATH activated! +$2,400 underground coins!', used: false }
-        };
-
-        // Load used codes from localStorage
-        function loadRouletteUsedCodes() {
-            const saved = localStorage.getItem('roulette_codes_used');
-            if (saved) {
-                const usedCodes = JSON.parse(saved);
-                Object.keys(usedCodes).forEach(code => {
-                    if (rouletteCodes[code]) {
-                        rouletteCodes[code].used = usedCodes[code];
-                    }
-                });
-            }
-        }
-
-        // Save used codes to localStorage
-        function saveRouletteUsedCodes() {
-            const usedCodes = {};
-            Object.keys(rouletteCodes).forEach(code => {
-                usedCodes[code] = rouletteCodes[code].used;
-            });
-            localStorage.setItem('roulette_codes_used', JSON.stringify(usedCodes));
-        }
-
-        document.addEventListener('keydown', function(e) {
-            rouletteCheatSequence.push(e.key.toLowerCase());
-            
-            // Check against all codes
-            Object.keys(rouletteCodes).forEach(code => {
-                if (rouletteCheatSequence.length >= code.length) {
-                    const recentKeys = rouletteCheatSequence.slice(-code.length).join('');
-                    
-                    if (recentKeys === code && !rouletteCodes[code].used) {
-                        // Code matched and not used yet
-                        undergroundBalance += rouletteCodes[code].reward;
-                        
-                        localStorage.setItem('underground_balance', String(undergroundBalance));
-                        updateDisplay();
-                        
-                        showMessage('🔮 GHOST CODE ACTIVATED', rouletteCodes[code].message);
-                        
-                        // Mark as used
-                        rouletteCodes[code].used = true;
-                        saveRouletteUsedCodes();
-                        
-                        // Reset sequence
-                        rouletteCheatSequence = [];
-                    }
-                }
-            });
-            
-            // Keep sequence reasonable length
-            if (rouletteCheatSequence.length > 20) {
-                rouletteCheatSequence = rouletteCheatSequence.slice(-20);
+            if (lives > 0) {
+                newGame();
+            } else {
+                triggerFullReset();
             }
         });
-
-        // Load used codes when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadRouletteUsedCodes();
-            
-            // Mark underground ghost code achievement when using codes
-            const originalSaveRouletteUsedCodes = saveRouletteUsedCodes;
-            saveRouletteUsedCodes = function() {
-                if (window.vc && window.vc.markGhostCodeUnderground) {
-                    window.vc.markGhostCodeUnderground();
-                }
-                originalSaveRouletteUsedCodes();
-            };
-        });
+    </script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script>
+      // Track roulette entry for achievements
+      try { if(window.vc && window.vc.markRouletteEntered) window.vc.markRouletteEntered(); } catch(e){}
     </script>
 </body>
 </html>

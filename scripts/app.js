@@ -42,7 +42,58 @@
   
   function writePlatinumCredits(v){ 
     localStorage.setItem('vc_platinum', String(v)); 
-    updateBalance(); 
+    updateBalance();
+    checkRedDiamondConversion();
+  }
+
+  // Red Diamond currency — ultra-premium tier
+  const RED_DIAMOND_THRESHOLD = 1000; // At 1000 diamonds, forced conversion
+  const RED_DIAMOND_CONVERSION_RATE = 150; // 150 diamonds = 1 red diamond
+  const RED_DIAMOND_CONVERSION_PERCENT = 0.6; // Convert 60% of diamonds
+
+  function readRedDiamonds(){
+    const raw = localStorage.getItem('vc_red_diamonds');
+    return raw ? Number(raw) : 0;
+  }
+
+  function writeRedDiamonds(v){
+    localStorage.setItem('vc_red_diamonds', String(v));
+    updateRedDiamondDisplays();
+  }
+
+  function updateRedDiamondDisplays(){
+    const els = document.querySelectorAll('.red-diamond-value');
+    els.forEach(e => { e.textContent = readRedDiamonds().toLocaleString(); });
+  }
+
+  function checkRedDiamondConversion(){
+    const diamonds = readPlatinumCredits();
+    if(diamonds >= RED_DIAMOND_THRESHOLD){
+      const toConvert = Math.floor(diamonds * RED_DIAMOND_CONVERSION_PERCENT);
+      const redEarned = Math.floor(toConvert / RED_DIAMOND_CONVERSION_RATE);
+      const diamondsSpent = redEarned * RED_DIAMOND_CONVERSION_RATE;
+
+      if(redEarned < 1) return false;
+
+      const message = `💎 You hit ${diamonds.toLocaleString()} Diamonds!\n\nForced Conversion: 60% of your diamonds → Red Diamonds\n(150 💎 = 1 ❤️‍🔥)\n\nConverting ${diamondsSpent.toLocaleString()} 💎 → ${redEarned} ❤️‍🔥\nRemaining: ${(diamonds - diamondsSpent).toLocaleString()} 💎`;
+
+      alert(message);
+
+      const currentRed = readRedDiamonds();
+      writeRedDiamonds(currentRed + redEarned);
+      // Write directly to avoid re-triggering conversion
+      localStorage.setItem('vc_platinum', String(diamonds - diamondsSpent));
+      updateBalance();
+
+      if(typeof showBigMessage === 'function'){
+        showBigMessage(`❤️‍🔥 CONVERTED TO ${redEarned} RED DIAMONDS! ❤️‍🔥`, 3000);
+      }
+      if(typeof confetti === 'function'){
+        confetti(50);
+      }
+      return true;
+    }
+    return false;
   }
   
   function checkPlatinumConversion(){
@@ -602,13 +653,13 @@
     });
   }
 
-  window.vc = { readBalance, writeBalance, updateBalance, readDebt, writeDebt, updateDebt, loan100, paybackLoan, setBuddyText, showBigMessage, confetti, readJackpot, writeJackpot, updateJackpot, addToJackpot, winJackpot, startGlobalBloodDebtTimer, stopGlobalBloodDebtTimer, addOrganEffect, resetAllOrganEffects, launderMoney, readPlatinumCredits, writePlatinumCredits, purchaseWithPlatinum, checkPlatinumConversion };
+  window.vc = { readBalance, writeBalance, updateBalance, readDebt, writeDebt, updateDebt, loan100, paybackLoan, setBuddyText, showBigMessage, confetti, readJackpot, writeJackpot, updateJackpot, addToJackpot, winJackpot, startGlobalBloodDebtTimer, stopGlobalBloodDebtTimer, addOrganEffect, resetAllOrganEffects, launderMoney, readPlatinumCredits, writePlatinumCredits, purchaseWithPlatinum, checkPlatinumConversion, readRedDiamonds, writeRedDiamonds, updateRedDiamondDisplays, checkRedDiamondConversion };
   document.addEventListener('DOMContentLoaded', ()=>{ 
     vc.updateBalance(); 
     vc.updateDebt(); 
     vc.updateJackpot();
     const brand = document.querySelector('.brand'); 
-    if(brand) brand.textContent = 'ORANGE CASINO'; 
+    if(brand) brand.textContent = 'HOLLYWOOD CASINO'; 
     
     // Apply any existing organ effects globally on every page
     applyGlobalOrganEffects();

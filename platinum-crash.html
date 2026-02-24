@@ -8,9 +8,9 @@
     <style>
       body {
         background: 
-          radial-gradient(ellipse at top, rgba(30, 58, 138, 0.4) 0%, transparent 50%),
-          radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-          linear-gradient(180deg, #0a0e27 0%, #1e3a8a 25%, #1e40af 50%, #1e3a8a 75%, #0c0f1f 100%);
+          radial-gradient(ellipse at top, rgba(155, 48, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+          linear-gradient(180deg, #dcd0f0 0%, #d1c4e9 40%, #e8e0f4 70%, #dcd0f0 100%);
         background-attachment: fixed;
         min-height: 100vh;
         overflow-y: auto;
@@ -20,33 +20,29 @@
         max-width: 900px;
         margin: 40px auto;
         padding: 40px;
-        background: 
-          linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.8)),
-          radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent 60%);
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.95), rgba(78, 48, 64, 0.85));
         border: 3px solid;
-        border-image: linear-gradient(135deg, #3b82f6, #60a5fa, #3b82f6) 1;
+        border-image: linear-gradient(135deg, #9b30ff, #d4af37, #9b30ff) 1;
         border-radius: 20px;
-        box-shadow: 0 8px 40px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 8px 40px rgba(155, 48, 255, 0.3);
       }
 
       .game-title {
         text-align: center;
         font-size: 2.5em;
-        background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-bottom: 32px;
-        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
       }
 
       .rocket-display {
         position: relative;
         height: 500px;
-        background: 
-          linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.6)),
-          radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent);
-        border: 3px solid rgba(59, 130, 246, 0.5);
+        background: linear-gradient(180deg, rgba(58, 32, 48, 0.9), rgba(42, 21, 32, 0.8));
+        border: 3px solid rgba(155, 48, 255, 0.4);
         border-radius: 16px;
         margin: 32px 0;
         overflow: hidden;
@@ -64,7 +60,7 @@
         position: absolute;
         width: 2px;
         height: 2px;
-        background: #dbeafe;
+        background: #f0e4f8;
         border-radius: 50%;
         animation: twinkle 3s infinite;
       }
@@ -87,9 +83,9 @@
         position: absolute;
         width: 6px;
         height: 6px;
-        background: radial-gradient(circle, rgba(96, 165, 250, 0.9), rgba(59, 130, 246, 0.4));
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.9), rgba(155, 48, 255, 0.4));
         border-radius: 50%;
-        box-shadow: 0 0 15px rgba(96, 165, 250, 0.8);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
         animation: fadeTrail 1s ease-out forwards;
       }
 
@@ -105,12 +101,12 @@
         transform: translateX(-50%);
         font-size: 5em;
         font-weight: 900;
-        background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-align: center;
-        filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.8));
+        filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6));
         transition: all 0.1s ease;
         z-index: 10;
       }
@@ -122,7 +118,7 @@
         bottom: 30px;
         left: 50px;
         transition: all 0.1s ease-out;
-        filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.8));
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
         z-index: 5;
       }
 
@@ -164,10 +160,10 @@
       .bet-input {
         padding: 12px 20px;
         font-size: 1.1em;
-        background: rgba(15, 23, 42, 0.8);
-        border: 2px solid #3b82f6;
+        background: rgba(58, 32, 48, 0.8);
+        border: 2px solid #9b30ff;
         border-radius: 10px;
-        color: #dbeafe;
+        color: #f0e4f8;
         font-weight: 700;
         width: 200px;
         text-align: center;
@@ -177,18 +173,18 @@
         padding: 14px 32px;
         font-size: 1.2em;
         font-weight: 900;
-        background: linear-gradient(135deg, #3b82f6, #60a5fa);
-        color: #0a0e27;
-        border: 2px solid #60a5fa;
+        background: linear-gradient(135deg, #9b30ff, #d4af37);
+        color: #1a0e1f;
+        border: 2px solid #d4af37;
         border-radius: 12px;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 4px 20px rgba(155, 48, 255, 0.4);
       }
 
       .game-btn:hover:not(:disabled) {
         transform: translateY(-3px);
-        box-shadow: 0 8px 32px rgba(59, 130, 246, 0.6);
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5);
       }
 
       .game-btn:disabled {
@@ -211,19 +207,19 @@
         font-weight: 900;
         margin: 24px 0;
         min-height: 40px;
-        background: linear-gradient(135deg, #dbeafe, #60a5fa);
+        background: linear-gradient(135deg, #f0e4f8, #d4af37);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
 
       .game-info {
-        background: rgba(30, 58, 138, 0.3);
-        border: 2px solid rgba(59, 130, 246, 0.5);
+        background: rgba(155, 48, 255, 0.12);
+        border: 2px solid rgba(155, 48, 255, 0.4);
         border-radius: 12px;
         padding: 20px;
         margin: 24px 0;
-        color: #cbd5e1;
+        color: #e0d4ea;
         line-height: 1.8;
       }
 
@@ -231,19 +227,19 @@
         display: inline-block;
         margin-top: 32px;
         padding: 12px 24px;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(30, 58, 138, 0.4));
-        border: 2px solid #3b82f6;
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.15));
+        border: 2px solid #9b30ff;
         border-radius: 10px;
-        color: #60a5fa;
+        color: #d4af37;
         text-decoration: none;
         font-weight: 700;
         transition: all 0.3s ease;
       }
 
       .back-link:hover {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(30, 58, 138, 0.6));
-        border-color: #60a5fa;
-        box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.35), rgba(212, 175, 55, 0.25));
+        border-color: #d4af37;
+        box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
       }
 
       .stats {
@@ -256,27 +252,27 @@
 
       .stat-box {
         padding: 16px 24px;
-        background: rgba(59, 130, 246, 0.2);
-        border: 2px solid rgba(96, 165, 250, 0.4);
+        background: rgba(155, 48, 255, 0.15);
+        border: 2px solid rgba(212, 175, 55, 0.35);
         border-radius: 12px;
         text-align: center;
       }
 
       .stat-label {
-        color: #cbd5e1;
+        color: #e0d4ea;
         font-size: 0.9em;
         margin-bottom: 4px;
       }
 
       .stat-value {
-        color: #60a5fa;
+        color: #d4af37;
         font-size: 1.4em;
         font-weight: 900;
       }
 
       .activity-feed {
-        background: rgba(15, 23, 42, 0.8);
-        border: 2px solid rgba(59, 130, 246, 0.5);
+        background: rgba(58, 32, 48, 0.8);
+        border: 2px solid rgba(155, 48, 255, 0.4);
         border-radius: 12px;
         padding: 16px;
         margin: 24px 0;
@@ -289,20 +285,20 @@
       }
 
       .activity-feed::-webkit-scrollbar-track {
-        background: rgba(15, 23, 42, 0.5);
+        background: rgba(58, 32, 48, 0.5);
         border-radius: 4px;
       }
 
       .activity-feed::-webkit-scrollbar-thumb {
-        background: rgba(59, 130, 246, 0.5);
+        background: rgba(155, 48, 255, 0.5);
         border-radius: 4px;
       }
 
       .activity-item {
         padding: 8px 0;
-        color: #cbd5e1;
+        color: #e0d4ea;
         font-size: 0.9em;
-        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        border-bottom: 1px solid rgba(155, 48, 255, 0.2);
       }
 
       .activity-item:last-child {
@@ -310,7 +306,7 @@
       }
 
       .activity-item .username {
-        color: #60a5fa;
+        color: #d4af37;
         font-weight: 700;
       }
 
@@ -320,7 +316,7 @@
       }
 
       .crash-result {
-        color: #cbd5e1;
+        color: #e0d4ea;
         font-size: 0.95em;
         margin-top: 8px;
         text-align: center;
@@ -333,9 +329,9 @@
     </style>
   </head>
   <body>
-    <header class="site-header" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.95)); border-bottom: 3px solid; border-image: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6) 1; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);">
+    <header class="site-header" style="background: linear-gradient(135deg, rgba(58, 32, 48, 0.97), rgba(43, 21, 32, 0.97)); border-bottom: 3px solid; border-image: linear-gradient(90deg, #9b30ff, #d4af37, #9b30ff) 1; box-shadow: 0 8px 32px rgba(155, 48, 255, 0.3);">
       <div class="container">
-        <h1 class="brand" style="background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀 Rocket Crash 💎</h1>
+        <h1 class="brand" style="background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀 Rocket Crash 💎</h1>
         <div class="balance">
           Platinum: <span id="platinum-balance">0</span> 💎
         </div>
@@ -347,7 +343,7 @@
         <h2 class="game-title">🚀 Rocket Crash 💎</h2>
 
         <div class="game-info">
-          <strong style="color: #60a5fa;">How to Play:</strong><br>
+          <strong style="color: #d4af37;">How to Play:</strong><br>
           Place your bet and watch the multiplier climb! Cash out before the rocket crashes to win your bet × the multiplier.
           Wait too long and you lose everything! The rocket can crash at any moment!
         </div>
@@ -380,7 +376,7 @@
         <div class="crash-result" id="crash-result"></div>
 
         <div class="activity-feed" id="activity-feed">
-          <div style="text-align: center; color: #60a5fa; font-weight: 700; margin-bottom: 8px;">🎮 Recent Activity</div>
+          <div style="text-align: center; color: #d4af37; font-weight: 700; margin-bottom: 8px;">🎮 Recent Activity</div>
         </div>
 
         <a href="vip-casino.html" class="back-link">← Back to VIP Casino</a>
@@ -389,6 +385,7 @@
 
     <script src="scripts/todd-dialogue.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
     <script>
       // Check VIP access
       if (localStorage.getItem('vc_vip_access') !== 'true') {
@@ -512,6 +509,9 @@
         window.vc.writePlatinumCredits(platinum - betAmount);
         updateDisplay();
 
+        // Track achievement
+        try { if(window.vc && window.vc.markCrashPlayed) window.vc.markCrashPlayed(); } catch(e){}
+
         isFlying = true;
         currentMultiplier = 1.00;
         crashPoint = generateCrashPoint();
@@ -607,6 +607,14 @@
         resultMsg.textContent = `💰 Cashed out at ${cashedOutAt.toFixed(2)}x! Won ${winAmount.toLocaleString()} 💎! Watching...`;
         
         addActivity('YOU', cashedOutAt);
+
+        // Track crash achievements
+        try {
+          if(window.vc) {
+            if(cashedOutAt >= 5 && window.vc.markCrash5x) window.vc.markCrash5x();
+            if(cashedOutAt >= 10 && window.vc.markCrash10x) window.vc.markCrash10x();
+          }
+        } catch(e){}
         
         if (window.vc.setBuddyText) {
           if (cashedOutAt >= 50) {

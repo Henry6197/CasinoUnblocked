@@ -1,4 +1,4 @@
-// Donny Boy's Rambling Dialogue System for Orange Casino
+// Donny Boy's Rambling Dialogue System for Hollywood Casino
 // He talks constantly with random nonsense and lots of filler words
 
 // Filler words and sounds Donny Boy uses

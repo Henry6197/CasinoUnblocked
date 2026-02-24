@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orange Casino</title>
+  <title>Hollywood Casino</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="new-styles.css" />
   </head>
@@ -11,20 +11,17 @@
     <!-- Ads Toggle Button -->
     <button class="ads-toggle" id="ads-toggle">🚫 Hide Ads</button>
     
-    <!-- Dark Mode Toggle for Underground Access -->
-    <button class="dark-mode-toggle" id="underground-toggle" onclick="enterUnderground()">
-      🌑 Dark Mode 🌑
-    </button>
-    
     <header class="site-header">
       <div class="container">
-  <h1 class="brand">ORANGE CASINO</h1>
+  <h1 class="brand">HOLLYWOOD CASINO</h1>
         <nav class="main-nav">
           <a href="index.html">Home</a>
           <a href="slot.html">Slots</a>
           <a href="blackjack.html">Blackjack</a>
           <a href="poker.html">Poker</a>
           <a href="scratch-offs.html">Scratch-Offs</a>
+          <a href="shop.html">Shop</a>
+          <a href="social.html">Social</a>
           <a href="achievements.html">Achievements</a>
         </nav>
   <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
@@ -34,8 +31,8 @@
     <main class="container">
       <section class="hero">
         <div class="welcome-banner">
-          <h2>🎰 Welcome to ORANGE CASINO 🎰</h2>
-          <p class="welcome-subtitle">The hottest casino experience on the web! Pick your game and start winning big!</p>
+          <h2>⭐ Welcome to HOLLYWOOD CASINO ⭐</h2>
+          <p class="welcome-subtitle">Where every bet is a blockbuster! Step onto the red carpet and start winning big!</p>
         </div>
         
         <!-- Main Games Section -->
@@ -45,7 +42,7 @@
             <a class="card game-card" href="slot.html">
               <div class="card-icon">🎰</div>
               <h3>Slots</h3>
-              <p>Spin the reels and watch the orange magic happen!</p>
+              <p>Spin the reels and watch the Hollywood magic happen!</p>
               <div class="card-footer">Click to Play</div>
             </a>
             <a class="card game-card" href="blackjack.html">
@@ -79,6 +76,20 @@
               <div class="button-group">
                 <button class="btn loan-btn" onclick="vc.loan100()">Loan $100</button>
                                 <button class="btn payback-btn" onclick="vc.paybackLoan()">Payback Loan</button>
+                                <button class="btn rusty-btn" onclick="tryEnterRoulette()" style="
+                  background: url('images/360_F_210328878_cIlSkzQwKOB1ZmKWEWev05eAB9m053XY.jpg') center/cover;
+                  color: #fff;
+                  border: 2px solid #5c2e0e;
+                  text-shadow: 1px 1px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7);
+                  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+                  font-size: 0.8em;
+                  letter-spacing: 0.5px;
+                  position: relative;
+                  overflow: hidden;
+                  text-transform: uppercase;
+                  font-weight: 900;
+                  min-width: 80px;
+                ">???</button>
               </div>
             </div>
             <div class="financial-panel emergency-panel">
@@ -91,27 +102,27 @@
           
           <!-- Platinum Shop Panel (shows when player has platinum) -->
           <div id="platinum-panel" class="financial-panel platinum-panel" style="display: none; margin-top: 16px;">
-            <h4>💎 Platinum Membership - Ultra Elite Access</h4>
+            <h4>💎 Platinum Membership - Hollywood Elite</h4>
             <div class="platinum-balance">Platinum Credits: <span id="platinum-display">0</span> 💎</div>
-            <p style="font-size: 0.85em; color: #c4b5fd; margin: 8px 0; font-style: italic;">Exclusive access for the ultra-wealthy</p>
+            <p style="font-size: 0.85em; color: var(--muted); margin: 8px 0; font-style: italic;">Exclusive access for the A-list</p>
             <button id="manual-convert-btn" class="btn" style="background: linear-gradient(135deg, #059669, #047857); color: white; width: 100%; margin-bottom: 16px; display: none;" onclick="manualConvert()">💵 Convert Cash to Platinum (10B = 1 💎)</button>
             
             <div id="vip-casino-access" class="platinum-items" style="margin-top: 16px;">
-              <div class="platinum-item vip-casino-feature" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(218, 165, 32, 0.1)); border: 3px solid #ffd700; padding: 20px;">
+              <div class="platinum-item vip-casino-feature" style="background: linear-gradient(135deg, rgba(155, 48, 255, 0.12), rgba(212, 175, 55, 0.08)); border: 3px solid var(--accent); padding: 20px; border-radius: 14px; box-shadow: 0 6px 30px rgba(155, 48, 255, 0.15);">
                 <div style="text-align: center; margin-bottom: 16px;">
-                  <div style="font-size: 3em; margin-bottom: 8px;">👑</div>
-                  <strong style="font-size: 1.3em; color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">VIP CASINO ACCESS</strong>
+                  <div style="font-size: 3em; margin-bottom: 8px;">🎬</div>
+                  <strong style="font-size: 1.3em; color: var(--accent); text-shadow: 0 0 12px rgba(155, 48, 255, 0.4);">VIP HOLLYWOOD LOUNGE</strong>
                 </div>
-                <div style="margin: 16px 0; line-height: 1.8;">
-                  <div style="margin-bottom: 8px;">✨ <strong>Exclusive Ultra-Elite Casino</strong></div>
+                <div style="margin: 16px 0; line-height: 1.8; color: var(--text);">
+                  <div style="margin-bottom: 8px;">⭐ <strong>Exclusive A-List Casino</strong></div>
                   <div style="margin-bottom: 8px;">💰 <strong>Platinum-only games & betting</strong></div>
                   <div style="margin-bottom: 8px;">🎰 <strong>Massive multipliers & jackpots</strong></div>
-                  <div style="margin-bottom: 8px;">🏆 <strong>VIP rewards & bonuses</strong></div>
-                  <div style="margin-bottom: 8px;">👔 <strong>White-glove service</strong></div>
+                  <div style="margin-bottom: 8px;">🏆 <strong>VIP red-carpet rewards</strong></div>
+                  <div style="margin-bottom: 8px;">🥂 <strong>Champagne-tier service</strong></div>
                 </div>
                 <div style="text-align: center; margin-top: 16px;">
-                  <button id="vip-access-btn" class="btn platinum-buy-btn" onclick="purchaseVIPAccess()" style="background: linear-gradient(135deg, #ffd700, #daa520); color: #1e1b4b; padding: 14px 28px; font-size: 1.1em; font-weight: 900; width: 100%; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);">🌟 UNLOCK FOR 100 💎 🌟</button>
-                  <button id="vip-enter-btn" onclick="enterVIPCasino()" style="display: none; background: linear-gradient(135deg, #ffd700, #daa520); color: #1e1b4b; padding: 14px 28px; font-size: 1.1em; font-weight: 900; width: 100%; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5); transition: all 0.3s ease;">👑 ENTER VIP CASINO 👑</button>
+                  <button id="vip-access-btn" class="btn platinum-buy-btn" onclick="purchaseVIPAccess()" style="background: linear-gradient(135deg, var(--accent), #7b1fa2); color: #fff; padding: 14px 28px; font-size: 1.1em; font-weight: 900; width: 100%; box-shadow: 0 4px 20px rgba(155, 48, 255, 0.4); border-radius: 10px; letter-spacing: 1px;">🌟 UNLOCK FOR 100 💎 🌟</button>
+                  <button id="vip-enter-btn" onclick="enterVIPCasino()" style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: #2a1f3a; padding: 14px 28px; font-size: 1.1em; font-weight: 900; width: 100%; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4); transition: all 0.3s ease; letter-spacing: 1px;">👑 ENTER VIP LOUNGE 👑</button>
                 </div>
               </div>
             </div>
@@ -153,64 +164,20 @@
     <script src="scripts/todd-dialogue.js"></script>
     <script src="scripts/app.js"></script>
     <script>
-      // Underground Casino Access
-      function enterUnderground() {
-        const toggle = document.getElementById('underground-toggle');
-        toggle.textContent = '🕳️ Entering...';
-        toggle.style.background = 'linear-gradient(45deg, #dc143c, #ff073a)';
-        
-        // Show warning message
-        if (window.vc && window.vc.showBigMessage) {
-          window.vc.showBigMessage('ENTERING UNDERGROUND...', 2000);
-        }
-        if (window.vc && window.vc.setBuddyText) {
-          window.vc.setBuddyText('Wait... where are you going? That place is dangerous!');
-        }
-        
-        // Delay for dramatic effect
-        setTimeout(() => {
-          window.location.href = 'underground.html';
-        }, 2000);
-      }
-      
-      // Update debt display with correct ID
-      function updateDebtDisplay() {
+      // Debt gate for Russian Roulette
+      function tryEnterRoulette() {
         const debt = Number(localStorage.getItem('vc_debt') || 0);
-        const displayElements = document.querySelectorAll('#debt-display');
-        displayElements.forEach(el => {
-          if (el) el.textContent = debt.toLocaleString();
-        });
-      }
-      
-      // Add some mystery to the toggle
-      document.addEventListener('DOMContentLoaded', function() {
-        const toggle = document.getElementById('underground-toggle');
-        
-        // Update all displays on page load
-        updateDebtDisplay();
-        
-        // Random flicker effect
-        setInterval(() => {
-          if (Math.random() < 0.1) { // 10% chance every second
-            toggle.style.opacity = '0.5';
-            setTimeout(() => {
-              toggle.style.opacity = '1';
-            }, 200);
-          }
-        }, 1000);
-        
-        // Hover warning
-        toggle.addEventListener('mouseenter', function() {
+        if (debt <= 0) {
           if (window.vc && window.vc.setBuddyText) {
-            window.vc.setBuddyText('That button leads somewhere dark... Are you sure?');
+            window.vc.setBuddyText("You don't have any debt... you don't want to go there. Trust me.");
           }
-        });
-        
-        // Update debt display periodically in case it changes
-        setInterval(() => {
-          updateDebtDisplay();
-        }, 5000);
-      });
+          if (window.vc && window.vc.showBigMessage) {
+            window.vc.showBigMessage("⚠️ You need debt to enter.", 2000);
+          }
+          return;
+        }
+        window.location.href = 'underground-roulette.html';
+      }
 
       // Normal Input Code System for Main Casino
       const mainCodes = {

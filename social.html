@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HollyGram — Social Feed</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: 
+          radial-gradient(ellipse at top, rgba(155, 48, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+          linear-gradient(180deg, #dcd0f0 0%, #d1c4e9 40%, #e8e0f4 70%, #dcd0f0 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+      }
+
+      .social-header {
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.97), rgba(43, 21, 32, 0.97));
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #ff4466, #9b30ff, #d4af37, #9b30ff, #ff4466) 1;
+        box-shadow: 0 8px 32px rgba(155, 48, 255, 0.3);
+      }
+
+      .social-brand {
+        background: linear-gradient(135deg, #ff4466, #9b30ff, #d4af37, #9b30ff, #ff4466);
+        background-size: 300% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 28px !important;
+        animation: shimmer 4s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 0% center; }
+        100% { background-position: 300% center; }
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.1));
+        border: 2px solid rgba(155, 48, 255, 0.4);
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        border-color: #d4af37;
+        box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+      }
+
+      .profile-card {
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.95), rgba(78, 48, 64, 0.85));
+        border: 2px solid rgba(155, 48, 255, 0.35);
+        border-radius: 20px;
+        padding: 32px;
+        text-align: center;
+        margin: 32px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 80px;
+        background: linear-gradient(135deg, rgba(155,48,255,0.2), rgba(212,175,55,0.1));
+        pointer-events: none;
+      }
+
+      .profile-avatar { font-size: 4em; position: relative; z-index: 1; margin-bottom: 8px; }
+      
+      .profile-name {
+        background: linear-gradient(135deg, #f0e4f8, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 1.6em;
+        font-weight: 900;
+        position: relative; z-index: 1;
+      }
+
+      .profile-stats {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        margin-top: 16px;
+        position: relative; z-index: 1;
+      }
+
+      .profile-stat-label { color: #c0b0d0; font-size: 0.85em; }
+      .profile-stat-value { color: #d4af37; font-weight: 900; font-size: 1.3em; }
+
+      .feed-tabs {
+        display: flex;
+        gap: 0;
+        margin: 24px 0 0;
+        border-bottom: 2px solid rgba(155, 48, 255, 0.3);
+      }
+
+      .feed-tab {
+        background: transparent;
+        border: none;
+        color: #c0b0d0;
+        font-weight: 700;
+        font-size: 1em;
+        padding: 12px 24px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .feed-tab:hover { color: #d4af37; }
+
+      .feed-tab.active {
+        color: #d4af37;
+        border-bottom-color: #d4af37;
+      }
+
+      .feed {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 24px 0;
+      }
+
+      .post-card {
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.93), rgba(78, 48, 64, 0.8));
+        border: 2px solid rgba(155, 48, 255, 0.25);
+        border-radius: 16px;
+        padding: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .post-card:hover {
+        border-color: rgba(212, 175, 55, 0.4);
+        box-shadow: 0 8px 28px rgba(155, 48, 255, 0.2);
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px 12px;
+      }
+
+      .post-avatar { font-size: 1.6em; }
+
+      .post-username {
+        color: #f0e4f8;
+        font-weight: 800;
+        font-size: 0.95em;
+      }
+
+      .post-time {
+        color: #6a5a7a;
+        font-size: 0.8em;
+        margin-left: auto;
+      }
+
+      .post-image {
+        width: 100%;
+        padding: 30px 0;
+        text-align: center;
+        font-size: 6em;
+        background: linear-gradient(180deg, rgba(155,48,255,0.06) 0%, rgba(212,175,55,0.04) 100%);
+        border-top: 1px solid rgba(155,48,255,0.1);
+        border-bottom: 1px solid rgba(155,48,255,0.1);
+      }
+
+      .post-body {
+        padding: 16px 20px;
+      }
+
+      .post-caption {
+        color: #e0d4ea;
+        font-size: 0.95em;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+
+      .post-caption .highlight-cash { color: #34d399; font-weight: 800; }
+      .post-caption .highlight-diamond { color: #d4af37; font-weight: 800; }
+      .post-caption .highlight-red { color: #ff4466; font-weight: 800; }
+
+      .post-interactions {
+        display: flex;
+        gap: 20px;
+        padding: 12px 20px 16px;
+        border-top: 1px solid rgba(155,48,255,0.1);
+      }
+
+      .interaction {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #c0b0d0;
+        font-size: 0.9em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .interaction:hover { color: #d4af37; }
+      .interaction .count { font-weight: 800; }
+
+      .post-comments {
+        padding: 0 20px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .comment {
+        background: rgba(155,48,255,0.06);
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+      }
+
+      .comment-user { color: #d4af37; font-weight: 800; }
+      .comment-text { color: #c0b0d0; }
+
+      .empty-feed {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6a5a7a;
+        font-size: 1.1em;
+      }
+
+      .compose-area {
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.93), rgba(78, 48, 64, 0.8));
+        border: 2px solid rgba(155, 48, 255, 0.35);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 24px 0;
+      }
+
+      .compose-title {
+        color: #d4af37;
+        font-weight: 800;
+        font-size: 1.1em;
+        margin-bottom: 12px;
+      }
+
+      .compose-input {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(42, 28, 38, 0.8);
+        border: 2px solid rgba(155,48,255,0.3);
+        border-radius: 10px;
+        color: #f0e4f8;
+        font-size: 0.95em;
+        resize: none;
+        height: 60px;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .compose-input::placeholder { color: #6a5a7a; }
+
+      .compose-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .compose-btn {
+        background: linear-gradient(135deg, #9b30ff, #7b20df);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .compose-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba(155,48,255,0.4);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 24px 0;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.15));
+        border: 2px solid #9b30ff;
+        border-radius: 10px;
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        border-color: #d4af37;
+        box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+      }
+
+      .verified { color: #9b30ff; font-size: 0.8em; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header social-header">
+      <div class="container">
+        <h1 class="brand social-brand">📱 HollyGram 📱</h1>
+        <div class="nav-links">
+          <a href="index.html">🏠 Casino</a>
+          <a href="shop.html">🛍️ Shop</a>
+          <a href="vip-casino.html">👑 VIP</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar">😎</div>
+        <div class="profile-name">@HighRoller <span class="verified">✓</span></div>
+        <div class="profile-stats">
+          <div>
+            <div class="profile-stat-value" id="stat-posts">0</div>
+            <div class="profile-stat-label">Posts</div>
+          </div>
+          <div>
+            <div class="profile-stat-value" id="stat-followers">0</div>
+            <div class="profile-stat-label">Followers</div>
+          </div>
+          <div>
+            <div class="profile-stat-value" id="stat-likes">0</div>
+            <div class="profile-stat-label">Total Likes</div>
+          </div>
+          <div>
+            <div class="profile-stat-value" id="stat-items">0</div>
+            <div class="profile-stat-label">Items Owned</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compose -->
+      <div class="compose-area">
+        <div class="compose-title">📝 New Post</div>
+        <textarea class="compose-input" id="compose-text" placeholder="What's on your mind, high roller?"></textarea>
+        <div class="compose-actions">
+          <button class="compose-btn" onclick="createTextPost()">Post 📤</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="feed-tabs">
+        <button class="feed-tab active" onclick="switchTab('all', this)">🔥 All</button>
+        <button class="feed-tab" onclick="switchTab('purchases', this)">🛍️ Purchases</button>
+        <button class="feed-tab" onclick="switchTab('drinks', this)">🍸 Drinks</button>
+        <button class="feed-tab" onclick="switchTab('text', this)">💬 Thoughts</button>
+      </div>
+
+      <!-- Feed -->
+      <div class="feed" id="feed"></div>
+
+      <a href="index.html" class="back-link">← Back to Casino</a>
+    </main>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script>
+      // ===== FAKE USERS FOR INTERACTIONS =====
+      const FAKE_USERS = [
+        'DiamondKing', 'GoldDigger99', 'LuckyLegend', 'VIPWhale', 'CasinoQueen',
+        'BigBaller', 'PlatinumLife', 'HighStakes', 'NeonNights', 'RichKid',
+        'LuxuryLiv', 'StacksOnStacks', 'MrMoneybags', 'AceOfSpades', 'JackpotJen',
+        'SlotMaster', 'RollingInIt', 'CashCow', 'BetBig', 'StarPlayer'
+      ];
+
+      const COMMENTS_POOL = {
+        cash: [
+          "Nice pickup! 🔥", "Solid flex 💪", "Getting that bag!", "Not bad!",
+          "Clean! 💰", "W purchase 🙌", "Living good!", "Respect the hustle"
+        ],
+        diamond: [
+          "DIAMOND HANDS 💎💎", "Bro is LOADED 😭", "How many diamonds you got??",
+          "Elite taste 🔥🔥", "That's insane!", "Goals fr", "You're crazy rich 💎",
+          "Diamond lifestyle > everything", "Absolute legend", "I need this"
+        ],
+        red: [
+          "RED DIAMOND FLEX 😱🔥", "BRO WHAT", "This is actually insane",
+          "I can't even afford to look at this 😭", "GOATED 🐐🐐🐐",
+          "This person is on another level", "Red diamond royalty 👑",
+          "That's worth more than my house", "How is this even real",
+          "I bow down 🙇‍♂️", "THE ULTIMATE FLEX!!!", "Literally speechless"
+        ],
+        drink_diamond: [
+          "Cheers! 🥂", "Living it up!", "VIP vibes 🍸", "Classy!",
+          "That's a good one", "Bar life 🍹"
+        ],
+        drink_red: [
+          "RED DIAMOND DRINK?! 😱", "Most expensive sip ever!", "Legendary taste 🔥",
+          "That drink costs more than my car", "The bartender must love you"
+        ],
+        text: [
+          "Facts 💯", "Real talk", "W take", "So true", "Love this energy ✨",
+          "Spitting facts", "Couldn't agree more"
+        ]
+      };
+
+      let currentTab = 'all';
+
+      // Calculate engagement based on price and currency
+      function calcEngagement(price, currency) {
+        let base = 0;
+        if (currency === 'cash') {
+          base = Math.floor(Math.log10(Math.max(price, 1)) * 15) + Math.floor(Math.random() * 20);
+        } else if (currency === 'diamond') {
+          base = price * 80 + Math.floor(Math.random() * 100) + 50;
+        } else if (currency === 'red') {
+          base = price * 500 + Math.floor(Math.random() * 300) + 200;
+        } else {
+          // text post
+          base = Math.floor(Math.random() * 30) + 5;
+        }
+        return {
+          likes: base + Math.floor(Math.random() * Math.max(base * 0.3, 10)),
+          comments: Math.floor(base * 0.15) + Math.floor(Math.random() * 5) + 1,
+          shares: Math.floor(base * 0.05) + Math.floor(Math.random() * 3)
+        };
+      }
+
+      function getComments(currency, type, count) {
+        let pool;
+        if (type === 'text') pool = COMMENTS_POOL.text;
+        else if (type === 'drink') pool = currency === 'red' ? COMMENTS_POOL.drink_red : COMMENTS_POOL.drink_diamond;
+        else pool = COMMENTS_POOL[currency] || COMMENTS_POOL.cash;
+
+        const selected = [];
+        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        for (let i = 0; i < Math.min(count, shuffled.length, 4); i++) {
+          selected.push({
+            user: FAKE_USERS[Math.floor(Math.random() * FAKE_USERS.length)],
+            text: shuffled[i]
+          });
+        }
+        return selected;
+      }
+
+      function timeAgo(ts) {
+        const diff = Date.now() - ts;
+        const mins = Math.floor(diff / 60000);
+        if (mins < 1) return 'just now';
+        if (mins < 60) return mins + 'm ago';
+        const hrs = Math.floor(mins / 60);
+        if (hrs < 24) return hrs + 'h ago';
+        return Math.floor(hrs / 24) + 'd ago';
+      }
+
+      function getPosts() {
+        return JSON.parse(localStorage.getItem('vc_social_posts') || '[]');
+      }
+
+      function savePosts(posts) {
+        localStorage.setItem('vc_social_posts', JSON.stringify(posts));
+      }
+
+      function createTextPost() {
+        const text = document.getElementById('compose-text').value.trim();
+        if (!text) return;
+
+        const posts = getPosts();
+        posts.unshift({
+          id: Date.now(),
+          type: 'text',
+          emoji: '💬',
+          title: text,
+          desc: '',
+          price: 0,
+          currency: 'text',
+          timestamp: Date.now()
+        });
+        savePosts(posts);
+        document.getElementById('compose-text').value = '';
+        renderFeed();
+
+        if (window.vc && window.vc.setBuddyText) {
+          window.vc.setBuddyText("Posted! Let's see those likes roll in 📱");
+        }
+      }
+
+      function deletePost(postId) {
+        let posts = getPosts();
+        posts = posts.filter(p => p.id !== postId);
+        savePosts(posts);
+        renderFeed();
+      }
+
+      function switchTab(tab, btn) {
+        currentTab = tab;
+        document.querySelectorAll('.feed-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        renderFeed();
+      }
+
+      function renderFeed() {
+        const feed = document.getElementById('feed');
+        let posts = getPosts();
+
+        if (currentTab === 'purchases') posts = posts.filter(p => p.type === 'purchase');
+        else if (currentTab === 'drinks') posts = posts.filter(p => p.type === 'drink');
+        else if (currentTab === 'text') posts = posts.filter(p => p.type === 'text');
+
+        if (posts.length === 0) {
+          feed.innerHTML = '<div class="empty-feed">No posts yet. Buy something from the <a href="shop.html" style="color:#d4af37">Shop</a> or order a drink at the <a href="vip-casino.html" style="color:#d4af37">VIP Bar</a> and post it!</div>';
+          updateStats([]);
+          return;
+        }
+
+        feed.innerHTML = posts.map(post => {
+          const eng = calcEngagement(post.price || 0, post.currency || 'text');
+          const comments = getComments(post.currency, post.type, eng.comments);
+          const priceTag = post.currency === 'cash'
+            ? `<span class="highlight-cash">$${(post.price||0).toLocaleString()}</span>`
+            : post.currency === 'diamond'
+            ? `<span class="highlight-diamond">💎 ${post.price}</span>`
+            : post.currency === 'red'
+            ? `<span class="highlight-red">❤️‍🔥 ${post.price}</span>`
+            : '';
+
+          const caption = post.type === 'text'
+            ? post.title
+            : post.type === 'drink'
+            ? `Just ordered a ${post.title} at the VIP Lounge Bar 🍸 ${priceTag}`
+            : `Just copped the ${post.title}! ${priceTag} 🔥`;
+
+          return `
+            <div class="post-card">
+              <div class="post-header">
+                <div class="post-avatar">😎</div>
+                <div>
+                  <div class="post-username">@HighRoller <span class="verified">✓</span></div>
+                </div>
+                <div class="post-time">${timeAgo(post.timestamp)}</div>
+              </div>
+              ${post.type !== 'text' ? `<div class="post-image">${post.emoji}</div>` : ''}
+              <div class="post-body">
+                <div class="post-caption">${caption}</div>
+              </div>
+              <div class="post-interactions">
+                <div class="interaction">❤️ <span class="count">${eng.likes.toLocaleString()}</span></div>
+                <div class="interaction">💬 <span class="count">${comments.length}</span></div>
+                <div class="interaction">🔄 <span class="count">${eng.shares}</span></div>
+                <div class="interaction" onclick="deletePost(${post.id})" style="margin-left:auto; color:#6a5a7a; font-size:0.8em;">🗑️ Delete</div>
+              </div>
+              ${comments.length > 0 ? `
+                <div class="post-comments">
+                  ${comments.map(c => `
+                    <div class="comment">
+                      <span class="comment-user">@${c.user}</span> <span class="comment-text">${c.text}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+
+        updateStats(getPosts());
+      }
+
+      function updateStats(allPosts) {
+        const posts = getPosts();
+        document.getElementById('stat-posts').textContent = posts.length;
+
+        // Followers scale with inventory + post count
+        const inv = JSON.parse(localStorage.getItem('vc_inventory') || '[]');
+        const followers = inv.length * 150 + posts.length * 25 + Math.floor(Math.random() * 50);
+        document.getElementById('stat-followers').textContent = followers.toLocaleString();
+
+        // Total likes
+        let totalLikes = 0;
+        posts.forEach(p => {
+          totalLikes += calcEngagement(p.price || 0, p.currency || 'text').likes;
+        });
+        document.getElementById('stat-likes').textContent = totalLikes.toLocaleString();
+
+        document.getElementById('stat-items').textContent = inv.length;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderFeed();
+      });
+    </script>
+
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">−</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">Show off your wealth! The richer the post, the more clout! 📱</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hollywood Shop — Buy the Dream</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: 
+          radial-gradient(ellipse at top, rgba(155, 48, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+          linear-gradient(180deg, #dcd0f0 0%, #d1c4e9 40%, #e8e0f4 70%, #dcd0f0 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+      }
+
+      .shop-header {
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.97), rgba(43, 21, 32, 0.97));
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #9b30ff, #d4af37, #9b30ff) 1;
+        box-shadow: 0 8px 32px rgba(155, 48, 255, 0.3);
+      }
+
+      .shop-brand {
+        background: linear-gradient(135deg, #f0e4f8 0%, #9b30ff 25%, #d4af37 50%, #9b30ff 75%, #f0e4f8 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 28px !important;
+        filter: drop-shadow(0 0 20px rgba(155, 48, 255, 0.6));
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+
+      .wallet-bar {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        margin: 24px 0;
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.9), rgba(78, 48, 64, 0.8));
+        border: 2px solid rgba(155, 48, 255, 0.3);
+        border-radius: 14px;
+        flex-wrap: wrap;
+      }
+
+      .wallet-item {
+        font-weight: 900;
+        font-size: 1.15em;
+      }
+
+      .wallet-cash { color: #34d399; }
+      .wallet-diamond { color: #d4af37; }
+      .wallet-red { color: #ff4466; }
+
+      .shop-section {
+        margin: 40px 0;
+      }
+
+      .shop-section-title {
+        background: linear-gradient(135deg, #f0e4f8, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .shop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .shop-item {
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.93), rgba(78, 48, 64, 0.8));
+        border: 2px solid rgba(155, 48, 255, 0.3);
+        border-radius: 16px;
+        padding: 24px 18px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shop-item:hover {
+        transform: translateY(-6px);
+        border-color: #d4af37;
+        box-shadow: 0 12px 36px rgba(155, 48, 255, 0.25);
+      }
+
+      .shop-item.owned {
+        border-color: #34d399;
+        opacity: 0.75;
+      }
+
+      .shop-item.owned::after {
+        content: '✅ OWNED';
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #34d399;
+        color: #1a0e1f;
+        font-size: 0.7em;
+        font-weight: 900;
+        padding: 3px 8px;
+        border-radius: 6px;
+      }
+
+      .item-emoji { font-size: 3.5em; margin-bottom: 10px; }
+
+      .item-name {
+        color: #f0e4f8;
+        font-weight: 800;
+        font-size: 1.15em;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        color: #c0b0d0;
+        font-size: 0.85em;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        min-height: 38px;
+      }
+
+      .item-price {
+        font-weight: 800;
+        font-size: 1em;
+        margin-bottom: 14px;
+      }
+
+      .price-cash { color: #34d399; }
+      .price-diamond { color: #d4af37; }
+      .price-red { color: #ff4466; }
+
+      .buy-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 22px;
+        font-weight: 900;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        letter-spacing: 0.5px;
+      }
+
+      .buy-btn:hover:not(:disabled) {
+        transform: scale(1.06);
+      }
+
+      .buy-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .buy-btn-cash {
+        background: linear-gradient(135deg, #34d399, #10b981);
+        color: #0a1f1a;
+      }
+
+      .buy-btn-diamond {
+        background: linear-gradient(135deg, #d4af37, #b8941e);
+        color: #2a1520;
+      }
+
+      .buy-btn-red {
+        background: linear-gradient(135deg, #ff4466, #cc2244);
+        color: #fff;
+      }
+
+      .post-btn {
+        background: linear-gradient(135deg, #9b30ff, #7b20df);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-weight: 700;
+        font-size: 0.8em;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .post-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(155,48,255,0.4); }
+
+      .shop-toast {
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.98), rgba(78, 48, 64, 0.98));
+        border: 3px solid #d4af37;
+        border-radius: 20px;
+        padding: 40px 50px;
+        text-align: center;
+        z-index: 10000;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(.4,0,.2,1);
+        pointer-events: none;
+      }
+
+      .shop-toast.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .shop-toast .toast-emoji { font-size: 4em; margin-bottom: 12px; }
+      .shop-toast .toast-text { color: #d4af37; font-weight: 800; font-size: 1.3em; }
+      .shop-toast .toast-sub { color: #c0b0d0; font-size: 0.95em; margin-top: 8px; }
+
+      .back-link {
+        display: inline-block;
+        margin: 32px 0;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.15));
+        border: 2px solid #9b30ff;
+        border-radius: 10px;
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        border-color: #d4af37;
+        box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.1));
+        border: 2px solid rgba(155, 48, 255, 0.4);
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        border-color: #d4af37;
+        box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header shop-header">
+      <div class="container">
+        <h1 class="brand shop-brand">🛍️ HOLLYWOOD SHOP 🛍️</h1>
+        <div class="nav-links">
+          <a href="index.html">🏠 Casino</a>
+          <a href="social.html">📱 Social</a>
+          <a href="vip-casino.html">👑 VIP</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="wallet-bar">
+        <span class="wallet-item wallet-cash">💵 $<span id="wallet-cash">0</span></span>
+        <span class="wallet-item wallet-diamond">💎 <span id="wallet-diamond">0</span></span>
+        <span class="wallet-item wallet-red">❤️‍🔥 <span id="wallet-red" class="red-diamond-value">0</span></span>
+      </div>
+
+      <!-- CLOTHING -->
+      <div class="shop-section">
+        <h2 class="shop-section-title">👔 Clothing</h2>
+        <div class="shop-grid" id="clothing-grid"></div>
+      </div>
+
+      <!-- CARS -->
+      <div class="shop-section">
+        <h2 class="shop-section-title">🚗 Cars</h2>
+        <div class="shop-grid" id="cars-grid"></div>
+      </div>
+
+      <!-- HOUSES -->
+      <div class="shop-section">
+        <h2 class="shop-section-title">🏠 Houses</h2>
+        <div class="shop-grid" id="houses-grid"></div>
+      </div>
+
+      <!-- JEWELRY & LUXURY -->
+      <div class="shop-section">
+        <h2 class="shop-section-title">💍 Jewelry & Luxury</h2>
+        <div class="shop-grid" id="luxury-grid"></div>
+      </div>
+
+      <!-- TECH -->
+      <div class="shop-section">
+        <h2 class="shop-section-title">📱 Tech</h2>
+        <div class="shop-grid" id="tech-grid"></div>
+      </div>
+
+      <a href="index.html" class="back-link">← Back to Casino</a>
+
+      <div class="shop-toast" id="shop-toast">
+        <div class="toast-emoji" id="toast-emoji">🛍️</div>
+        <div class="toast-text" id="toast-text">Purchased!</div>
+        <div class="toast-sub" id="toast-sub"></div>
+      </div>
+    </main>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script>
+      // ===== SHOP INVENTORY =====
+      const SHOP_ITEMS = [
+        // CLOTHING — cash
+        { id: 'tshirt', cat: 'clothing', emoji: '👕', name: 'Hollywood Tee', desc: 'A basic tee with a gold logo.', price: 500, currency: 'cash' },
+        { id: 'hoodie', cat: 'clothing', emoji: '🧥', name: 'Velvet Hoodie', desc: 'Purple velvet with gold stitching.', price: 2500, currency: 'cash' },
+        { id: 'suit', cat: 'clothing', emoji: '🤵', name: 'Red Carpet Suit', desc: 'Custom tailored. Turns heads.', price: 25000, currency: 'cash' },
+        { id: 'sneakers', cat: 'clothing', emoji: '👟', name: 'Diamond Kicks', desc: 'Encrusted with real diamonds.', price: 5, currency: 'diamond' },
+        { id: 'crown', cat: 'clothing', emoji: '👑', name: 'Golden Crown', desc: 'For true royalty only.', price: 2, currency: 'red' },
+
+        // CARS — cash & diamond
+        { id: 'sedan', cat: 'cars', emoji: '🚗', name: 'Luxury Sedan', desc: 'Leather seats. Smooth ride.', price: 50000, currency: 'cash' },
+        { id: 'sports', cat: 'cars', emoji: '🏎️', name: 'Sports Car', desc: '0-60 in 2.8 seconds.', price: 250000, currency: 'cash' },
+        { id: 'suv', cat: 'cars', emoji: '🚙', name: 'Armored SUV', desc: 'Bulletproof. Blacked out.', price: 8, currency: 'diamond' },
+        { id: 'supercar', cat: 'cars', emoji: '🏁', name: 'Hypercar', desc: 'Only 10 made. You have one.', price: 25, currency: 'diamond' },
+        { id: 'goldcar', cat: 'cars', emoji: '✨', name: 'Solid Gold Lambo', desc: 'Yes, it actually drives.', price: 3, currency: 'red' },
+
+        // HOUSES — cash, diamond, red
+        { id: 'apartment', cat: 'houses', emoji: '🏢', name: 'City Penthouse', desc: 'Top floor. 360° skyline view.', price: 500000, currency: 'cash' },
+        { id: 'mansion', cat: 'houses', emoji: '🏰', name: 'Hollywood Mansion', desc: '12 bedrooms. Pool. Theatre.', price: 2000000, currency: 'cash' },
+        { id: 'villa', cat: 'houses', emoji: '🏝️', name: 'Private Island Villa', desc: 'Your own island in the Pacific.', price: 50, currency: 'diamond' },
+        { id: 'spacestation', cat: 'houses', emoji: '🚀', name: 'Orbital Space Station', desc: 'Live in zero gravity.', price: 5, currency: 'red' },
+        { id: 'castle', cat: 'houses', emoji: '🏯', name: 'Diamond Palace', desc: 'The ultimate flex. Crystal walls.', price: 10, currency: 'red' },
+
+        // JEWELRY & LUXURY
+        { id: 'watch', cat: 'luxury', emoji: '⌚', name: 'Diamond Watch', desc: 'Time is money — literally.', price: 75000, currency: 'cash' },
+        { id: 'chain', cat: 'luxury', emoji: '📿', name: 'Gold Chain', desc: 'Heavy. Shiny. Iconic.', price: 10, currency: 'diamond' },
+        { id: 'ring', cat: 'luxury', emoji: '💍', name: 'Platinum Ring', desc: 'Rare gemstone embedded.', price: 20, currency: 'diamond' },
+        { id: 'tiara', cat: 'luxury', emoji: '👸', name: 'Ruby Tiara', desc: 'Worn by a queen. Now yours.', price: 4, currency: 'red' },
+
+        // TECH
+        { id: 'phone', cat: 'tech', emoji: '📱', name: 'Diamond Phone', desc: 'Sapphire screen. Gold body.', price: 15000, currency: 'cash' },
+        { id: 'laptop', cat: 'tech', emoji: '💻', name: 'Platinum Laptop', desc: 'Fastest computer money can buy.', price: 5, currency: 'diamond' },
+        { id: 'vr', cat: 'tech', emoji: '🥽', name: 'Holographic VR', desc: 'Full sensory immersion.', price: 15, currency: 'diamond' },
+        { id: 'robot', cat: 'tech', emoji: '🤖', name: 'Personal AI Butler', desc: 'Does everything for you.', price: 6, currency: 'red' },
+      ];
+
+      function getInventory() {
+        const raw = localStorage.getItem('vc_inventory');
+        return raw ? JSON.parse(raw) : [];
+      }
+
+      function saveInventory(inv) {
+        localStorage.setItem('vc_inventory', JSON.stringify(inv));
+      }
+
+      function updateWallet() {
+        document.getElementById('wallet-cash').textContent = window.vc.readBalance().toLocaleString();
+        document.getElementById('wallet-diamond').textContent = window.vc.readPlatinumCredits().toLocaleString();
+        document.getElementById('wallet-red').textContent = window.vc.readRedDiamonds().toLocaleString();
+      }
+
+      function showToast(emoji, text, sub) {
+        const t = document.getElementById('shop-toast');
+        document.getElementById('toast-emoji').textContent = emoji;
+        document.getElementById('toast-text').textContent = text;
+        document.getElementById('toast-sub').textContent = sub || '';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2400);
+      }
+
+      function buyItem(itemId) {
+        const item = SHOP_ITEMS.find(i => i.id === itemId);
+        if (!item) return;
+
+        const inv = getInventory();
+        if (inv.includes(itemId)) return;
+
+        let success = false;
+        if (item.currency === 'cash') {
+          const bal = window.vc.readBalance();
+          if (bal >= item.price) {
+            window.vc.writeBalance(bal - item.price);
+            success = true;
+          }
+        } else if (item.currency === 'diamond') {
+          const d = window.vc.readPlatinumCredits();
+          if (d >= item.price) {
+            window.vc.writePlatinumCredits(d - item.price);
+            success = true;
+          }
+        } else if (item.currency === 'red') {
+          const r = window.vc.readRedDiamonds();
+          if (r >= item.price) {
+            window.vc.writeRedDiamonds(r - item.price);
+            success = true;
+          }
+        }
+
+        if (!success) {
+          if (window.vc.setBuddyText) {
+            const labels = { cash: 'cash', diamond: 'Diamonds 💎', red: 'Red Diamonds ❤️‍🔥' };
+            window.vc.setBuddyText("Not enough " + labels[item.currency] + "!");
+          }
+          return;
+        }
+
+        inv.push(itemId);
+        saveInventory(inv);
+        updateWallet();
+        renderShop();
+        showToast(item.emoji, 'Purchased!', item.name);
+
+        if (window.vc.setBuddyText) {
+          const reactions = [
+            "Big spender! 💸", "Now THAT'S a flex! 🔥", "Looking expensive! ✨",
+            "The whole casino is jealous! 😎", "Money well spent! 💰"
+          ];
+          window.vc.setBuddyText(reactions[Math.floor(Math.random() * reactions.length)]);
+        }
+      }
+
+      function postToSocial(itemId) {
+        const item = SHOP_ITEMS.find(i => i.id === itemId);
+        if (!item) return;
+
+        const posts = JSON.parse(localStorage.getItem('vc_social_posts') || '[]');
+        posts.unshift({
+          id: Date.now(),
+          type: 'purchase',
+          emoji: item.emoji,
+          title: item.name,
+          desc: item.desc,
+          price: item.price,
+          currency: item.currency,
+          timestamp: Date.now()
+        });
+        localStorage.setItem('vc_social_posts', JSON.stringify(posts));
+        showToast('📱', 'Posted to Social!', 'Check your feed →');
+      }
+
+      function renderShop() {
+        const inv = getInventory();
+        const grids = {
+          clothing: document.getElementById('clothing-grid'),
+          cars: document.getElementById('cars-grid'),
+          houses: document.getElementById('houses-grid'),
+          luxury: document.getElementById('luxury-grid'),
+          tech: document.getElementById('tech-grid'),
+        };
+
+        Object.values(grids).forEach(g => g.innerHTML = '');
+
+        SHOP_ITEMS.forEach(item => {
+          const owned = inv.includes(item.id);
+          const priceLabels = {
+            cash: `<span class="price-cash">$${item.price.toLocaleString()}</span>`,
+            diamond: `<span class="price-diamond">💎 ${item.price}</span>`,
+            red: `<span class="price-red">❤️‍🔥 ${item.price}</span>`
+          };
+          const btnClass = { cash: 'buy-btn-cash', diamond: 'buy-btn-diamond', red: 'buy-btn-red' };
+
+          const card = document.createElement('div');
+          card.className = 'shop-item' + (owned ? ' owned' : '');
+          card.innerHTML = `
+            <div class="item-emoji">${item.emoji}</div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-desc">${item.desc}</div>
+            <div class="item-price">${priceLabels[item.currency]}</div>
+            ${owned
+              ? '<button class="post-btn" onclick="postToSocial(\'' + item.id + '\')">📱 Post to Social</button>'
+              : '<button class="buy-btn ' + btnClass[item.currency] + '" onclick="buyItem(\'' + item.id + '\')">BUY</button>'
+            }
+          `;
+          grids[item.cat].appendChild(card);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateWallet();
+        renderShop();
+      });
+    </script>
+
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">−</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">Welcome to the shop! Spend big, live big! 🛍️</div>
+      </div>
+    </div>
+  </body>
+</html>

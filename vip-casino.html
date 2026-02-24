@@ -8,29 +8,29 @@
     <style>
       body {
         background: 
-          radial-gradient(ellipse at top, rgba(30, 58, 138, 0.4) 0%, transparent 50%),
-          radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-          linear-gradient(180deg, #0a0e27 0%, #1e3a8a 25%, #1e40af 50%, #1e3a8a 75%, #0c0f1f 100%);
+          radial-gradient(ellipse at top, rgba(155, 48, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+          linear-gradient(180deg, #dcd0f0 0%, #d1c4e9 40%, #e8e0f4 70%, #dcd0f0 100%);
         background-attachment: fixed;
         min-height: 100vh;
       }
       
       .vip-header {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.95));
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.97), rgba(43, 21, 32, 0.97));
         border-bottom: 3px solid;
-        border-image: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6) 1;
-        box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+        border-image: linear-gradient(90deg, #9b30ff, #d4af37, #9b30ff) 1;
+        box-shadow: 0 8px 32px rgba(155, 48, 255, 0.3);
         backdrop-filter: blur(10px);
       }
       
       .vip-brand {
-        background: linear-gradient(135deg, #dbeafe 0%, #3b82f6 25%, #60a5fa 50%, #3b82f6 75%, #dbeafe 100%);
+        background: linear-gradient(135deg, #f0e4f8 0%, #9b30ff 25%, #d4af37 50%, #9b30ff 75%, #f0e4f8 100%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-size: 28px !important;
-        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+        filter: drop-shadow(0 0 20px rgba(155, 48, 255, 0.6));
         animation: shimmer 3s linear infinite;
       }
       
@@ -40,28 +40,41 @@
       }
       
       .vip-welcome {
-        background: 
-          linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.8)),
-          radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 60%);
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.92), rgba(78, 48, 64, 0.85));
         border: 3px solid;
-        border-image: linear-gradient(135deg, #3b82f6, #60a5fa, #3b82f6) 1;
+        border-image: linear-gradient(135deg, #9b30ff, #d4af37, #9b30ff) 1;
         border-radius: 16px;
         padding: 40px;
         text-align: center;
         margin: 40px 0;
-        box-shadow: 
-          0 8px 40px rgba(59, 130, 246, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 40px rgba(155, 48, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .vip-welcome::before {
+        content: '';
+        position: absolute;
+        top: -80%; left: -80%; right: -80%; bottom: -80%;
+        background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.06) 0%, transparent 60%);
+        animation: spotlightVIP 8s ease-in-out infinite;
+        pointer-events: none;
+      }
+      
+      @keyframes spotlightVIP {
+        0%,100% { transform: translateX(-25%) rotate(0deg); }
+        50% { transform: translateX(25%) rotate(3deg); }
       }
       
       .vip-welcome h2 {
-        background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-size: 2.5em;
         margin: 0 0 16px;
-        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        position: relative; z-index: 1;
       }
       
       .vip-features {
@@ -72,17 +85,13 @@
       }
       
       .vip-feature-card {
-        background: 
-          linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.7)),
-          radial-gradient(circle at center, rgba(59, 130, 246, 0.08), transparent 70%);
-        border: 2px solid rgba(59, 130, 246, 0.5);
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.93), rgba(78, 48, 64, 0.8));
+        border: 2px solid rgba(155, 48, 255, 0.35);
         border-radius: 16px;
         padding: 32px;
         text-align: center;
-        box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transition: all 0.3s ease;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transition: all 0.35s cubic-bezier(.4,0,.2,1);
         position: relative;
         overflow: hidden;
       }
@@ -90,25 +99,18 @@
       .vip-feature-card::before {
         content: '';
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        top: -50%; left: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(155, 48, 255, 0.12) 0%, transparent 70%);
         opacity: 0;
         transition: opacity 0.3s ease;
       }
       
-      .vip-feature-card:hover::before {
-        opacity: 1;
-      }
+      .vip-feature-card:hover::before { opacity: 1; }
       
       .vip-feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 
-          0 16px 48px rgba(59, 130, 246, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        border-color: #60a5fa;
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 16px 48px rgba(155, 48, 255, 0.3), 0 0 30px rgba(212, 175, 55, 0.1);
+        border-color: #d4af37;
       }
       
       .btn {
@@ -125,121 +127,319 @@
       .vip-feature-icon {
         font-size: 4em;
         margin-bottom: 16px;
-        filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.7));
-        position: relative;
-        z-index: 1;
+        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+        position: relative; z-index: 1;
       }
       
       .vip-feature-title {
-        background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa);
+        background: linear-gradient(135deg, #f0e4f8, #d4af37);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-size: 1.5em;
         font-weight: 800;
         margin: 16px 0;
-        position: relative;
-        z-index: 1;
+        position: relative; z-index: 1;
       }
       
       .vip-feature-desc {
-        color: #cbd5e1;
+        color: #e0d4ea;
         line-height: 1.6;
         font-size: 1.05em;
-        position: relative;
-        z-index: 1;
+        position: relative; z-index: 1;
       }
       
       .platinum-only {
-        background: 
-          linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(79, 70, 229, 0.2)),
-          radial-gradient(circle at center, rgba(129, 140, 248, 0.15), transparent 60%);
-        border: 2px solid rgba(129, 140, 248, 0.6);
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.15), rgba(212, 175, 55, 0.08));
+        border: 2px solid rgba(155, 48, 255, 0.4);
         padding: 16px;
         border-radius: 12px;
         margin: 32px 0;
         text-align: center;
-        box-shadow: 0 4px 20px rgba(129, 140, 248, 0.3);
+        box-shadow: 0 4px 20px rgba(155, 48, 255, 0.15);
       }
       
       .platinum-only h3 {
-        background: linear-gradient(135deg, #c7d2fe, #818cf8);
+        background: linear-gradient(135deg, #d4af37, #9b30ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin: 0 0 8px;
       }
-      
-      .coming-soon {
-        background: 
-          linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.8)),
-          radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent 60%);
-        border: 3px solid;
-        border-image: linear-gradient(135deg, #3b82f6, #818cf8, #3b82f6) 1;
+
+      /* ===== HANGOUT BAR ===== */
+      .bar-section {
+        background: linear-gradient(145deg, rgba(58, 32, 48, 0.95), rgba(42, 28, 38, 0.9));
+        border: 2px solid rgba(212, 175, 55, 0.4);
         border-radius: 16px;
-        padding: 60px 40px;
-        text-align: center;
+        padding: 40px;
         margin: 40px 0;
-        box-shadow: 
-          0 8px 40px rgba(59, 130, 246, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
       }
-      
-      .coming-soon h2 {
-        background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa);
+
+      .bar-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: 
+          radial-gradient(ellipse 300px 200px at 15% 80%, rgba(212, 175, 55, 0.06) 0%, transparent 70%),
+          radial-gradient(ellipse 200px 300px at 85% 20%, rgba(155, 48, 255, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .bar-header {
+        text-align: center;
+        margin-bottom: 32px;
+        position: relative; z-index: 1;
+      }
+
+      .bar-header h2 {
+        background: linear-gradient(135deg, #d4af37, #f0e4f8, #d4af37);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        font-size: 3em;
-        margin: 0 0 16px;
-        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+        font-size: 2em;
+        margin: 0 0 8px;
+        animation: shimmer 4s linear infinite;
       }
-      
-      .coming-soon p {
-        color: #cbd5e1;
-        font-size: 1.3em;
-        line-height: 1.8;
+
+      .bar-subtitle {
+        color: #c0b0d0;
+        font-size: 1.05em;
+        font-style: italic;
       }
+
+      .bar-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        position: relative; z-index: 1;
+      }
+
+      .drink-card {
+        background: linear-gradient(160deg, rgba(78, 48, 64, 0.9), rgba(58, 32, 48, 0.95));
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        border-radius: 14px;
+        padding: 20px 16px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: default;
+      }
+
+      .drink-card:hover {
+        transform: translateY(-4px);
+        border-color: #d4af37;
+        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+      }
+
+      .drink-emoji { font-size: 3em; margin-bottom: 8px; }
+      .drink-name { color: #d4af37; font-weight: 800; font-size: 1.1em; margin-bottom: 4px; }
+      .drink-desc { color: #c0b0d0; font-size: 0.88em; line-height: 1.4; margin-bottom: 10px; min-height: 36px; }
+      .drink-price { color: #9b30ff; font-weight: 700; font-size: 0.95em; margin-bottom: 12px; }
+
+      .drink-buy-btn {
+        background: linear-gradient(135deg, #d4af37, #b8941e);
+        color: #2a1520;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-weight: 800;
+        font-size: 0.9em;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        letter-spacing: 0.5px;
+      }
+
+      .drink-buy-btn:hover {
+        background: linear-gradient(135deg, #e6c34a, #d4af37);
+        transform: scale(1.06);
+        box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+      }
+
+      .drink-buy-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .bar-tab {
+        text-align: center;
+        margin-top: 24px;
+        padding: 16px;
+        background: rgba(155, 48, 255, 0.08);
+        border-radius: 12px;
+        border: 1px solid rgba(155, 48, 255, 0.2);
+        position: relative; z-index: 1;
+      }
+
+      .bar-tab-label { color: #c0b0d0; font-size: 0.95em; }
+      .bar-tab-amount { color: #d4af37; font-weight: 900; font-size: 1.4em; margin-top: 4px; }
+
+      .active-effects {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 12px;
+      }
+
+      .effect-badge {
+        background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.1));
+        border: 1px solid rgba(155, 48, 255, 0.4);
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 0.85em;
+        color: #d4af37;
+        font-weight: 700;
+      }
+
+      .drink-toast {
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: linear-gradient(135deg, rgba(58, 32, 48, 0.98), rgba(78, 48, 64, 0.98));
+        border: 3px solid #d4af37;
+        border-radius: 20px;
+        padding: 40px 50px;
+        text-align: center;
+        z-index: 10000;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(.4,0,.2,1);
+        pointer-events: none;
+      }
+
+      .drink-toast.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .drink-toast .toast-emoji { font-size: 4em; margin-bottom: 12px; }
+      .drink-toast .toast-text { color: #d4af37; font-weight: 800; font-size: 1.3em; }
+      .drink-toast .toast-effect { color: #c0b0d0; font-size: 0.95em; margin-top: 8px; }
     </style>
   </head>
   <body>
     <header class="site-header vip-header">
       <div class="container">
-        <h1 class="brand vip-brand">👑 VIP CASINO 👑</h1>
+        <h1 class="brand vip-brand">🎬 HOLLYWOOD VIP LOUNGE 🎬</h1>
         <nav class="main-nav">
-          <a href="index.html" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(30, 58, 138, 0.3)); border: 2px solid rgba(96, 165, 250, 0.5); border-radius: 8px; padding: 8px 16px; transition: all 0.3s ease; color:#60a5fa">🏠 Main Casino</a>
-          <a href="vip-casino.html" style="color: #60a5fa; background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(96, 165, 250, 0.2)); border: 2px solid #60a5fa; border-radius: 8px; padding: 8px 16px; box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);">VIP Lounge</a>
+          <a href="index.html" style="background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.15)); border: 2px solid rgba(155, 48, 255, 0.5); border-radius: 8px; padding: 8px 16px; transition: all 0.3s ease; color:#d4af37">🏠 Main Casino</a>
+          <a href="vip-casino.html" style="color: #d4af37; background: linear-gradient(135deg, rgba(155, 48, 255, 0.3), rgba(212, 175, 55, 0.2)); border: 2px solid #d4af37; border-radius: 8px; padding: 8px 16px; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);">VIP Lounge</a>
         </nav>
-            <div class="balance-display" style="background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.3em; font-weight: 800; margin: 16px 0;">
-          Platinum: <span id="platinum-value">0</span> 💎
+            <div class="balance-display" style="background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.3em; font-weight: 800; margin: 16px 0;">
+          💎 <span id="platinum-value">0</span> &nbsp;·&nbsp; <span style="background: linear-gradient(135deg, #ff4466, #cc2244); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">❤️‍🔥 <span class="red-diamond-value">0</span></span>
         </div>
       </div>
     </header>
 
     <main class="container">
       <div class="vip-welcome">
-        <div style="font-size: 4em; margin-bottom: 16px;">👑</div>
-        <h2>Welcome to the VIP Casino</h2>
-              <p style="color: #cbd5e1; font-size: 1.2em; line-height: 1.8; margin: 0;">
-        Welcome to the pinnacle of luxury gaming. This exclusive space is reserved for our most distinguished platinum members. Experience games with higher stakes, better odds, and rewards that redefine opulence. <span style="background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800;">Your Platinum Credits</span> unlock a world beyond imagination.
+        <div style="font-size: 4em; margin-bottom: 16px;">🎬</div>
+        <h2>Welcome to Hollywood's Finest</h2>
+              <p style="color: #e0d4ea; font-size: 1.2em; line-height: 1.8; margin: 0; position:relative; z-index:1;">
+        Step beyond the velvet rope into the most exclusive lounge on the Strip. Reserved for platinum-tier high rollers, this is where fortunes are forged under golden chandeliers. <span style="background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800;">Your Platinum Credits</span> are the key to a world most only dream about.
       </p>
       </div>
 
       <div class="platinum-only">
-        <h3>💎 Platinum Currency Only 💎</h3>
-        <p style="color: #cbd5e1; margin: 8px 0;">All games and services use Platinum Credits exclusively. Convert your cash at the main casino.</p>
+        <h3>💎 Platinum & Red Diamond Currency 💎</h3>
+        <p style="color: #e0d4ea; margin: 8px 0;">Games & drinks use 💎 Diamonds or ❤️‍🔥 Red Diamonds. At 1,000 💎 you must convert 60% to Red Diamonds (150 💎 = 1 ❤️‍🔥).</p>
+        <div style="margin-top: 12px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+          <span style="color: #d4af37; font-weight: 900; font-size: 1.2em;">💎 <span id="diamond-display">0</span></span>
+          <span style="color: #ff4466; font-weight: 900; font-size: 1.2em;">❤️‍🔥 <span class="red-diamond-value" id="red-diamond-display">0</span></span>
+        </div>
       </div>
 
-      <div class="vip-features">
-        <div class="vip-feature-card" onclick="window.location.href='platinum-dice.html'" style="cursor: pointer;">
-          <div class="vip-feature-icon">🎲</div>
-          <div class="vip-feature-title">Diamond Dice</div>
-          <div class="vip-feature-desc">
-            Roll luxury dice and multiply your platinum. 
-            Predict the outcome and win up to 36x your bet!
+      <!-- ===== HANGOUT BAR ===== -->
+      <div class="bar-section" id="hangout-bar">
+        <div class="bar-header">
+          <h2>🍸 The Velvet Lounge Bar 🍸</h2>
+          <p class="bar-subtitle">Kick back, order a drink, and enjoy the VIP life. No buffs, no gimmicks — just vibes.</p>
+        </div>
+
+        <div class="bar-menu" id="bar-menu">
+          <div class="drink-card" data-drink="water">
+            <div class="drink-emoji">💧</div>
+            <div class="drink-name">Sparkling Water</div>
+            <div class="drink-desc">Crisp, clean, sophisticated</div>
+            <div class="drink-price">💎 1</div>
+            <button class="drink-buy-btn" onclick="buyDrink('water')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="champagne">
+            <div class="drink-emoji">🥂</div>
+            <div class="drink-name">Golden Champagne</div>
+            <div class="drink-desc">A Hollywood classic — bubbly & bold</div>
+            <div class="drink-price">💎 2</div>
+            <button class="drink-buy-btn" onclick="buyDrink('champagne')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="martini">
+            <div class="drink-emoji">🍸</div>
+            <div class="drink-name">Purple Martini</div>
+            <div class="drink-desc">Smooth violet with a twist of lime</div>
+            <div class="drink-price">💎 3</div>
+            <button class="drink-buy-btn" onclick="buyDrink('martini')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="whiskey">
+            <div class="drink-emoji">🥃</div>
+            <div class="drink-name">Starlight Whiskey</div>
+            <div class="drink-desc">Aged 100 years under the desert moon</div>
+            <div class="drink-price">💎 4</div>
+            <button class="drink-buy-btn" onclick="buyDrink('whiskey')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="absinthe">
+            <div class="drink-emoji">🧪</div>
+            <div class="drink-name">Hollywood Absinthe</div>
+            <div class="drink-desc">Mysterious green. Hits different.</div>
+            <div class="drink-price">💎 5</div>
+            <button class="drink-buy-btn" onclick="buyDrink('absinthe')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="elixir">
+            <div class="drink-emoji">✨</div>
+            <div class="drink-name">Producer's Elixir</div>
+            <div class="drink-desc">The rarest drink on the Strip. Liquid gold.</div>
+            <div class="drink-price" style="color: #ff4466;">❤️‍🔥 1 Red Diamond</div>
+            <button class="drink-buy-btn" style="background: linear-gradient(135deg, #ff4466, #cc2244);" onclick="buyDrink('elixir')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="bloodmoon">
+            <div class="drink-emoji">🌑</div>
+            <div class="drink-name">Blood Moon Cocktail</div>
+            <div class="drink-desc">Only served during a full moon. Or whenever you pay.</div>
+            <div class="drink-price" style="color: #ff4466;">❤️‍🔥 2 Red Diamonds</div>
+            <button class="drink-buy-btn" style="background: linear-gradient(135deg, #ff4466, #cc2244);" onclick="buyDrink('bloodmoon')">ORDER</button>
+          </div>
+
+          <div class="drink-card" data-drink="stardust">
+            <div class="drink-emoji">🌌</div>
+            <div class="drink-name">Stardust Nebula</div>
+            <div class="drink-desc">Tastes like the cosmos. Looks even better.</div>
+            <div class="drink-price" style="color: #ff4466;">❤️‍🔥 3 Red Diamonds</div>
+            <button class="drink-buy-btn" style="background: linear-gradient(135deg, #ff4466, #cc2244);" onclick="buyDrink('stardust')">ORDER</button>
           </div>
         </div>
 
+        <div class="bar-tab">
+          <div class="bar-tab-label">🍹 Your Drinks Ordered</div>
+          <div class="active-effects" id="drinks-ordered">
+            <span style="color: #6a5a7a; font-style: italic;">No drinks yet — order something!</span>
+          </div>
+          <div style="margin-top: 12px; color: #c0b0d0; font-size: 0.9em;">
+            Bar Tab: <span class="bar-tab-amount" id="bar-tab-total">💎 0</span> · <span style="color: #ff4466;" id="bar-tab-red">❤️‍🔥 0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VIP GAMES ===== -->
+      <div class="vip-features">
         <div class="vip-feature-card" onclick="window.location.href='platinum-wheel.html'" style="cursor: pointer;">
           <div class="vip-feature-icon">🎡</div>
           <div class="vip-feature-title">Platinum Fortune Wheel</div>
@@ -258,23 +458,157 @@
           </div>
         </div>
       </div>
+
+      <!-- Toast overlay -->
+      <div class="drink-toast" id="drink-toast">
+        <div class="toast-emoji" id="toast-emoji">🥂</div>
+        <div class="toast-text" id="toast-text">Cheers!</div>
+        <div class="toast-effect" id="toast-effect"></div>
+      </div>
     </main>
 
-    <footer class="site-footer" style="border-top: 3px solid; border-image: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6) 1; background: rgba(15, 23, 42, 0.95);">
-      <div class="container" style="background: linear-gradient(135deg, #dbeafe, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">
-        👑 VIP Casino — For Platinum Members Only 💎
+    <footer class="site-footer" style="border-top: 3px solid; border-image: linear-gradient(90deg, #9b30ff, #d4af37, #9b30ff) 1; background: rgba(58, 32, 48, 0.95);">
+      <div class="container" style="background: linear-gradient(135deg, #f0e4f8, #d4af37, #9b30ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">
+        🎬 Hollywood VIP Lounge — For Platinum Members Only 💎
       </div>
     </footer>
 
     <script src="scripts/todd-dialogue.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
     <script>
+      // ===== DRINK MENU DATA =====
+      const DRINKS = {
+        water:     { name: 'Sparkling Water', emoji: '💧', price: 1, currency: 'diamond', toast: 'Refreshing!' },
+        champagne: { name: 'Golden Champagne', emoji: '🥂', price: 2, currency: 'diamond', toast: 'To fortune and glory!' },
+        martini:   { name: 'Purple Martini', emoji: '🍸', price: 3, currency: 'diamond', toast: 'Shaken, never stirred.' },
+        whiskey:   { name: 'Starlight Whiskey', emoji: '🥃', price: 4, currency: 'diamond', toast: 'Smooth as platinum.' },
+        absinthe:  { name: 'Hollywood Absinthe', emoji: '🧪', price: 5, currency: 'diamond', toast: 'See you on the other side...' },
+        elixir:    { name: "Producer's Elixir", emoji: '✨', price: 1, currency: 'red', toast: 'Liquid gold. Pure luxury.' },
+        bloodmoon: { name: 'Blood Moon Cocktail', emoji: '🌑', price: 2, currency: 'red', toast: 'The moon rises for you.' },
+        stardust:  { name: 'Stardust Nebula', emoji: '🌌', price: 3, currency: 'red', toast: 'You can taste the cosmos.' }
+      };
+
+      let barTabDiamonds = 0;
+      let barTabRed = 0;
+      let drinksOrdered = [];
+
+      function updateDisplays() {
+        if (window.vc) {
+          const plat = window.vc.readPlatinumCredits();
+          const red = window.vc.readRedDiamonds();
+          const platEl = document.getElementById('platinum-value');
+          const diamEl = document.getElementById('diamond-display');
+          const redEl = document.getElementById('red-diamond-display');
+          if (platEl) platEl.textContent = plat.toLocaleString();
+          if (diamEl) diamEl.textContent = plat.toLocaleString();
+          if (redEl) redEl.textContent = red.toLocaleString();
+          // Also update any .red-diamond-value elements
+          window.vc.updateRedDiamondDisplays();
+        }
+      }
+
+      function buyDrink(drinkId) {
+        const drink = DRINKS[drinkId];
+        if (!drink) return;
+
+        if (!window.vc) return;
+
+        if (drink.currency === 'red') {
+          // Pay with red diamonds
+          const red = window.vc.readRedDiamonds();
+          if (red < drink.price) {
+            if (window.vc.setBuddyText) {
+              window.vc.setBuddyText("Not enough Red Diamonds! You need " + drink.price + " ❤️‍🔥");
+            }
+            return;
+          }
+          window.vc.writeRedDiamonds(red - drink.price);
+          barTabRed += drink.price;
+        } else {
+          // Pay with regular diamonds
+          const plat = window.vc.readPlatinumCredits();
+          if (plat < drink.price) {
+            if (window.vc.setBuddyText) {
+              window.vc.setBuddyText("Not enough Diamonds! You need " + drink.price + " 💎");
+            }
+            return;
+          }
+          window.vc.writePlatinumCredits(plat - drink.price);
+          barTabDiamonds += drink.price;
+        }
+
+        updateDisplays();
+
+        // Track achievement
+        try { if(window.vc && window.vc.markDrinkOrdered) window.vc.markDrinkOrdered(drink.currency === 'red'); } catch(e){}
+
+        // Update bar tab display
+        document.getElementById('bar-tab-total').textContent = '💎 ' + barTabDiamonds;
+        document.getElementById('bar-tab-red').textContent = '❤️‍🔥 ' + barTabRed;
+
+        // Track drink ordered
+        drinksOrdered.push({ emoji: drink.emoji, name: drink.name });
+        renderDrinks();
+
+        // Show toast
+        showToast(drink.emoji, drink.toast, drink.name);
+
+        // Post to social feed
+        try {
+          const socialPosts = JSON.parse(localStorage.getItem('vc_social_posts') || '[]');
+          socialPosts.unshift({
+            id: Date.now(),
+            type: 'drink',
+            emoji: drink.emoji,
+            title: drink.name,
+            desc: drink.toast,
+            price: drink.price,
+            currency: drink.currency === 'red' ? 'red' : 'diamond',
+            timestamp: Date.now()
+          });
+          localStorage.setItem('vc_social_posts', JSON.stringify(socialPosts));
+        } catch(e) {}
+
+        // Buddy reaction
+        if (window.vc.setBuddyText) {
+          const reactions = [
+            "Excellent choice! 🍸 Posted to HollyGram!",
+            "Now THAT is class! ✨ Your followers are jealous!",
+            "A drink fit for a star! 🌟 Flexed on HollyGram!",
+            "Cheers, high roller! 🥂 Posted to your feed!",
+            "Living the VIP life! 💎 HollyGram is blowing up!",
+            "The bartender nods approvingly. 🎩 Shared on HollyGram!"
+          ];
+          window.vc.setBuddyText(reactions[Math.floor(Math.random() * reactions.length)]);
+        }
+      }
+
+      function renderDrinks() {
+        const container = document.getElementById('drinks-ordered');
+        if (drinksOrdered.length === 0) {
+          container.innerHTML = '<span style="color: #6a5a7a; font-style: italic;">No drinks yet — order something!</span>';
+          return;
+        }
+        container.innerHTML = drinksOrdered.map(d =>
+          '<span class="effect-badge">' + d.emoji + ' ' + d.name + '</span>'
+        ).join('');
+      }
+
+      function showToast(emoji, text, subtitle) {
+        const toast = document.getElementById('drink-toast');
+        document.getElementById('toast-emoji').textContent = emoji;
+        document.getElementById('toast-text').textContent = text;
+        document.getElementById('toast-effect').textContent = subtitle;
+        toast.classList.add('show');
+        setTimeout(() => { toast.classList.remove('show'); }, 2200);
+      }
+
       document.addEventListener('DOMContentLoaded', () => {
         // Check if user has VIP access
         const hasAccess = localStorage.getItem('vc_vip_access') === 'true';
         
         if (!hasAccess) {
-          // Redirect back to main casino if no access
           if (window.vc && window.vc.setBuddyText) {
             window.vc.setBuddyText('You need to purchase VIP access with platinum credits!');
           }
@@ -283,14 +617,7 @@
           }, 2000);
         }
         
-        // Display platinum balance
-        if (window.vc) {
-          const platinum = window.vc.readPlatinumCredits();
-          const platinumDisplay = document.getElementById('platinum-value');
-          if (platinumDisplay) {
-            platinumDisplay.textContent = platinum.toLocaleString();
-          }
-        }
+        updateDisplays();
       });
     </script>
 
