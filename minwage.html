@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Min Wage Grind 💼</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      background-attachment: fixed;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(15, 15, 35, 0.95);
+      border-bottom: 3px solid #e94560;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header h1 {
+      font-size: 1.6em;
+      background: linear-gradient(135deg, #e94560, #ffbd69);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .wallet {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #ffbd69;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    .panel {
+      background: rgba(25, 25, 50, 0.9);
+      border: 2px solid rgba(233, 69, 96, 0.4);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .panel h2 {
+      color: #e94560;
+      margin-bottom: 16px;
+      font-size: 1.4em;
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .job-card {
+      background: rgba(40, 40, 70, 0.8);
+      border: 2px solid rgba(255, 189, 105, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .job-card:hover {
+      border-color: #ffbd69;
+      box-shadow: 0 4px 20px rgba(255, 189, 105, 0.2);
+    }
+
+    .job-card.locked {
+      opacity: 0.5;
+    }
+
+    .job-card .emoji {
+      font-size: 3em;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .job-card .title {
+      font-weight: 700;
+      color: #ffbd69;
+      font-size: 1.1em;
+      margin-bottom: 6px;
+    }
+
+    .job-card .pay {
+      color: #81c784;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .job-card .time {
+      color: #aaa;
+      font-size: 0.85em;
+      margin-bottom: 12px;
+    }
+
+    .work-btn {
+      padding: 10px 24px;
+      font-size: 1em;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e94560, #ffbd69);
+      color: #1a1a2e;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .work-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(233, 69, 96, 0.4); }
+    .work-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .progress-bar {
+      width: 100%;
+      height: 24px;
+      background: rgba(40, 40, 70, 0.8);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+      border: 1px solid rgba(233, 69, 96, 0.3);
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #e94560, #ffbd69);
+      border-radius: 12px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .progress-label {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #ffbd69;
+      display: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 12px;
+      background: rgba(40, 40, 70, 0.6);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 189, 105, 0.2);
+    }
+
+    .stat-box .label { color: #aaa; font-size: 0.85em; }
+    .stat-box .value { color: #ffbd69; font-size: 1.4em; font-weight: 800; }
+
+    .transfer-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .transfer-btn {
+      padding: 14px 32px;
+      font-size: 1.2em;
+      font-weight: 900;
+      background: linear-gradient(135deg, #9b30ff, #d4af37);
+      color: #1a0e1f;
+      border: 2px solid #d4af37;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(155, 48, 255, 0.4);
+    }
+
+    .transfer-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5);
+    }
+
+    .transfer-input {
+      padding: 12px 20px;
+      font-size: 1.1em;
+      background: rgba(40, 40, 70, 0.8);
+      border: 2px solid #9b30ff;
+      border-radius: 10px;
+      color: #f0e4f8;
+      font-weight: 700;
+      width: 200px;
+      text-align: center;
+      margin-right: 12px;
+    }
+
+    .casino-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, rgba(155, 48, 255, 0.2), rgba(212, 175, 55, 0.15));
+      border: 2px solid #9b30ff;
+      border-radius: 10px;
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .casino-link:hover {
+      background: linear-gradient(135deg, rgba(155, 48, 255, 0.35), rgba(212, 175, 55, 0.25));
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    }
+
+    .message {
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 700;
+      min-height: 30px;
+      margin: 12px 0;
+      color: #81c784;
+    }
+
+    .upgrade-btn {
+      padding: 8px 16px;
+      font-size: 0.9em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1565c0, #42a5f5);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 8px;
+      width: 100%;
+    }
+
+    .upgrade-btn:hover { transform: translateY(-2px); }
+    .upgrade-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .minigame-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .minigame-overlay.active {
+      display: flex;
+    }
+
+    .minigame-box {
+      background: rgba(25, 25, 50, 0.95);
+      border: 2px solid #e94560;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .minigame-box h3 {
+      color: #ffbd69;
+      font-size: 1.5em;
+      margin-bottom: 16px;
+    }
+
+    .minigame-box p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .type-input {
+      padding: 12px 20px;
+      font-size: 1.2em;
+      background: rgba(40, 40, 70, 0.8);
+      border: 2px solid #e94560;
+      border-radius: 10px;
+      color: #f0e4f8;
+      font-weight: 700;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .type-prompt {
+      font-size: 1.3em;
+      font-weight: 800;
+      color: #ffbd69;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+      font-family: monospace;
+    }
+
+    .type-timer {
+      font-size: 2em;
+      font-weight: 900;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .combo-display {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #81c784;
+      margin-top: 8px;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .shake {
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .pop-in {
+      animation: popIn 0.4s ease;
+    }
+
+    .bonus-flash {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      font-weight: 900;
+      color: #ffbd69;
+      text-shadow: 0 0 20px rgba(255, 189, 105, 0.8);
+      z-index: 2000;
+      pointer-events: none;
+      animation: bonusFlash 1.5s ease forwards;
+    }
+
+    @keyframes bonusFlash {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5) translateY(-30px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💼 Min Wage Grind</h1>
+    <div class="wallet">Cash: $<span id="cash">0.00</span></div>
+  </header>
+
+  <div class="container">
+    <div class="panel">
+      <h2>📊 Your Stats</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <div class="label">Total Earned</div>
+          <div class="value" id="total-earned">$0</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Shifts Worked</div>
+          <div class="value" id="shifts-worked">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Current Level</div>
+          <div class="value" id="player-level">1</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Casino Balance</div>
+          <div class="value" id="casino-credits">$0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>🏢 Available Jobs</h2>
+      <p style="color: #aaa; margin-bottom: 8px;">Click "Work Shift" to start a typing minigame. Type faster = earn more! Higher-level jobs unlock as you level up.</p>
+      
+      <div class="progress-label" id="progress-label">Working...</div>
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="message" id="message"></div>
+
+      <div class="jobs-grid">
+        <div class="job-card" id="job-dishes">
+          <span class="emoji">🍽️</span>
+          <div class="title">Dishwasher</div>
+          <div class="pay">$7.25 / shift</div>
+          <div class="time">Type 3 words</div>
+          <button class="work-btn" onclick="workShift('dishes')">Work Shift</button>
+        </div>
+
+        <div class="job-card" id="job-cashier">
+          <span class="emoji">🛒</span>
+          <div class="title">Cashier</div>
+          <div class="pay">$14.00 / shift</div>
+          <div class="time">Type 5 words</div>
+          <button class="work-btn" onclick="workShift('cashier')">Work Shift</button>
+          <button class="upgrade-btn" onclick="unlockJob('cashier')" id="unlock-cashier">🔒 Unlock (Lvl 3)</button>
+        </div>
+
+        <div class="job-card" id="job-barista">
+          <span class="emoji">☕</span>
+          <div class="title">Barista</div>
+          <div class="pay">$20.00 / shift</div>
+          <div class="time">Type 6 words</div>
+          <button class="work-btn" onclick="workShift('barista')">Work Shift</button>
+          <button class="upgrade-btn" onclick="unlockJob('barista')" id="unlock-barista">🔒 Unlock (Lvl 5)</button>
+        </div>
+
+        <div class="job-card" id="job-delivery">
+          <span class="emoji">🚗</span>
+          <div class="title">Delivery Driver</div>
+          <div class="pay">$28.00 / shift</div>
+          <div class="time">Type 7 words</div>
+          <button class="work-btn" onclick="workShift('delivery')">Work Shift</button>
+          <button class="upgrade-btn" onclick="unlockJob('delivery')" id="unlock-delivery">🔒 Unlock (Lvl 8)</button>
+        </div>
+
+        <div class="job-card" id="job-waiter">
+          <span class="emoji">🍕</span>
+          <div class="title">Waiter + Tips</div>
+          <div class="pay">$15-45 / shift</div>
+          <div class="time">Type 6 words + tips</div>
+          <button class="work-btn" onclick="workShift('waiter')">Work Shift</button>
+          <button class="upgrade-btn" onclick="unlockJob('waiter')" id="unlock-waiter">🔒 Unlock (Lvl 10)</button>
+        </div>
+
+        <div class="job-card" id="job-freelance">
+          <span class="emoji">💻</span>
+          <div class="title">Freelance Dev</div>
+          <div class="pay">$50-120 / shift</div>
+          <div class="time">Type 10 words + bonus</div>
+          <button class="work-btn" onclick="workShift('freelance')">Work Shift</button>
+          <button class="upgrade-btn" onclick="unlockJob('freelance')" id="unlock-freelance">🔒 Unlock (Lvl 15)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>🎰 Transfer to Casino</h2>
+      <p style="color: #aaa; margin-bottom: 16px;">Convert your hard-earned cash into casino money. Rate: $1 earned here = $1 in the casino.</p>
+      
+      <div class="transfer-section">
+        <input type="number" id="transfer-amount" class="transfer-input" placeholder="$ Amount" min="1" value="100">
+        <button class="transfer-btn" onclick="transferToCasino()">🎰 Transfer to Casino</button>
+        <br>
+        <a href="index.html" class="casino-link" id="casino-link">🎰 Go to Casino →</a>
+      </div>
+      <div class="message" id="transfer-message" style="margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- Typing Minigame Overlay -->
+  <div class="minigame-overlay" id="minigame-overlay">
+    <div class="minigame-box pop-in">
+      <h3 id="minigame-title">🍽️ Washing Dishes...</h3>
+      <p id="minigame-desc">Type the words to complete your shift!</p>
+      <div class="type-timer" id="type-timer">15s</div>
+      <div class="type-prompt" id="type-prompt">loading</div>
+      <input type="text" class="type-input" id="type-input" placeholder="Type here..." autocomplete="off" spellcheck="false">
+      <div class="combo-display" id="combo-display"></div>
+    </div>
+  </div>
+
+  <script>
+    // ====== WORD LISTS (work-themed) ======
+    const WORD_LISTS = {
+      dishes: ['plate', 'cup', 'fork', 'soap', 'rinse', 'scrub', 'sink', 'clean', 'dry', 'stack', 'bowl', 'pan', 'sponge', 'drain', 'wash'],
+      cashier: ['scan', 'price', 'total', 'card', 'change', 'receipt', 'bag', 'coupon', 'cash', 'sale', 'barcode', 'refund', 'checkout', 'credit', 'debit'],
+      barista: ['latte', 'mocha', 'steam', 'grind', 'blend', 'brew', 'foam', 'cream', 'sugar', 'drip', 'roast', 'decaf', 'syrup', 'iced', 'chai'],
+      delivery: ['route', 'address', 'speed', 'parcel', 'drop', 'pickup', 'drive', 'signal', 'order', 'fast', 'map', 'traffic', 'fuel', 'door', 'sign'],
+      waiter: ['order', 'table', 'menu', 'serve', 'drink', 'plate', 'check', 'refill', 'seat', 'tip', 'appetizer', 'entree', 'dessert', 'napkin', 'tray'],
+      freelance: ['function', 'deploy', 'commit', 'debug', 'server', 'client', 'render', 'async', 'fetch', 'parse', 'build', 'merge', 'branch', 'export', 'module']
+    };
+
+    // ====== GAME CONFIG ======
+    const SAVE_KEY = 'minwage_save';
+    const CASINO_BALANCE_KEY = 'vc_balance'; // Same key the casino uses!
+
+    const JOBS = {
+      dishes:    { name: 'Dishwasher',       emoji: '🍽️', pay: 7.25,  words: 3,  timeLimit: 15, level: 1,  tip: false },
+      cashier:   { name: 'Cashier',          emoji: '🛒', pay: 14.00, words: 5,  timeLimit: 20, level: 3,  tip: false },
+      barista:   { name: 'Barista',          emoji: '☕', pay: 20.00, words: 6,  timeLimit: 22, level: 5,  tip: false },
+      delivery:  { name: 'Delivery Driver',  emoji: '🚗', pay: 28.00, words: 7,  timeLimit: 25, level: 8,  tip: false },
+      waiter:    { name: 'Waiter',           emoji: '🍕', pay: 15.00, words: 6,  timeLimit: 20, level: 10, tip: true, tipMax: 30 },
+      freelance: { name: 'Freelance Dev',    emoji: '💻', pay: 50.00, words: 10, timeLimit: 30, level: 15, tip: true, tipMax: 70 },
+    };
+
+    let state = loadState();
+    let isWorking = false;
+    let currentJob = null;
+    let wordsToType = [];
+    let currentWordIndex = 0;
+    let combo = 0;
+    let timerInterval = null;
+    let timeLeft = 0;
+
+    // ====== SAVE / LOAD ======
+    function defaultState() {
+      return {
+        cash: 0,
+        totalEarned: 0,
+        shiftsWorked: 0,
+        unlockedJobs: ['dishes'],
+      };
+    }
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
+        return saved ? { ...defaultState(), ...saved } : defaultState();
+      } catch { return defaultState(); }
+    }
+
+    function saveState() {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+    }
+
+    function getLevel() {
+      return Math.floor(state.shiftsWorked / 5) + 1;
+    }
+
+    function getCasinoBalance() {
+      const raw = localStorage.getItem(CASINO_BALANCE_KEY);
+      return raw ? Number(raw) : 1000;
+    }
+
+    // ====== UI UPDATE ======
+    function updateUI() {
+      document.getElementById('cash').textContent = state.cash.toFixed(2);
+      document.getElementById('total-earned').textContent = '$' + Math.floor(state.totalEarned).toLocaleString();
+      document.getElementById('shifts-worked').textContent = state.shiftsWorked;
+      document.getElementById('player-level').textContent = getLevel();
+      document.getElementById('casino-credits').textContent = '$' + getCasinoBalance().toLocaleString();
+
+      const level = getLevel();
+
+      for (const [id, job] of Object.entries(JOBS)) {
+        const card = document.getElementById('job-' + id);
+        const unlockBtn = document.getElementById('unlock-' + id);
+        const workBtn = card.querySelector('.work-btn');
+
+        if (id === 'dishes') {
+          workBtn.style.display = '';
+          card.classList.remove('locked');
+          continue;
+        }
+
+        if (state.unlockedJobs.includes(id)) {
+          workBtn.style.display = '';
+          card.classList.remove('locked');
+          if (unlockBtn) unlockBtn.style.display = 'none';
+        } else {
+          workBtn.style.display = 'none';
+          card.classList.add('locked');
+          if (unlockBtn) {
+            unlockBtn.style.display = '';
+            unlockBtn.disabled = level < job.level;
+            unlockBtn.textContent = level >= job.level ? '🔓 Unlock Now!' : `🔒 Unlock (Lvl ${job.level})`;
+          }
+        }
+      }
+    }
+
+    // ====== TYPING MINIGAME ======
+    function getRandomWords(jobId, count) {
+      const list = WORD_LISTS[jobId] || WORD_LISTS.dishes;
+      const words = [];
+      const used = new Set();
+      while (words.length < count) {
+        const w = list[Math.floor(Math.random() * list.length)];
+        if (!used.has(w)) {
+          words.push(w);
+          used.add(w);
+        }
+        if (used.size >= list.length) used.clear(); // Reset if we've used all words
+      }
+      return words;
+    }
+
+    function startMinigame(jobId) {
+      const job = JOBS[jobId];
+      currentJob = jobId;
+      wordsToType = getRandomWords(jobId, job.words);
+      currentWordIndex = 0;
+      combo = 0;
+      timeLeft = job.timeLimit;
+
+      const overlay = document.getElementById('minigame-overlay');
+      const title = document.getElementById('minigame-title');
+      const desc = document.getElementById('minigame-desc');
+      const prompt = document.getElementById('type-prompt');
+      const input = document.getElementById('type-input');
+      const timer = document.getElementById('type-timer');
+      const comboDisplay = document.getElementById('combo-display');
+
+      title.textContent = `${job.emoji} Working as ${job.name}...`;
+      desc.textContent = `Type ${job.words} words to complete your shift! Faster = bonus pay!`;
+      prompt.textContent = wordsToType[0];
+      input.value = '';
+      timer.textContent = timeLeft + 's';
+      comboDisplay.textContent = '';
+
+      overlay.classList.add('active');
+      input.focus();
+
+      // Start countdown
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timer.textContent = timeLeft + 's';
+        if (timeLeft <= 5) timer.style.color = '#e94560';
+        else timer.style.color = '#e94560';
+        
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          endMinigame(false);
+        }
+      }, 1000);
+    }
+
+    function endMinigame(success) {
+      clearInterval(timerInterval);
+      const overlay = document.getElementById('minigame-overlay');
+      overlay.classList.remove('active');
+
+      const job = JOBS[currentJob];
+      const message = document.getElementById('message');
+
+      if (success) {
+        // Calculate pay with speed bonus
+        const job = JOBS[currentJob];
+        const baseTimeLeft = job.timeLimit - timeLeft; // How fast they were
+        const speedBonus = Math.max(0, (timeLeft / job.timeLimit) * 0.5); // Up to 50% bonus for speed
+        let earned = job.pay * (1 + speedBonus);
+
+        let tipText = '';
+        if (job.tip) {
+          const tipAmount = Math.round(Math.random() * job.tipMax * 100) / 100;
+          earned += tipAmount;
+          tipText = ` (+ $${tipAmount.toFixed(2)} tips!)`;
+        }
+
+        // Combo bonus
+        let comboText = '';
+        if (combo >= job.words) {
+          const comboBonus = earned * 0.25;
+          earned += comboBonus;
+          comboText = ' 🔥 PERFECT COMBO +25%!';
+        }
+
+        // Random manager bonus
+        let bonusText = '';
+        if (Math.random() > 0.88) {
+          const bonus = Math.round(earned * 0.5 * 100) / 100;
+          earned += bonus;
+          bonusText = ` 🌟 Manager bonus! +$${bonus.toFixed(2)}`;
+          showBonusFlash('🌟 MANAGER BONUS!');
+        }
+
+        earned = Math.round(earned * 100) / 100;
+
+        state.cash = Math.round((state.cash + earned) * 100) / 100;
+        state.totalEarned = Math.round((state.totalEarned + earned) * 100) / 100;
+        state.shiftsWorked++;
+        saveState();
+
+        message.style.color = '#81c784';
+        message.textContent = `✅ Earned $${earned.toFixed(2)}${tipText}${comboText}${bonusText}`;
+
+        // Level up check
+        const oldLevel = Math.floor((state.shiftsWorked - 1) / 5) + 1;
+        const newLevel = getLevel();
+        if (newLevel > oldLevel) {
+          setTimeout(() => {
+            showBonusFlash(`⬆️ LEVEL ${newLevel}!`);
+          }, 800);
+        }
+      } else {
+        // Failed - still get partial pay
+        const partialPay = Math.round(job.pay * (currentWordIndex / job.words) * 0.5 * 100) / 100;
+        state.cash = Math.round((state.cash + partialPay) * 100) / 100;
+        state.totalEarned = Math.round((state.totalEarned + partialPay) * 100) / 100;
+        if (currentWordIndex > 0) state.shiftsWorked++;
+        saveState();
+
+        message.style.color = '#e94560';
+        message.textContent = `⏰ Time's up! Partial pay: $${partialPay.toFixed(2)}`;
+      }
+
+      isWorking = false;
+      document.querySelectorAll('.work-btn').forEach(b => b.disabled = false);
+      updateUI();
+    }
+
+    // Handle typing input
+    document.getElementById('type-input').addEventListener('input', (e) => {
+      const input = e.target;
+      const typed = input.value.trim().toLowerCase();
+      const target = wordsToType[currentWordIndex];
+
+      if (typed === target) {
+        combo++;
+        currentWordIndex++;
+        input.value = '';
+
+        const comboDisplay = document.getElementById('combo-display');
+        if (combo > 1) {
+          comboDisplay.textContent = `🔥 ${combo}x Combo!`;
+          comboDisplay.classList.add('pop-in');
+          setTimeout(() => comboDisplay.classList.remove('pop-in'), 400);
+        }
+
+        if (currentWordIndex >= wordsToType.length) {
+          // All words typed - success!
+          endMinigame(true);
+        } else {
+          // Show next word
+          const prompt = document.getElementById('type-prompt');
+          prompt.textContent = wordsToType[currentWordIndex];
+          prompt.classList.add('pop-in');
+          setTimeout(() => prompt.classList.remove('pop-in'), 400);
+        }
+      }
+    });
+
+    // Close minigame on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('minigame-overlay').classList.contains('active')) {
+        endMinigame(false);
+      }
+    });
+
+    // ====== WORK SHIFT ======
+    function workShift(jobId) {
+      if (isWorking) return;
+      if (!state.unlockedJobs.includes(jobId) && jobId !== 'dishes') return;
+
+      isWorking = true;
+      document.querySelectorAll('.work-btn').forEach(b => b.disabled = true);
+      document.getElementById('message').textContent = '';
+
+      startMinigame(jobId);
+    }
+
+    // ====== UNLOCK JOB ======
+    function unlockJob(jobId) {
+      const job = JOBS[jobId];
+      if (getLevel() >= job.level && !state.unlockedJobs.includes(jobId)) {
+        state.unlockedJobs.push(jobId);
+        saveState();
+        updateUI();
+        document.getElementById('message').textContent = `🎉 Unlocked ${job.name}!`;
+        document.getElementById('message').style.color = '#81c784';
+        showBonusFlash(`🎉 ${job.name} Unlocked!`);
+      }
+    }
+
+    // ====== TRANSFER TO CASINO ======
+    function transferToCasino() {
+      const amount = parseFloat(document.getElementById('transfer-amount').value);
+      const msg = document.getElementById('transfer-message');
+
+      if (isNaN(amount) || amount < 1) {
+        msg.textContent = '⚠️ Enter a valid amount!';
+        msg.style.color = '#e94560';
+        return;
+      }
+
+      if (amount > state.cash) {
+        msg.textContent = '⚠️ Not enough cash!';
+        msg.style.color = '#e94560';
+        return;
+      }
+
+      const transferAmount = Math.floor(amount);
+      state.cash = Math.round((state.cash - transferAmount) * 100) / 100;
+      saveState();
+
+      // Write directly to the casino's localStorage key
+      const currentBalance = getCasinoBalance();
+      localStorage.setItem(CASINO_BALANCE_KEY, String(currentBalance + transferAmount));
+
+      msg.textContent = `✅ Transferred $${transferAmount.toLocaleString()} to your casino balance!`;
+      msg.style.color = '#81c784';
+      showBonusFlash(`🎰 $${transferAmount.toLocaleString()} sent!`);
+      updateUI();
+    }
+
+    // ====== VISUAL EFFECTS ======
+    function showBonusFlash(text) {
+      const el = document.createElement('div');
+      el.className = 'bonus-flash';
+      el.textContent = text;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1500);
+    }
+
+    // ====== INIT ======
+    updateUI();
+  </script>
+</body>
+</html>
