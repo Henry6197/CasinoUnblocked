@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       check:()=> (vc.readDebt() >= 5000)},
     {id:'debt_max', title:'💀 Financial Ruin', desc:'Max out debt at $5,500+', reward: 500,
       check:()=> (vc.readDebt() >= 5500)},
-    {id:'debt_free', title:'🕊️ Debt Free', desc:'Pay off all your debt after having some', reward: 1000,
-      check:()=> readBool('ach_debt_cleared')},
+    {id:'debt_free', title:'🤑 Big Spender', desc:'Spend $10,000 total across all games', reward: 1000,
+      check:()=> readNum('vc_total_wagered') >= 10000},
 
     // ===================== DIAMOND CURRENCY =====================
     {id:'first_diamond', title:'💎 First Diamond', desc:'Earn your first diamond', reward: 500,
@@ -178,23 +178,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
     {id:'bj_100_hands', title:'🃏 Blackjack Master', desc:'Play 100 blackjack hands', reward: 2000,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 100; }},
 
-    // ===================== RUSSIAN ROULETTE =====================
-    {id:'roulette_entered', title:'🔫 Into The Basement', desc:'Enter Russian Roulette', reward: 200,
-      check:()=> readBool('ach_roulette_entered')},
-    {id:'roulette_survivor', title:'🔫 Survivor', desc:'Survive a full round of Russian Roulette', reward: 500,
-      check:()=> readNum('rr_won') >= 1},
-    {id:'roulette_5_wins', title:'🔫 Daredevil', desc:'Survive 5 games of Russian Roulette', reward: 2000,
-      check:()=> readNum('rr_won') >= 5},
-    {id:'roulette_10_wins', title:'🔫 Death Wish', desc:'Survive 10 games of Russian Roulette', reward: 5000,
-      check:()=> readNum('rr_won') >= 10},
+    // ===================== HIGH ROLLER =====================
+    {id:'high_roller_1', title:'🎲 Lucky Streak', desc:'Win 3 games in a row', reward: 200,
+      check:()=> readNum('vc_win_streak') >= 3},
+    {id:'high_roller_2', title:'🎲 Hot Hand', desc:'Win 5 games in a row', reward: 500,
+      check:()=> readNum('vc_win_streak') >= 5},
+    {id:'high_roller_3', title:'🎲 Unstoppable', desc:'Win 10 games in a row', reward: 2000,
+      check:()=> readNum('vc_win_streak') >= 10},
+    {id:'high_roller_4', title:'🎲 Casino Legend', desc:'Win 20 games in a row', reward: 5000,
+      check:()=> readNum('vc_win_streak') >= 20},
 
     // ===================== SPECIAL LOCATIONS =====================
     {id:'coal_escape', title:'🔑 Great Escape', desc:'Escape the coal mine', reward: 1000,
       check:()=> readBool('vc_coal_mine_escaped')},
-    {id:'hells_casino', title:'🔥 Descent into Hell', desc:"Enter Hell's Casino", reward: 300,
-      check:()=> readBool('ach_hells_visited')},
-    {id:'hells_escape', title:'😇 Redemption', desc:"Escape Hell's Casino", reward: 1000,
-      check:()=> readBool('ach_hells_escaped')},
+    {id:'net_profit_1k', title:'📈 In The Green', desc:'Have a net profit of $1,000+', reward: 300,
+      check:()=> (vc.readCredits() - 500) >= 1000},
+    {id:'net_profit_10k', title:'📈 Profit King', desc:'Have a net profit of $10,000+', reward: 1000,
+      check:()=> (vc.readCredits() - 500) >= 10000},
 
     // ===================== CHAD'S COURSE =====================
     {id:'buy_course', title:'🎓 Student of Success', desc:"Buy Chad Moneybags' Course", reward: 1000000,

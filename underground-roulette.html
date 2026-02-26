@@ -262,8 +262,7 @@
         }
 
         .chamber.current {
-            border-color: var(--rust-light);
-            box-shadow: 0 0 8px rgba(160, 82, 45, 0.4);
+            /* no visual indicator */
         }
 
         /* Trigger button */
@@ -701,6 +700,21 @@
         let roundNum = 0;
         let gameActive = false;
         let currentStreak = 0;
+        let playerDead = false;
+
+        // Block reload / back / tab-close while death is processing
+        window.addEventListener('beforeunload', (e) => {
+            if (playerDead) { e.preventDefault(); e.returnValue = ''; }
+        });
+        window.addEventListener('popstate', (e) => {
+            if (playerDead) { history.pushState(null, '', location.href); }
+        });
+        history.pushState(null, '', location.href);
+        document.addEventListener('visibilitychange', () => {
+            if (playerDead && document.visibilityState === 'hidden') {
+                // Already nuked, nothing to save them
+            }
+        });
 
         function getDebt() {
             return Number(localStorage.getItem('vc_debt') || 0);
@@ -857,15 +871,19 @@
                 logMessage('BANG. The chamber was loaded.', 'danger');
                 logMessage('You lost a chance. ' + lives + ' remaining.', 'danger');
 
-                save();
-                updateDisplay();
-
                 if (lives <= 0) {
-                    // DEATH — full reset after dramatic pause
+                    // DEATH — nuke immediately so reload/back can't save them
+                    playerDead = true;
+                    localStorage.clear();
+                    updateDisplay();
+
+                    // Show message after the reset is already done
                     setTimeout(() => {
                         triggerFullReset();
-                    }, 2000);
+                    }, 1500);
                 } else {
+                    save();
+                    updateDisplay();
                     showPopup('💀 BANG', 'The bullet found you. ' + lives + ' chance' + (lives !== 1 ? 's' : '') + ' left.', 'Continue');
                 }
             } else {

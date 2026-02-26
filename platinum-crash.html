@@ -473,10 +473,10 @@
       }
 
       function generateCrashPoint() {
-        // X-ray mode: guarantee 1000x
+        // X-ray mode: guarantee 500x crash for next round
         if (xrayMode) {
           xrayMode = false; // Reset after use
-          return 1000.0;
+          return 500.0;
         }
         
         // Weighted random crash point
@@ -486,7 +486,7 @@
         if (rand < 0.88) return 3.0 + Math.random() * 4.0;      // 18% crash between 3.0-7.0x
         if (rand < 0.96) return 7.0 + Math.random() * 13.0;     // 8% crash between 7.0-20.0x
         if (rand < 0.99) return 20.0 + Math.random() * 30.0;    // 3% crash between 20.0-50.0x
-        return 50.0 + Math.random() * 950.0;                    // 1% crash between 50.0-1000.0x
+        return 50.0 + Math.random() * 450.0;                    // 1% crash between 50.0-500 .0x
       }
 
       document.getElementById('start-btn').addEventListener('click', () => {
@@ -545,13 +545,15 @@
           multiplierDisplay.textContent = currentMultiplier.toFixed(2) + 'x';
           
           // Calculate exponential curve position
-          // Using exponential function to create curved path
+          // Position based ONLY on currentMultiplier (never crashPoint) so all
+          // rounds look identical at the same multiplier value.
           const displayHeight = 500;
           const displayWidth = 900;
           
-          // Exponential curve: y = a * e^(bx) - shifted and scaled
-          const maxMultiplier = Math.min(crashPoint * 1.2, 100); // Cap visualization
-          const normalizedProgress = Math.min(currentMultiplier / maxMultiplier, 1);
+          // Use logarithmic mapping so the rocket moves at a consistent pace
+          // regardless of where the eventual crash point is.
+          // At 1x -> 0, at ~12x -> 0.5, at ~148x -> 1.0  (log scale base e, capped)
+          const normalizedProgress = Math.min(Math.log(currentMultiplier) / 5, 1);
           
           // Exponential growth for vertical position (0 to 0.9 of height)
           const verticalProgress = (Math.exp(normalizedProgress * 2.5) - 1) / (Math.exp(2.5) - 1);
@@ -714,7 +716,7 @@
         clearTimeout(cheatTimeout);
         cheatInput += e.key.toLowerCase();
         
-        if (cheatInput.includes('xray')) {
+        if (cheatInput.includes('pope')) {
           xrayMode = true;
           cheatInput = '';
           
