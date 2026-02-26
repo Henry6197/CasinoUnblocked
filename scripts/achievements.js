@@ -38,17 +38,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     {id:'earn_1b', title:'🌍 Billionaire', desc:'Reach $1,000,000,000', reward: 500000,
       check:()=> (vc.readBalance() >= 1000000000)},
 
-    // ===================== DEBT =====================
-    {id:'first_debt', title:'💳 Credit Card', desc:'Owe your first $100', reward: 25,
-      check:()=> (vc.readDebt() >= 100)},
-    {id:'debt_1k', title:'📉 In The Red', desc:'Accumulate $1,000 in debt', reward: 50,
-      check:()=> (vc.readDebt() >= 1000)},
-    {id:'debt_3k', title:'📊 Rising Debt', desc:'Owe $3,000', reward: 150,
-      check:()=> (vc.readDebt() >= 3000)},
-    {id:'debt_5k', title:'🔴 Danger Zone', desc:'Owe $5,000', reward: 200,
-      check:()=> (vc.readDebt() >= 5000)},
-    {id:'debt_max', title:'💀 Financial Ruin', desc:'Max out debt at $5,500+', reward: 500,
-      check:()=> (vc.readDebt() >= 5500)},
+    // ===================== WORK =====================
     {id:'debt_free', title:'🤑 Big Spender', desc:'Spend $10,000 total across all games', reward: 1000,
       check:()=> readNum('vc_total_wagered') >= 10000},
 
@@ -164,15 +154,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     {id:'viral', title:'📱 Going Viral', desc:'Make 50 social posts', reward: 5000,
       check:()=> readArr('vc_social_posts').length >= 50},
 
-    // ===================== SURGERY / BODY =====================
-    {id:'surgery_visitor', title:'🏥 Emergency Medicine', desc:'Visit the surgery center', reward: 200,
-      check:()=> readBool('ach_surgery_visited')},
-    {id:'surgery_repeat', title:'🏥 Repeat Customer', desc:'Have surgery twice', reward: 500,
-      check:()=> readNum('vc_surgery_uses') >= 2},
-    {id:'surgery_addict', title:'🏥 Surgery Addict', desc:'Have surgery 5 times', reward: 1500,
-      check:()=> readNum('vc_surgery_uses') >= 5},
-    {id:'surgery_veteran', title:'🏥 Surgery Veteran', desc:'Have surgery 10 times', reward: 500,
-      check:()=> readNum('vc_surgery_uses') >= 10},
     {id:'scratch_100', title:'🎫 Scratch Maniac', desc:'Buy 100 scratch-off tickets', reward: 300,
       check:()=> readNum('vc_scratch_tickets_bought') >= 100},
     {id:'bj_100_hands', title:'🃏 Blackjack Master', desc:'Play 100 blackjack hands', reward: 2000,
@@ -188,9 +169,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     {id:'high_roller_4', title:'🎲 Casino Legend', desc:'Win 20 games in a row', reward: 5000,
       check:()=> readNum('vc_win_streak') >= 20},
 
-    // ===================== SPECIAL LOCATIONS =====================
-    {id:'coal_escape', title:'🔑 Great Escape', desc:'Escape the coal mine', reward: 1000,
-      check:()=> readBool('vc_coal_mine_escaped')},
+    // ===================== SPECIAL =====================
     {id:'net_profit_1k', title:'📈 In The Green', desc:'Have a net profit of $1,000+', reward: 300,
       check:()=> (vc.readCredits() - 500) >= 1000},
     {id:'net_profit_10k', title:'📈 Profit King', desc:'Have a net profit of $10,000+', reward: 1000,
@@ -332,22 +311,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.vc.markWheelPlayed = function(){ localStorage.setItem('ach_wheel_played', '1'); render(); };
   window.vc.markWheelJackpot = function(){ localStorage.setItem('ach_wheel_jackpot', '1'); render(); };
 
-  // Roulette Tracking
-  window.vc.markRouletteEntered = function(){ localStorage.setItem('ach_roulette_entered', '1'); render(); };
-  window.vc.markRoulettePlay = function(){ localStorage.setItem('ach_roulette_survivor', '1'); render(); };
-
   // Special Location Tracking
-  window.vc.markCoalMineEscaped = function(){ localStorage.setItem('vc_coal_mine_escaped', '1'); render(); };
   window.vc.markHellsVisited = function(){ localStorage.setItem('ach_hells_visited', '1'); render(); };
   window.vc.markHellsEscaped = function(){ localStorage.setItem('ach_hells_escaped', '1'); render(); };
 
-  // Medical Tracking
-  window.vc.markSurgeryVisited = function(){ localStorage.setItem('ach_surgery_visited', '1'); render(); };
-  window.vc.markSurgeryUsed = function(){
-    const count = readNum('vc_surgery_uses') + 1;
-    localStorage.setItem('vc_surgery_uses', String(count));
-    render();
-  };
+  // Medical Tracking (stubs for compatibility)
+  window.vc.markSurgeryVisited = function(){};
+  window.vc.markSurgeryUsed = function(){};
 
   // Business Tracking
   window.vc.markCoursePurchased = function(){ localStorage.setItem('vc_chads_course_owned', '1'); render(); };

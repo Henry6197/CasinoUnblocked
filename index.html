@@ -24,7 +24,7 @@
           <a href="social.html">Social</a>
           <a href="achievements.html">Achievements</a>
         </nav>
-  <div class="balance" id="balance">Balance: $<span id="balance-value">1000</span><span class="debt">Debt: $<span id="debt-value">0</span></span></div>
+  <div class="balance" id="balance">Balance: $<span id="balance-value">0</span></div>
       </div>
     </header>
 
@@ -72,37 +72,14 @@
           </div>
         </div>
 
-        <!-- Financial Services Section -->
+        <!-- Earn Money Section -->
         <div class="financial-section">
-          <h3 class="section-title">💰 Financial Services</h3>
+          <h3 class="section-title">💰 Earn Money</h3>
           <div class="financial-grid">
-            <div class="financial-panel loan-panel">
-              <h4>💳 Quick Loans</h4>
-              <div class="debt-display">Current Debt: $<span id="debt-display">0</span></div>
-              <div class="button-group">
-                <button class="btn loan-btn" onclick="vc.loan100()">Loan $100</button>
-                                <button class="btn payback-btn" onclick="vc.paybackLoan()">Payback Loan</button>
-                                <button class="btn rusty-btn" onclick="tryEnterRoulette()" style="
-                  background: url('images/360_F_210328878_cIlSkzQwKOB1ZmKWEWev05eAB9m053XY.jpg') center/cover;
-                  color: #fff;
-                  border: 2px solid #5c2e0e;
-                  text-shadow: 1px 1px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7);
-                  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
-                  font-size: 0.8em;
-                  letter-spacing: 0.5px;
-                  position: relative;
-                  overflow: hidden;
-                  text-transform: uppercase;
-                  font-weight: 900;
-                  min-width: 80px;
-                ">???</button>
-              </div>
-            </div>
-            <div class="financial-panel emergency-panel">
-              <h4>🏥 Emergency Surgery</h4>
-              <p>Sell your kidney for quick cash!</p>
-              <div class="surgery-warning">⚠️ 30-second procedure</div>
-              <a class="btn surgery-btn" href="surgery.html">💰 Earn $5,000</a>
+            <div class="financial-panel" style="text-align: center;">
+              <h4>💼 Need Cash?</h4>
+              <p>No free money here! Work for it at Min Wage Grind.</p>
+              <a class="btn" href="minwage.html" style="display: inline-block; margin-top: 12px; background: linear-gradient(135deg, #e94560, #ffbd69); color: #1a1a2e; font-weight: 900; font-size: 1.1em;">💼 Go to Work</a>
             </div>
           </div>
           
@@ -170,20 +147,7 @@
     <script src="scripts/todd-dialogue.js"></script>
     <script src="scripts/app.js"></script>
     <script>
-      // Debt gate for Russian Roulette
-      function tryEnterRoulette() {
-        const debt = Number(localStorage.getItem('vc_debt') || 0);
-        if (debt <= 0) {
-          if (window.vc && window.vc.setBuddyText) {
-            window.vc.setBuddyText("You don't have any debt... you don't want to go there. Trust me.");
-          }
-          if (window.vc && window.vc.showBigMessage) {
-            window.vc.showBigMessage("⚠️ You need debt to enter.", 2000);
-          }
-          return;
-        }
-        window.location.href = 'underground-roulette.html';
-      }
+      // No more loans or roulette - earn money by working!
 
       // Normal Input Code System for Main Casino
       const mainCodes = {

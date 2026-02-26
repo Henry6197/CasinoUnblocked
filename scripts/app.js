@@ -1,21 +1,15 @@
 // Shared utilities: balance handling and small helpers
 (()=>{
-  // Auto payoff protection flag
-  let autoPayoffInProgress = false;
   
   function readBalance(){
     const raw = localStorage.getItem('vc_balance');
-    return raw ? Number(raw) : 1000;
+    return raw ? Number(raw) : 0;
   }
   function writeBalance(v){ 
     localStorage.setItem('vc_balance', String(v)); 
     updateBalance(); 
     // Check for platinum conversion
     checkPlatinumConversion();
-    // Only trigger auto-payoff if not already in progress
-    if(!autoPayoffInProgress) {
-      checkAutoPayoffDebt(); 
-    }
   }
   
   function updateBalance(){ 
@@ -156,18 +150,10 @@
     return false;
   }
 
-  // Debt handling
-  function readDebt(){ const raw = localStorage.getItem('vc_debt'); return raw ? Number(raw) : 0; }
-  function writeDebt(v){ 
-    localStorage.setItem('vc_debt', String(v)); 
-    updateDebt(); 
-    checkDebtLimit();
-  }
-  
-  function updateDebt(){ 
-    const els = document.querySelectorAll('#debt-value, #debt-display'); 
-    els.forEach(e=>{ const v = readDebt(); e.textContent = v.toLocaleString(); }); 
-  }
+  // Debt handling (stubs kept for compatibility)
+  function readDebt(){ return 0; }
+  function writeDebt(v){}
+  function updateDebt(){}
 
   // Progressive Jackpot system
   function readJackpot(){ const raw = localStorage.getItem('vc_jackpot'); return raw ? Number(raw) : 5000; }
@@ -192,107 +178,10 @@
     return jackpotAmount;
   }
 
-  // Check if debt exceeds $5,500 and force coal mine
-  function checkDebtLimit(){
-    const debt = readDebt();
-    
-    if(debt > 5500){
-      // Check for Financial Ruin achievement before coal mine redirect
-      if(window.vc && typeof window.vc.render === 'function'){
-        window.vc.render(); // This will check all achievements including Financial Ruin
-      }
-      
-      // Mark coal mine visited for achievement
-      if(window.vc && typeof window.vc.markCoalMineVisited === 'function'){
-        window.vc.markCoalMineVisited();
-      }
-      
-      // Force redirect to coal mine (can happen multiple times)
-      setTimeout(() => {
-        window.location.href = 'coal-mine.html';
-      }, 1000); // Small delay to show the debt first and let achievement trigger
-    }
-  }
 
-  // Auto payoff debt when balance is high enough
-  function checkAutoPayoffDebt(){
-    if(autoPayoffInProgress) return; // Prevent recursion
-    
-    const balance = readBalance();
-    const debt = readDebt();
-    
-    if(debt > 0 && balance >= debt + 100){ // Reduced threshold from 500 to 100
-      autoPayoffInProgress = true;
-      
-      try {
-        // Auto pay off debt completely
-        const newBalance = balance - debt;
-        
-        // Ensure both operations complete successfully
-        localStorage.setItem('vc_balance', String(newBalance));
-        localStorage.setItem('vc_debt', '0');
-        
-        // Force update both displays
-        updateBalance();
-        updateDebt();
-        
-        setBuddyText(window.DONNY_RAMBLE?.getRamble() || generateRandomRamble());
-        
-        // Show a celebration message
-        if(typeof vc.confetti === 'function') vc.confetti(30);
-        if(typeof vc.showBigMessage === 'function') vc.showBigMessage(`DEBT CLEARED! -$${debt}`, 2000);
-        
-      } catch(error) {
-        // If something goes wrong, restore the original balance
-        console.error('Auto debt payoff failed:', error);
-        localStorage.setItem('vc_balance', String(balance));
-        updateBalance();
-      } finally {
-        autoPayoffInProgress = false;
-      }
-    } else {
-      autoPayoffInProgress = false;
-    }
-  }
 
-  function loan100(){ // give $100, add $150 debt
-    let balance = readBalance(); 
-    let debt = readDebt(); 
-    
-    // Removed loan limit - can always take loans regardless of balance
-    
-    balance += 100; 
-    debt += 150; 
-    writeBalance(balance); 
-    writeDebt(debt); 
-    setBuddyText(window.DONNY_RAMBLE?.getRamble() || 'Uhh, tremendous loan, really tremendous.'); 
-  }
-
-  function paybackLoan(){ 
-    let balance = readBalance(); 
-    let debt = readDebt(); 
-    if(debt <= 0){ 
-      setBuddyText(window.DONNY_RAMBLE?.getRamble() || 'Uhh, no debt, amazing.'); 
-      return; 
-    } 
-    const pay = Math.min(balance, debt); 
-    if(pay <= 0){ 
-      setBuddyText(window.DONNY_RAMBLE?.getRamble() || 'Uhh, not enough money, believe me.'); 
-      return; 
-    } 
-    balance -= pay; 
-    debt -= pay; 
-    writeBalance(balance); 
-    writeDebt(debt); 
-    
-    // Stop global blood debt timer if debt is fully paid
-    if (debt === 0) {
-      stopGlobalBloodDebtTimer();
-      setBuddyText('Smart move! Debt paid in full. You avoided the surgery table.');
-    } else {
-      setBuddyText(window.DONNY_RAMBLE?.getRamble() || 'Tremendous payment, really tremendous.'); 
-    }
-  }
+  function loan100(){ setBuddyText('Loans have been removed. Go earn money at Min Wage Grind!'); }
+  function paybackLoan(){ }
 
   // Buddy and overlay helpers
   function setBuddyText(s){ const b = document.getElementById('buddy-text'); if(b) b.textContent = s; }
@@ -673,25 +562,5 @@
     
     // Initialize ads toggle functionality
     initAdsToggle();
-    
-    // Check for active blood debt timer
-    const lastLoanTime = localStorage.getItem('vc_last_blood_loan');
-    if (lastLoanTime) {
-      const elapsed = Math.floor((Date.now() - parseInt(lastLoanTime)) / 1000);
-      globalTimeRemaining = Math.max(0, 300 - elapsed);
-      if (globalTimeRemaining > 0) {
-        startGlobalBloodDebtTimer();
-      } else {
-        localStorage.removeItem('vc_last_blood_loan');
-      }
-    }
-    
-    // Check debt limit on page load (except on coal mine page)
-    if(!window.location.href.includes('coal-mine.html')){
-      const debt = readDebt();
-      if(debt > 5500){
-        window.location.href = 'coal-mine.html';
-      }
-    }
   });
 })();
