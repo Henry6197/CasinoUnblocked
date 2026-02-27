@@ -9,190 +9,190 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const defs = [
     // ===================== BALANCE MILESTONES =====================
-    {id:'first_dollar', title:'💰 First Dollar', desc:'Have more than $1,000', reward: 10,
+    {id:'first_dollar', title:'💰 First Dollar', desc:'Have more than $1,000', reward: 0,
       check:()=> (vc.readBalance() >= 1001)},
-    {id:'earn_2k', title:'💵 Small Fortune', desc:'Accumulate $2,000', reward: 100,
+    {id:'earn_2k', title:'💵 Small Fortune', desc:'Accumulate $2,000', reward: 0,
       check:()=> (vc.readBalance() >= 2000)},
-    {id:'earn_5k', title:'💸 Getting Serious', desc:'Reach $5,000', reward: 250,
+    {id:'earn_5k', title:'💸 Getting Serious', desc:'Reach $5,000', reward: 0,
       check:()=> (vc.readBalance() >= 5000)},
-    {id:'earn_10k', title:'💰 Five Figures', desc:'Earn $10,000', reward: 500,
+    {id:'earn_10k', title:'💰 Five Figures', desc:'Earn $10,000', reward: 0,
       check:()=> (vc.readBalance() >= 10000)},
-    {id:'earn_25k', title:'🏦 Big Money', desc:'Accumulate $25,000', reward: 1000,
+    {id:'earn_25k', title:'🏦 Big Money', desc:'Accumulate $25,000', reward: 0,
       check:()=> (vc.readBalance() >= 25000)},
-    {id:'earn_50k', title:'💎 High Roller', desc:'Reach $50,000', reward: 2000,
+    {id:'earn_50k', title:'💎 High Roller', desc:'Reach $50,000', reward: 0,
       check:()=> (vc.readBalance() >= 50000)},
-    {id:'earn_100k', title:'🤑 Six Figures', desc:'Earn $100,000', reward: 3000,
+    {id:'earn_100k', title:'🤑 Six Figures', desc:'Earn $100,000', reward: 0,
       check:()=> (vc.readBalance() >= 100000)},
-    {id:'earn_250k', title:'👑 Quarter Million', desc:'Accumulate $250,000', reward: 4000,
+    {id:'earn_250k', title:'👑 Quarter Million', desc:'Accumulate $250,000', reward: 0,
       check:()=> (vc.readBalance() >= 250000)},
-    {id:'earn_500k', title:'💰 Half Million', desc:'Reach $500,000', reward: 4500,
+    {id:'earn_500k', title:'💰 Half Million', desc:'Reach $500,000', reward: 0,
       check:()=> (vc.readBalance() >= 500000)},
-    {id:'earn_1m', title:'🏆 Millionaire', desc:'Become a millionaire!', reward: 4999,
+    {id:'earn_1m', title:'🏆 Millionaire', desc:'Become a millionaire!', reward: 0,
       check:()=> (vc.readBalance() >= 1000000)},
-    {id:'earn_5m', title:'💎 Multi-Millionaire', desc:'Reach $5,000,000', reward: 10000,
+    {id:'earn_5m', title:'💎 Multi-Millionaire', desc:'Reach $5,000,000', reward: 0,
       check:()=> (vc.readBalance() >= 5000000)},
-    {id:'earn_10m', title:'🤴 Eight Figures', desc:'Reach $10,000,000', reward: 25000,
+    {id:'earn_10m', title:'🤴 Eight Figures', desc:'Reach $10,000,000', reward: 0,
       check:()=> (vc.readBalance() >= 10000000)},
-    {id:'earn_100m', title:'🦈 Hundred Million', desc:'Reach $100,000,000', reward: 100000,
+    {id:'earn_100m', title:'🦈 Hundred Million', desc:'Reach $100,000,000', reward: 0,
       check:()=> (vc.readBalance() >= 100000000)},
-    {id:'earn_1b', title:'🌍 Billionaire', desc:'Reach $1,000,000,000', reward: 500000,
+    {id:'earn_1b', title:'🌍 Billionaire', desc:'Reach $1,000,000,000', reward: 0,
       check:()=> (vc.readBalance() >= 1000000000)},
 
     // ===================== WORK =====================
-    {id:'debt_free', title:'🤑 Big Spender', desc:'Spend $10,000 total across all games', reward: 1000,
+    {id:'debt_free', title:'🤑 Big Spender', desc:'Spend $10,000 total across all games', reward: 0,
       check:()=> readNum('vc_total_wagered') >= 10000},
 
     // ===================== DIAMOND CURRENCY =====================
-    {id:'first_diamond', title:'💎 First Diamond', desc:'Earn your first diamond', reward: 500,
+    {id:'first_diamond', title:'💎 First Diamond', desc:'Earn your first diamond', reward: 0,
       check:()=> (readNum('vc_platinum') >= 1)},
-    {id:'diamond_10', title:'💎 Diamond Collector', desc:'Have 10 diamonds', reward: 2000,
+    {id:'diamond_10', title:'💎 Diamond Collector', desc:'Have 10 diamonds', reward: 0,
       check:()=> (readNum('vc_platinum') >= 10)},
-    {id:'diamond_50', title:'💎 Diamond Hoarder', desc:'Have 50 diamonds', reward: 5000,
+    {id:'diamond_50', title:'💎 Diamond Hoarder', desc:'Have 50 diamonds', reward: 0,
       check:()=> (readNum('vc_platinum') >= 50)},
-    {id:'diamond_100', title:'💎 Diamond Mine', desc:'Have 100 diamonds', reward: 10000,
+    {id:'diamond_100', title:'💎 Diamond Mine', desc:'Have 100 diamonds', reward: 0,
       check:()=> (readNum('vc_platinum') >= 100)},
-    {id:'diamond_500', title:'💎 Diamond Dynasty', desc:'Have 500 diamonds', reward: 50000,
+    {id:'diamond_500', title:'💎 Diamond Dynasty', desc:'Have 500 diamonds', reward: 0,
       check:()=> (readNum('vc_platinum') >= 500)},
-    {id:'first_red', title:'❤️‍🔥 Red Diamond', desc:'Earn your first red diamond', reward: 25000,
+    {id:'first_red', title:'❤️‍🔥 Red Diamond', desc:'Earn your first red diamond', reward: 0,
       check:()=> (readNum('vc_red_diamonds') >= 1)},
-    {id:'red_5', title:'❤️‍🔥 Red Collection', desc:'Have 5 red diamonds', reward: 100000,
+    {id:'red_5', title:'❤️‍🔥 Red Collection', desc:'Have 5 red diamonds', reward: 0,
       check:()=> (readNum('vc_red_diamonds') >= 5)},
-    {id:'red_10', title:'❤️‍🔥 Red Royalty', desc:'Have 10 red diamonds', reward: 500000,
+    {id:'red_10', title:'❤️‍🔥 Red Royalty', desc:'Have 10 red diamonds', reward: 0,
       check:()=> (readNum('vc_red_diamonds') >= 10)},
 
     // ===================== GAME VISITS =====================
-    {id:'slot_visitor', title:'🎰 Slot Virgin', desc:'Play the slot machine', reward: 50,
+    {id:'slot_visitor', title:'🎰 Slot Virgin', desc:'Play the slot machine', reward: 0,
       check:()=> readBool('ach_visited_slots')},
-    {id:'blackjack_visitor', title:'🃏 Card Counter', desc:'Play blackjack', reward: 50,
+    {id:'blackjack_visitor', title:'🃏 Card Counter', desc:'Play blackjack', reward: 0,
       check:()=> readBool('ach_visited_blackjack')},
-    {id:'poker_visitor', title:'♠️ Poker Face', desc:'Play poker', reward: 50,
+    {id:'poker_visitor', title:'♠️ Poker Face', desc:'Play poker', reward: 0,
       check:()=> readBool('ach_visited_poker')},
-    {id:'scratch_visitor', title:'🎫 Scratcher', desc:'Try scratch-off tickets', reward: 50,
+    {id:'scratch_visitor', title:'🎫 Scratcher', desc:'Try scratch-off tickets', reward: 0,
       check:()=> readBool('ach_visited_scratch')},
-    {id:'all_games', title:'🎮 Game Tourist', desc:'Visit all 4 main casino games', reward: 500,
+    {id:'all_games', title:'🎮 Game Tourist', desc:'Visit all 4 main casino games', reward: 0,
       check:()=> readBool('ach_visited_slots') && readBool('ach_visited_blackjack') && readBool('ach_visited_poker') && readBool('ach_visited_scratch')},
 
     // ===================== BLACKJACK =====================
-    {id:'bj_first_hand', title:'🃏 First Hand', desc:'Play your first blackjack hand', reward: 50,
+    {id:'bj_first_hand', title:'🃏 First Hand', desc:'Play your first blackjack hand', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 1; }},
-    {id:'bj_10_hands', title:'🃏 Card Shark', desc:'Play 10 blackjack hands', reward: 200,
+    {id:'bj_10_hands', title:'🃏 Card Shark', desc:'Play 10 blackjack hands', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 10; }},
-    {id:'bj_25_hands', title:'🃏 Blackjack Addict', desc:'Play 25 blackjack hands', reward: 500,
+    {id:'bj_25_hands', title:'🃏 Blackjack Addict', desc:'Play 25 blackjack hands', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 25; }},
-    {id:'bj_50_hands', title:'🃏 Table Regular', desc:'Play 50 blackjack hands', reward: 1000,
+    {id:'bj_50_hands', title:'🃏 Table Regular', desc:'Play 50 blackjack hands', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 50; }},
-    {id:'bj_first_win', title:'🏆 Winner Winner', desc:'Win a blackjack hand', reward: 100,
+    {id:'bj_first_win', title:'🏆 Winner Winner', desc:'Win a blackjack hand', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsWon || 0) >= 1; }},
-    {id:'bj_10_wins', title:'🏆 On a Roll', desc:'Win 10 blackjack hands', reward: 500,
+    {id:'bj_10_wins', title:'🏆 On a Roll', desc:'Win 10 blackjack hands', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsWon || 0) >= 10; }},
-    {id:'bj_streak_3', title:'🔥 Hot Streak', desc:'Win 3 blackjack hands in a row', reward: 300,
+    {id:'bj_streak_3', title:'🔥 Hot Streak', desc:'Win 3 blackjack hands in a row', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.bestStreak || 0) >= 3; }},
-    {id:'bj_streak_5', title:'🔥 Unstoppable', desc:'Win 5 in a row at blackjack', reward: 1000,
+    {id:'bj_streak_5', title:'🔥 Unstoppable', desc:'Win 5 in a row at blackjack', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.bestStreak || 0) >= 5; }},
-    {id:'bj_streak_10', title:'🔥 Legendary Streak', desc:'Win 10 in a row at blackjack', reward: 5000,
+    {id:'bj_streak_10', title:'🔥 Legendary Streak', desc:'Win 10 in a row at blackjack', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.bestStreak || 0) >= 10; }},
 
     // ===================== SCRATCH-OFFS =====================
-    {id:'scratch_5', title:'🎫 Ticket Buyer', desc:'Buy 5 scratch-off tickets', reward: 100,
+    {id:'scratch_5', title:'🎫 Ticket Buyer', desc:'Buy 5 scratch-off tickets', reward: 0,
       check:()=> readNum('vc_scratch_tickets_bought') >= 5},
-    {id:'scratch_25', title:'🎫 Scratch Fanatic', desc:'Buy 25 scratch-off tickets', reward: 500,
+    {id:'scratch_25', title:'🎫 Scratch Fanatic', desc:'Buy 25 scratch-off tickets', reward: 0,
       check:()=> readNum('vc_scratch_tickets_bought') >= 25},
-    {id:'scratch_50', title:'🎫 Scratch Addict', desc:'Buy 50 tickets', reward: 1000,
+    {id:'scratch_50', title:'🎫 Scratch Addict', desc:'Buy 50 tickets', reward: 0,
       check:()=> readNum('vc_scratch_tickets_bought') >= 50},
-    {id:'scratch_winner', title:'🎉 Lucky Scratcher', desc:'Win $1,000+ total from scratch-offs', reward: 500,
+    {id:'scratch_winner', title:'🎉 Lucky Scratcher', desc:'Win $1,000+ total from scratch-offs', reward: 0,
       check:()=> readNum('vc_scratch_total_won') >= 1000},
-    {id:'scratch_big_winner', title:'🎉 Scratch Millionaire', desc:'Win $10,000+ total from scratch-offs', reward: 2000,
+    {id:'scratch_big_winner', title:'🎉 Scratch Millionaire', desc:'Win $10,000+ total from scratch-offs', reward: 0,
       check:()=> readNum('vc_scratch_total_won') >= 10000},
-    {id:'scratch_whale', title:'🐋 Scratch Whale', desc:'Spend $5,000+ on scratch-offs', reward: 1500,
+    {id:'scratch_whale', title:'🐋 Scratch Whale', desc:'Spend $5,000+ on scratch-offs', reward: 0,
       check:()=> readNum('vc_scratch_total_spent') >= 5000},
 
     // ===================== VIP / PLATINUM =====================
-    {id:'vip_access', title:'👑 VIP Member', desc:'Get access to the VIP Casino', reward: 1000,
+    {id:'vip_access', title:'👑 VIP Member', desc:'Get access to the VIP Casino', reward: 0,
       check:()=> localStorage.getItem('vc_vip_access') === 'true'},
-    {id:'vip_bar_visit', title:'🍸 First Drink', desc:'Order a drink at the VIP Bar', reward: 200,
+    {id:'vip_bar_visit', title:'🍸 First Drink', desc:'Order a drink at the VIP Bar', reward: 0,
       check:()=> readBool('ach_first_drink')},
-    {id:'bar_regular', title:'🍸 Bar Regular', desc:'Order 5 drinks at the VIP Bar', reward: 500,
+    {id:'bar_regular', title:'🍸 Bar Regular', desc:'Order 5 drinks at the VIP Bar', reward: 0,
       check:()=> readNum('ach_drinks_ordered') >= 5},
-    {id:'bar_connoisseur', title:'🍹 Mixologist', desc:'Order 10 drinks', reward: 1000,
+    {id:'bar_connoisseur', title:'🍹 Mixologist', desc:'Order 10 drinks', reward: 0,
       check:()=> readNum('ach_drinks_ordered') >= 10},
-    {id:'bar_legend', title:'🥃 Bar Legend', desc:'Order 25 drinks', reward: 2500,
+    {id:'bar_legend', title:'🥃 Bar Legend', desc:'Order 25 drinks', reward: 0,
       check:()=> readNum('ach_drinks_ordered') >= 25},
-    {id:'red_drink', title:'❤️‍🔥 Premium Taste', desc:'Order a red diamond drink', reward: 5000,
+    {id:'red_drink', title:'❤️‍🔥 Premium Taste', desc:'Order a red diamond drink', reward: 0,
       check:()=> readBool('ach_red_drink_ordered')},
 
     // ===================== PLATINUM GAMES =====================
-    {id:'crash_player', title:'🚀 Rocket Man', desc:'Play Rocket Crash', reward: 200,
+    {id:'crash_player', title:'🚀 Rocket Man', desc:'Play Rocket Crash', reward: 0,
       check:()=> readBool('ach_crash_played')},
-    {id:'crash_5x', title:'🚀 To The Moon', desc:'Cash out at 5x+ in Rocket Crash', reward: 1000,
+    {id:'crash_5x', title:'🚀 To The Moon', desc:'Cash out at 5x+ in Rocket Crash', reward: 0,
       check:()=> readBool('ach_crash_5x')},
-    {id:'crash_10x', title:'🚀 Stratosphere', desc:'Cash out at 10x+ in Rocket Crash', reward: 5000,
+    {id:'crash_10x', title:'🚀 Stratosphere', desc:'Cash out at 10x+ in Rocket Crash', reward: 0,
       check:()=> readBool('ach_crash_10x')},
-    {id:'wheel_player', title:'🎡 Wheel Spinner', desc:'Spin the Fortune Wheel', reward: 200,
+    {id:'wheel_player', title:'🎡 Wheel Spinner', desc:'Spin the Fortune Wheel', reward: 0,
       check:()=> readBool('ach_wheel_played')},
-    {id:'wheel_jackpot', title:'🎡 Jackpot!', desc:'Hit the jackpot on the Fortune Wheel', reward: 5000,
+    {id:'wheel_jackpot', title:'🎡 Jackpot!', desc:'Hit the jackpot on the Fortune Wheel', reward: 0,
       check:()=> readBool('ach_wheel_jackpot')},
 
     // ===================== SHOPPING =====================
-    {id:'first_purchase', title:'🛍️ First Purchase', desc:'Buy your first item from the Shop', reward: 200,
+    {id:'first_purchase', title:'🛍️ First Purchase', desc:'Buy your first item from the Shop', reward: 0,
       check:()=> readArr('vc_inventory').length >= 1},
-    {id:'shopaholic', title:'🛍️ Shopaholic', desc:'Own 5 items', reward: 1000,
+    {id:'shopaholic', title:'🛍️ Shopaholic', desc:'Own 5 items', reward: 0,
       check:()=> readArr('vc_inventory').length >= 5},
-    {id:'collector', title:'🛍️ Collector', desc:'Own 10 items', reward: 3000,
+    {id:'collector', title:'🛍️ Collector', desc:'Own 10 items', reward: 0,
       check:()=> readArr('vc_inventory').length >= 10},
-    {id:'hoarder', title:'🛍️ Hoarder', desc:'Own 15 items', reward: 5000,
+    {id:'hoarder', title:'🛍️ Hoarder', desc:'Own 15 items', reward: 0,
       check:()=> readArr('vc_inventory').length >= 15},
-    {id:'own_everything', title:'🛍️ Buy Everything', desc:'Own 20+ items', reward: 25000,
+    {id:'own_everything', title:'🛍️ Buy Everything', desc:'Own 20+ items', reward: 0,
       check:()=> readArr('vc_inventory').length >= 20},
 
     // ===================== SOCIAL =====================
-    {id:'first_post', title:'📱 First Post', desc:'Make your first social post', reward: 100,
+    {id:'first_post', title:'📱 First Post', desc:'Make your first social post', reward: 0,
       check:()=> readArr('vc_social_posts').length >= 1},
-    {id:'content_creator', title:'📱 Content Creator', desc:'Make 10 social posts', reward: 500,
+    {id:'content_creator', title:'📱 Content Creator', desc:'Make 10 social posts', reward: 0,
       check:()=> readArr('vc_social_posts').length >= 10},
-    {id:'influencer', title:'📱 Influencer', desc:'Make 25 social posts', reward: 2000,
+    {id:'influencer', title:'📱 Influencer', desc:'Make 25 social posts', reward: 0,
       check:()=> readArr('vc_social_posts').length >= 25},
-    {id:'viral', title:'📱 Going Viral', desc:'Make 50 social posts', reward: 5000,
+    {id:'viral', title:'📱 Going Viral', desc:'Make 50 social posts', reward: 0,
       check:()=> readArr('vc_social_posts').length >= 50},
 
-    {id:'scratch_100', title:'🎫 Scratch Maniac', desc:'Buy 100 scratch-off tickets', reward: 300,
+    {id:'scratch_100', title:'🎫 Scratch Maniac', desc:'Buy 100 scratch-off tickets', reward: 0,
       check:()=> readNum('vc_scratch_tickets_bought') >= 100},
-    {id:'bj_100_hands', title:'🃏 Blackjack Master', desc:'Play 100 blackjack hands', reward: 2000,
+    {id:'bj_100_hands', title:'🃏 Blackjack Master', desc:'Play 100 blackjack hands', reward: 0,
       check:()=> { const s = readObj('bj_stats'); return (s.handsPlayed || 0) >= 100; }},
 
     // ===================== HIGH ROLLER =====================
-    {id:'high_roller_1', title:'🎲 Lucky Streak', desc:'Win 3 games in a row', reward: 200,
+    {id:'high_roller_1', title:'🎲 Lucky Streak', desc:'Win 3 games in a row', reward: 0,
       check:()=> readNum('vc_win_streak') >= 3},
-    {id:'high_roller_2', title:'🎲 Hot Hand', desc:'Win 5 games in a row', reward: 500,
+    {id:'high_roller_2', title:'🎲 Hot Hand', desc:'Win 5 games in a row', reward: 0,
       check:()=> readNum('vc_win_streak') >= 5},
-    {id:'high_roller_3', title:'🎲 Unstoppable', desc:'Win 10 games in a row', reward: 2000,
+    {id:'high_roller_3', title:'🎲 Unstoppable', desc:'Win 10 games in a row', reward: 0,
       check:()=> readNum('vc_win_streak') >= 10},
-    {id:'high_roller_4', title:'🎲 Casino Legend', desc:'Win 20 games in a row', reward: 5000,
+    {id:'high_roller_4', title:'🎲 Casino Legend', desc:'Win 20 games in a row', reward: 0,
       check:()=> readNum('vc_win_streak') >= 20},
 
     // ===================== SPECIAL =====================
-    {id:'net_profit_1k', title:'📈 In The Green', desc:'Have a net profit of $1,000+', reward: 300,
+    {id:'net_profit_1k', title:'📈 In The Green', desc:'Have a net profit of $1,000+', reward: 0,
       check:()=> (vc.readCredits() - 500) >= 1000},
-    {id:'net_profit_10k', title:'📈 Profit King', desc:'Have a net profit of $10,000+', reward: 1000,
+    {id:'net_profit_10k', title:'📈 Profit King', desc:'Have a net profit of $10,000+', reward: 0,
       check:()=> (vc.readCredits() - 500) >= 10000},
 
     // ===================== CHAD'S COURSE =====================
-    {id:'buy_course', title:'🎓 Student of Success', desc:"Buy Chad Moneybags' Course", reward: 1000000,
+    {id:'buy_course', title:'🎓 Student of Success', desc:"Buy Chad Moneybags' Course", reward: 0,
       check:()=> readBool('vc_chads_course_owned')},
-    {id:'passive_1k', title:'💰 Passive Income', desc:"Earn $1,000 from Chad's course", reward: 300,
+    {id:'passive_1k', title:'💰 Passive Income', desc:"Earn $1,000 from Chad's course", reward: 0,
       check:()=> readNum('vc_chads_course_total_earned') >= 1000},
-    {id:'passive_10k', title:'💰 Cash Cow', desc:"Earn $10,000 from course", reward: 2000,
+    {id:'passive_10k', title:'💰 Cash Cow', desc:"Earn $10,000 from course", reward: 0,
       check:()=> readNum('vc_chads_course_total_earned') >= 10000},
 
     // ===================== MILESTONES =====================
-    {id:'achievement_10', title:'🏆 Achievement Hunter', desc:'Unlock 10 achievements', reward: 1000,
+    {id:'achievement_10', title:'🏆 Achievement Hunter', desc:'Unlock 10 achievements', reward: 0,
       check:()=> Object.keys(readObj(ACH_KEY)).length >= 10},
-    {id:'achievement_25', title:'🏆 Completionist', desc:'Unlock 25 achievements', reward: 5000,
+    {id:'achievement_25', title:'🏆 Completionist', desc:'Unlock 25 achievements', reward: 0,
       check:()=> Object.keys(readObj(ACH_KEY)).length >= 25},
-    {id:'achievement_50', title:'🏆 Half Way There', desc:'Unlock 50 achievements', reward: 25000,
+    {id:'achievement_50', title:'🏆 Half Way There', desc:'Unlock 50 achievements', reward: 0,
       check:()=> Object.keys(readObj(ACH_KEY)).length >= 50},
-    {id:'achievement_75', title:'🏆 Almost Perfect', desc:'Unlock 75 achievements', reward: 100000,
+    {id:'achievement_75', title:'🏆 Almost Perfect', desc:'Unlock 75 achievements', reward: 0,
       check:()=> Object.keys(readObj(ACH_KEY)).length >= 75},
-    {id:'achievement_all', title:'👑 True Master', desc:'Unlock ALL achievements', reward: 10000000,
+    {id:'achievement_all', title:'👑 True Master', desc:'Unlock ALL achievements', reward: 0,
       check:()=> {
         const state = readObj(ACH_KEY);
         // -1 because this achievement itself can't be unlocked when checking
@@ -200,15 +200,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }},
 
     // ===================== HIDDEN / SECRET =====================
-    {id:'help_seeker', title:'❓ Help Seeker', desc:'Watch the help video', reward: 100,
+    {id:'help_seeker', title:'❓ Help Seeker', desc:'Watch the help video', reward: 0,
       check:()=> readBool('ach_help_watched')},
-    {id:'ad_clicker', title:'📺 Ad Viewer', desc:'Click on an advertisement', reward: 50,
+    {id:'ad_clicker', title:'📺 Ad Viewer', desc:'Click on an advertisement', reward: 0,
       check:()=> readBool('ach_ad_clicked')},
-    {id:'popup_survivor', title:'🚫 Popup Survivor', desc:'Survive popup hell', reward: 200,
+    {id:'popup_survivor', title:'🚫 Popup Survivor', desc:'Survive popup hell', reward: 0,
       check:()=> readBool('ach_popup_survived')},
-    {id:'night_owl', title:'🌙 Night Owl', desc:'Play between midnight and 5am', reward: 500,
+    {id:'night_owl', title:'🌙 Night Owl', desc:'Play between midnight and 5am', reward: 0,
       check:()=> { const h = new Date().getHours(); return h >= 0 && h < 5; }},
-    {id:'patience', title:'⏳ Patience', desc:'Have the page open for 10+ minutes', reward: 300,
+    {id:'patience', title:'⌛ Patience', desc:'Have the page open for 10+ minutes', reward: 0,
       check:()=> readBool('ach_patient')},
   ];
 
@@ -218,19 +218,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function notifyUnlocked(def){
     try{
-      if(def.reward && def.reward > 0 && window.vc && typeof window.vc.readBalance === 'function' && typeof window.vc.writeBalance === 'function') {
-        window.vc.writeBalance(window.vc.readBalance() + def.reward);
-      }
-      const rewardText = def.reward ? ` +$${def.reward.toLocaleString()}` : '';
       if(window.vc && typeof window.vc.showBigMessage === 'function'){
-        window.vc.showBigMessage(`${def.title} unlocked!${rewardText}`, 2500);
+        window.vc.showBigMessage(`${def.title} unlocked!`, 2500);
       }
       if(window.vc && typeof window.vc.confetti === 'function') window.vc.confetti(36);
       if(window.vc && typeof window.vc.setBuddyText === 'function'){
-        window.vc.setBuddyText(`Achievement unlocked: ${def.title}${rewardText}`);
+        window.vc.setBuddyText(`Achievement unlocked: ${def.title}`);
       }
     }catch(e){}
-    console.log('Achievement unlocked:', def.id, def.title, 'Reward: $' + (def.reward || 0));
+    console.log('Achievement unlocked:', def.id, def.title);
   }
 
   function checkAll(){
@@ -263,9 +259,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const el = document.createElement('div');
       el.className = 'achievement';
       const unlocked = !!state[d.id];
-      const rewardText = d.reward ? ` (+$${d.reward.toLocaleString()})` : '';
       el.innerHTML = `
-        <div class="ach-title">${d.title}${rewardText}</div>
+        <div class="ach-title">${d.title}</div>
         <div class="ach-desc">${d.desc || ''}</div>
         <div class="ach-status">${unlocked ? '<span class="done">✅ Unlocked</span>' : '<span class="locked">🔒 Locked</span>'}</div>
       `;
@@ -397,7 +392,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         </div>
         <div style="text-align: left; display: inline-block; margin-bottom: 16px;">
           • All achievements and progress<br>
-          • Balance (back to $1,000)<br>
+          • Balance (back to $0)<br>
           • Debt (back to $0)<br>
           • Diamonds & Red Diamonds<br>
           • All promo codes<br>
