@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     el.innerHTML=''; 
     cards.forEach((c, i) => { 
       const cardEl = createCardElement(c, i === 0 && hideFirst);
-      cardEl.style.animationDelay = `${i * 0.1}s`;
+      cardEl.style.animationDelay = `${i * 0.15}s`;
       el.appendChild(cardEl); 
     }); 
   }
@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
           appendLog('Dealer reveals hole card...');
           revealDealer(); 
           updateScores(); 
-          setTimeout(() => settle(), 800);
-        }, 1000);
+          setTimeout(() => settle(), 1000);
+        }, 1200);
       }
     }
 
@@ -236,8 +236,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
           appendLog('Player busted!');
           revealDealer(); 
           updateScores(); 
-          setTimeout(() => settle(), 800);
-        }, 600);
+          setTimeout(() => settle(), 1000);
+        }, 800);
       } 
     }
 
@@ -258,8 +258,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         
         setTimeout(() => {
           dealerDrawCards();
-        }, 1000);
-      }, 800);
+        }, 1200);
+      }, 1000);
     }
     
     function dealerDrawCards() {
@@ -271,14 +271,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         
         setTimeout(() => {
           dealerDrawCards(); // Recursive call with delay
-        }, 1200);
+        }, 1400);
       } else {
         setTimeout(() => {
           appendLog('Dealer stands.');
           setTimeout(() => {
             settle();
-          }, 600);
-        }, 800);
+          }, 800);
+        }, 1000);
       }
     }
 
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         firstCard.classList.add('flipping');
         setTimeout(() => {
           showCards(dealerEl, dealer, false);
-        }, 300);
+        }, 250);
       } else {
         showCards(dealerEl, dealer, false);
       }

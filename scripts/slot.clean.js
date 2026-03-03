@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   // Clean slot logic: 5x3 grid, evaluate contiguous row runs and full-column matches.
-  const symbols = ['🍒','🍋','⭐','🍇','🔔','🍉'];
+  const symbols = ['🍒','🍋','7️⃣','🍇','🏦','🍉'];
   const spinBtn = document.getElementById('spin');
   const maxBtn = document.getElementById('max');
   const reels = Array.from(document.querySelectorAll('.reel'));
@@ -65,14 +65,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     // deterministic multipliers
     patterns.forEach(p=>{
+      let basePayout = 0;
       if(p.type === 'col'){
-        total += bet * 5; // column of 3 pays 5x
+        basePayout = bet * 5; // column of 3 pays 5x
       } else if(p.type === 'row'){
         const len = p.indices.length;
-        if(len === 3) total += bet * 2;    // 2x for a 3-run
-        else if(len === 4) total += bet * 4; // 4x for 4-run
-        else if(len >= 5) total += bet * 8; // 8x for full row
+        if(len === 3) basePayout = bet * 2;    // 2x for a 3-run
+        else if(len === 4) basePayout = bet * 4; // 4x for 4-run
+        else if(len >= 5) basePayout = bet * 8; // 8x for full row
       }
+      
+      // Symbol bonuses: 🏦 adds x1, 7️⃣ adds x2
+      if(p.symbol === '🏦'){
+        basePayout += bet * 1; // extra x1 for bank
+      } else if(p.symbol === '7️⃣'){
+        basePayout += bet * 2; // extra x2 for seven
+      }
+      
+      total += basePayout;
     });
     return total;
   }
@@ -130,7 +140,94 @@ document.addEventListener('DOMContentLoaded', ()=>{
       idxs.forEach(i => result[i] = jackpotSymbol);
     }
 
-    reels.forEach((r,i)=>{ r.classList.add('spin'); r.textContent = '🎰'; setTimeout(()=>{ r.textContent = result[i]; r.classList.remove('spin'); }, 300 + (i%5)*120 + Math.floor(i/5)*60); });
+    // Create scrolling animation for each reel
+    reels.forEach((r,i)=>{
+      const stopDelay = 400 + (i%5)*200 + Math.floor(i/5)*100; // stagger stops by column then row
+      const spinDuration = 2000; // how long before starting to stop
+      
+      // Create wrapper for scrolling effect
+      r.innerHTML = '';
+      r.style.overflow = 'hidden';
+      r.style.position = 'relative';
+      
+      const scrollContainer = document.createElement('div');
+      scrollContainer.className = 'reel-scroll';
+      scrollContainer.style.position = 'absolute';
+      scrollContainer.style.top = '0';
+      scrollContainer.style.left = '0';
+      scrollContainer.style.width = '100%';
+      scrollContainer.style.display = 'flex';
+      scrollContainer.style.flexDirection = 'column';
+      scrollContainer.style.alignItems = 'center';
+      
+      // Create many symbols to scroll through (20 random + final result)
+      const scrollSymbols = [];
+      for(let j=0; j<20; j++){
+        scrollSymbols.push(symbols[rand(symbols.length)]);
+      }
+      scrollSymbols.push(result[i]); // final symbol at the end
+      
+      scrollSymbols.forEach(sym => {
+        const symEl = document.createElement('div');
+        symEl.className = 'reel-symbol';
+        symEl.textContent = sym;
+        symEl.style.height = r.offsetHeight + 'px';
+        symEl.style.display = 'flex';
+        symEl.style.alignItems = 'center';
+        symEl.style.justifyContent = 'center';
+        symEl.style.fontSize = '28px';
+        scrollContainer.appendChild(symEl);
+      });
+      
+      r.appendChild(scrollContainer);
+      
+      // Animate the scroll
+      const symbolHeight = r.offsetHeight;
+      const totalScroll = scrollSymbols.length * symbolHeight;
+      const finalPosition = -(scrollSymbols.length - 1) * symbolHeight;
+      
+      // Start spinning animation
+      let currentPos = 0;
+      const spinSpeed = 30; // pixels per frame
+      const frameTime = 16; // ~60fps
+      
+      const spinInterval = setInterval(() => {
+        currentPos -= spinSpeed;
+        if(currentPos <= -totalScroll) {
+          currentPos = 0; // loop back to start
+        }
+        scrollContainer.style.transform = `translateY(${currentPos}px)`;
+      }, frameTime);
+      
+      // Stop at the right time with easing
+      setTimeout(() => {
+        clearInterval(spinInterval);
+        
+        // Calculate position to show final symbol (centered)
+        const finalPos = finalPosition;
+        
+        // Smooth deceleration to final position
+        const startPos = currentPos;
+        const distance = finalPos - startPos;
+        const duration = 500; // deceleration time
+        const startTime = Date.now();
+        
+        const decelerate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic for smooth stop
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          const newPos = startPos + (distance * easeProgress);
+          scrollContainer.style.transform = `translateY(${newPos}px)`;
+          
+          if(progress < 1) {
+            requestAnimationFrame(decelerate);
+          }
+        };
+        
+        requestAnimationFrame(decelerate);
+      }, stopDelay);
+    });
 
     setTimeout(()=>{
       try{
@@ -184,7 +281,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
           if(maxBtn) maxBtn.disabled = false;
         }, 400);
       }
-    }, 1200 + reels.length*80);
+    }, 2800); // Wait for all reels to finish spinning (max stopDelay 400+4*200+2*100=1600 + deceleration 500 + buffer)
   }
 
   if(spinBtn) spinBtn.addEventListener('click', ()=> spin(Number(betInput.value||10)));
