@@ -284,6 +284,54 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }, 2800); // Wait for all reels to finish spinning (max stopDelay 400+4*200+2*100=1600 + deceleration 500 + buffer)
   }
 
+  // Auto Spin
+  const autoSpinBtn = document.getElementById('auto-spin');
+  let autoSpinInterval = null;
+  const AUTO_SPIN_DELAY = 3400; // slightly longer than spin duration (2800 + buffer)
+
+  function stopAutoSpin(){
+    if(autoSpinInterval){
+      clearInterval(autoSpinInterval);
+      autoSpinInterval = null;
+    }
+    if(autoSpinBtn){
+      autoSpinBtn.textContent = '🔄 AUTO SPIN';
+      autoSpinBtn.classList.remove('active');
+    }
+  }
+
+  function startAutoSpin(){
+    const bet = Number(betInput.value || 10);
+    if(bet <= 0){ appendLog('Set a valid bet for auto spin.'); return; }
+    if(bet > vc.readBalance()){ appendLog('Insufficient funds for auto spin.'); return; }
+
+    if(autoSpinBtn){
+      autoSpinBtn.textContent = '⏹ STOP AUTO';
+      autoSpinBtn.classList.add('active');
+    }
+
+    // Kick off the first spin immediately
+    spin(bet);
+
+    autoSpinInterval = setInterval(()=>{
+      const currentBet = Number(betInput.value || 10);
+      if(currentBet > vc.readBalance() || currentBet <= 0){
+        appendLog('Auto spin stopped — insufficient funds or invalid bet.');
+        stopAutoSpin();
+        return;
+      }
+      if(!spinning) spin(currentBet);
+    }, AUTO_SPIN_DELAY);
+  }
+
+  if(autoSpinBtn) autoSpinBtn.addEventListener('click', ()=>{
+    if(autoSpinInterval){
+      stopAutoSpin();
+    } else {
+      startAutoSpin();
+    }
+  });
+
   if(spinBtn) spinBtn.addEventListener('click', ()=> spin(Number(betInput.value||10)));
   if(maxBtn) maxBtn.addEventListener('click', ()=>{ const max = Math.max(1, Math.floor(vc.readBalance()||0)); betInput.value = max; spin(max); });
 });

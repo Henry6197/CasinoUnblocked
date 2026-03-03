@@ -786,6 +786,25 @@ html,body{height:100%;margin:0;font-family:'Georgia','Playfair Display',Inter,Se
   font-weight: 700;
 }
 
+.auto-spin-btn {
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  color: #eef2ff;
+  font-weight: 700;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.auto-spin-btn.active {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+  animation: pulse-auto 1.2s infinite;
+}
+
+@keyframes pulse-auto {
+  0%, 100% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 18px rgba(239, 68, 68, 0.7); }
+}
+
 .results-log h4 {
   margin: 16px 0 8px;
   color: var(--accent);
