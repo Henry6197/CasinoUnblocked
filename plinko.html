@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plinko - HOLLYWOOD CASINO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button class="ads-toggle" id="ads-toggle">🚫 Hide Ads</button>
+
+    <div class="ad-container left ad-1" onclick="window.open('kraft-singles-ad.html', '_blank')">
+      <img src="images/ad1.svg" class="ad-svg" alt="Ad 1" />
+    </div>
+    <div class="ad-container left ad-2" onclick="window.open('doctors-hate-this.html', '_blank')">
+      <img src="images/ad2.svg" class="ad-svg" alt="Ad 2" />
+    </div>
+    <div class="ad-container right ad-3" onclick="window.open('popup-hell.html', '_blank')">
+      <img src="images/ad3.svg" class="ad-svg" alt="Ad 3" />
+    </div>
+    <div class="ad-container right ad-4" onclick="window.open('you-wont-believe.html', '_blank')">
+      <img src="images/ad4.svg" class="ad-svg" alt="Ad 4" />
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+        <h1 class="brand">HOLLYWOOD CASINO</h1>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="slot.html">Slots</a>
+          <a href="blackjack.html">Blackjack</a>
+          <a href="poker.html">Poker</a>
+          <a href="scratch-offs.html">Scratch-Offs</a>
+          <a href="plinko.html">Plinko</a>
+          <a href="achievements.html">Achievements</a>
+        </nav>
+        <div class="balance" id="balance">Balance: $<span id="balance-value">0</span></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="page-header">
+        <h2>Plinko</h2>
+        <p class="page-subtitle">Drop chips through the peg board and chase big multipliers.</p>
+      </div>
+
+      <div class="game-stage">
+        <div class="game-panel plinko-panel">
+          <div class="plinko-headline">
+            <h3>Neon Plinko Table</h3>
+            <div class="plinko-subline">Mega board - random bins, many losses, some wins, a few huge hits</div>
+          </div>
+
+          <div class="plinko-board-wrap">
+            <canvas id="plinko-canvas" width="960" height="760" aria-label="Plinko board"></canvas>
+          </div>
+
+          <div class="plinko-slot-strip" id="plinko-slot-strip"></div>
+
+          <div class="results-log">
+            <h4>Recent Drops</h4>
+            <div class="log" id="plinko-log"></div>
+          </div>
+        </div>
+
+        <aside class="game-controls">
+          <div class="control-panel bet-panel">
+            <h4>Bet Controls</h4>
+            <div class="bet-section">
+              <label class="bet-label" for="plinko-bet">Bet Amount:</label>
+              <input id="plinko-bet" class="bet-input" type="number" value="25" min="1" />
+            </div>
+
+            <div class="plinko-actions">
+              <button class="btn" id="drop-chip-btn">Drop Chip</button>
+              <button class="btn" id="auto-drop-btn">Auto Drop</button>
+            </div>
+          </div>
+
+          <div class="control-panel payout-panel">
+            <h4>Multipliers</h4>
+            <div class="plinko-payout-grid" id="plinko-payout-grid"></div>
+            <p class="muted plinko-note">Payout = bet x multiplier. Every drop costs your bet first.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Made with ❤️ - demo only. No real money.</div>
+    </footer>
+
+    <script src="scripts/todd-dialogue.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/achievements.js"></script>
+    <script src="scripts/plinko.js"></script>
+
+    <div class="buddy" id="buddy">
+      <div class="buddy-toggle" id="buddy-toggle">-</div>
+      <img src="images/buddy.svg" alt="Buddy" />
+      <div>
+        <div class="name">Donny Boy</div>
+        <div class="text" id="buddy-text">Plinko time. Aim center for safer payouts.</div>
+      </div>
+    </div>
+    <div class="big-overlay" id="big-overlay"><div class="message" id="big-message"></div></div>
+    <div id="confetti-root"></div>
+  </body>
+</html>

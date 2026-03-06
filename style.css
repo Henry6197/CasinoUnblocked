@@ -2060,6 +2060,106 @@ html,body{height:100%;margin:0;font-family:'Georgia','Playfair Display',Inter,Se
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Plinko */
+.plinko-panel {
+  background: linear-gradient(180deg, rgba(240, 232, 252, 0.95), rgba(222, 210, 243, 0.96));
+}
+
+.plinko-headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.plinko-headline h3 {
+  margin: 0;
+  color: var(--accent);
+}
+
+.plinko-subline {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.plinko-board-wrap {
+  border-radius: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(110, 70, 170, 0.25);
+  box-shadow: inset 0 0 20px rgba(155, 48, 255, 0.12);
+}
+
+#plinko-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+.plinko-slot-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+  gap: 4px;
+  margin: 12px 0 14px;
+}
+
+.plinko-slot-chip {
+  text-align: center;
+  padding: 6px 2px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #2d2140;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(222, 211, 245, 0.95));
+  border: 1px solid rgba(102, 57, 146, 0.22);
+}
+
+.plinko-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.plinko-payout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.plinko-payout-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(112, 67, 163, 0.22);
+  background: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  color: #34254b;
+}
+
+.plinko-note {
+  margin-top: 12px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 880px) {
+  .plinko-slot-strip {
+    grid-template-columns: repeat(auto-fit, minmax(34px, 1fr));
+  }
+
+  .plinko-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .plinko-headline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .ads-toggle:active {
   transform: translateY(-1px) scale(1.02);
   transition: all 0.1s ease;
